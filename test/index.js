@@ -120,7 +120,7 @@ describe('Schema', function () {
   });
 
 
-  describe('combined minumum and maximum', function () {
+  describe('combined minimum and maximum', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
