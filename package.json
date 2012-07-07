@@ -1,5 +1,5 @@
 {
-  "author": "",
+  "author": "Tom de Grunt <tom@degrunt.nl>",
   "name": "jsonschema",
   "version": "0.0.0",
   "dependencies": {
@@ -10,5 +10,13 @@
   "optionalDependencies": {},
   "engines": {
     "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tdegrunt/jsonschema.git"
+  },
+  "description": "JSON Schema",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
   }
 }
