@@ -16,7 +16,7 @@ Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-0
 
 Any non ticked of definition types are ignored.
 
-| Value | JSON Schema Draft | jsonschema | Comments
+| Value | JSON Schema Draft | jsonschema | Comments |
 |:-|:-:|:-:|:-|
 | type  | ✔ | ✔ |
 | properties | ✔ | ✔ |
@@ -50,7 +50,7 @@ Any non ticked of definition types are ignored.
 
 ### Types 
 
-| Value | JSON Schema Draft | jsonschema | Comments
+| Value | JSON Schema Draft | jsonschema | Comments |
 |:-|:-:|:-:|:-|
 | `string` | ✔ | ✔ |
 | `number` | ✔ | ✔ |
