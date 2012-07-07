@@ -1,7 +1,9 @@
 'use strict';
 
+// NOTE: This is not a working example, but should be working soon!
+
 var util = require('util');
-var Validator = require('./lib/validator');
+var Validator = require('../lib/validator');
 
 // Address, to be embedded on Person
 var addressSchema = {
