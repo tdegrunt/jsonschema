@@ -1,7 +1,5 @@
 'use strict';
 
-// NOTE: This is not a working example, but should be working soon!
-
 var util = require('util');
 var Validator = require('../lib/validator');
 
@@ -36,7 +34,7 @@ var p = {
     "lines": [ "1600 Pennsylvania Avenue Northwest" ],
     "zip": "DC 20500",
     "city": "Washington",
-    "country": 1
+    "country": "USA"
   }
 };
 
@@ -44,3 +42,4 @@ var v = new Validator();
 v.addSchema(addressSchema, 'Simple#Address');
 
 console.log(v.validate(p, schema));
+console.log(v.errors);
