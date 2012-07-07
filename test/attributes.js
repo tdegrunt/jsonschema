@@ -7,13 +7,13 @@ var mocha = require('mocha');
 var Validator = require('../lib/validator');
 var should = require('should');
 
-describe('Schema', function () {
+describe('Attributes', function () {
   describe('type', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
 
-    describe('numbers', function () {
+    describe('number', function () {
       it('should validate a valid number', function () {
         this.validator.validate(0, {'type': 'number'}).should.be.true;
         this.validator.errors.should.have.length(0);
