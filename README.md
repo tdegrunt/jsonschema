@@ -63,6 +63,26 @@ Any non ticked of definition types are ignored.
 | `any` | ✔ | ✔ |
 |  Union Types | ✔ | ✔ |
 
+### String Formats
+
+| Value | JSON Schema Draft | jsonschema | Comments |
+|:------|:-----------------:|:----------:|:---------|
+| `date-time` | ✔ | ✔ |
+| `date` | ✔ | ✔ |
+| `time` | ✔ | ✔ |
+| `utc-millisec` | ✔ | ✔ | Any number (integer or float) is allowed
+| `regex` | ✔ | ✔ | Any string is allowed
+| `color` | ✔ | ✔ |
+| `style` | ✔ | ✔ | Any string is allowed
+| `phone` |   | ✔ | Any string is allowed
+| `uri` | ✔ | ✔ |
+| `email` | ✔ | ✔ |
+| `ip-address` | ✔ | ✔ |
+| `ipv6` | ✔ | ✔ |
+| `host-name` | ✔ | ✔ |
+| `alpha` |   | ✔ |
+| `alphanumeric` |   | ✔ |
+
 ## License
 
 jsonschema is licensed under MIT license.
