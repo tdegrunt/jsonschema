@@ -48,7 +48,7 @@ Any non ticked of definition types are ignored.
 | $ref | ✔ | ✔ |
 | $schema  | ✔ |  |
 
-### Types 
+### Types
 
 | Value | JSON Schema Draft | jsonschema | Comments |
 |:------|:-----------------:|:----------:|:---------|
@@ -61,7 +61,7 @@ Any non ticked of definition types are ignored.
 | `null` | ✔ | ✔ |
 | `date` |   | ✔ |
 | `any` | ✔ | ✔ |
-|  Union Types | ✔ | ✔ | Need tests for simple type and `$ref` combination
+|  Union Types | ✔ |   |
 
 ## License
 

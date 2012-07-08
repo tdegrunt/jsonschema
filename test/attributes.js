@@ -133,4 +133,22 @@ describe('Attributes', function () {
       this.validator.errors.should.have.length(1);
     });
   });
+
+  describe('pattern', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if string matches the string pattern', function () {
+      return this.validator.validate('abbbc', {'type': 'string', 'pattern': 'ab+c'}).should.be.true;
+    });
+
+    it('should validate if string matches the regexp pattern', function () {
+      return this.validator.validate('abbbc', {'type': 'string', 'pattern': /ab+c/}).should.be.true;
+    });
+
+    it('should validate if string does not match the string pattern', function () {
+      return this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'}).should.be.false;
+    });
+  });
 });
