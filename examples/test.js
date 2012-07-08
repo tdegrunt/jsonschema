@@ -14,7 +14,7 @@ var addressSchema = {
     },
     "zip": {"type": "string"},
     "city": {"type": "string"},
-    "country": {"type": "string"}
+    "country": {"type": "string", "required": true}
   }
 };
 
@@ -24,7 +24,8 @@ var schema = {
   "type" : "object",
   "properties": {
     "name": {"type": "string"},
-    "address": {"$ref": "Simple#Address"}
+    "address": {"$ref": "Simple#Address"},
+    "votes": {"type": "integer", "minimum": 1}
   }
 };
 
@@ -35,7 +36,8 @@ var p = {
     "zip": "DC 20500",
     "city": "Washington",
     "country": "USA"
-  }
+  },
+  "votes": "lots"
 };
 
 var v = new Validator();
