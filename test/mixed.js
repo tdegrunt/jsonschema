@@ -49,7 +49,7 @@ describe('Mixed', function () {
       this.validator.errors.should.have.length(1);
       this.validator.errors[0].should.have.property('validator', 'type');
       this.validator.errors[0].should.have.property('message', 'is not string');
-      this.validator.errors[0].should.have.property('property', 'lines');
+      this.validator.errors[0].should.have.property('property', 'lines[0]');
     });
   });
 
