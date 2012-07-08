@@ -28,12 +28,12 @@ Any non ticked of definition types are ignored.
 | dependencies | ✔ |   |
 | minimum  | ✔ | ✔ |
 | maximum  | ✔ | ✔ |
-| exclusiveMinimum | ✔ |   |
-| exclusiveMaximum | ✔ |   |
+| exclusiveMinimum | ✔ | ✔ |
+| exclusiveMaximum | ✔ | ✔ |
 | minItems | ✔ |   |
 | maxItems | ✔ |   |
 | uniqueItems  | ✔ |   |
-| pattern  | ✔ |   |
+| pattern  | ✔ | ✔ |
 | minLength  | ✔ |   |
 | maxLength  | ✔ |   |
 | enum | ✔ |   |
@@ -61,7 +61,7 @@ Any non ticked of definition types are ignored.
 | `null` | ✔ | ✔ |
 | `date` |   | ✔ |
 | `any` | ✔ | ✔ |
-|  Union Types | ✔ |   |
+|  Union Types | ✔ | ✔ |
 
 ## License
 

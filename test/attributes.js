@@ -97,13 +97,22 @@ describe('Attributes', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
-    it('should validate if number is above minumum', function () {
+    it('should validate if number meets minumum', function () {
       return this.validator.validate(1, {'type': 'number', 'minimum': '1'}).should.be.true;
     });
 
     it('should not validate if number is below minumum', function () {
       return this.validator.validate(0, {'type': 'number', 'minimum': '1'}).should.be.false;
     });
+
+    it('should validate if number is above minumum, using exclusiveMinimum', function () {
+      return this.validator.validate(2, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.be.true;
+    });
+
+    it('should not validate if number is the minumum, using exclusiveMinimum', function () {
+      return this.validator.validate(1, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.be.false;
+    });
+
   });
 
   describe('maximum', function () {
@@ -114,11 +123,19 @@ describe('Attributes', function () {
       return this.validator.validate(1, {'type': 'number', 'maximum': '2'}).should.be.true;
     });
 
-    it('should not validate if number is above minumum', function () {
+    it('should not validate if number is above maximum', function () {
       return this.validator.validate(3, {'type': 'number', 'maximum': '2'}).should.be.false;
     });
-  });
 
+    it('should validate if number is below maximum, using exclusiveMinimum', function () {
+      return this.validator.validate(1, {'type': 'number', 'maximum': '2', 'exclusiveMaximum': true}).should.be.true;
+    });
+
+    it('should not validate if number is the maximum, using exclusiveMinimum', function () {
+      return this.validator.validate(2, {'type': 'number', 'maximum': '2', 'exclusiveMaximum': true}).should.be.false;
+    });
+
+  });
 
   describe('combined minimum and maximum', function () {
     beforeEach(function () {
