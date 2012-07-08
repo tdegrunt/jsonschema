@@ -40,7 +40,7 @@ Any non ticked of definition types are ignored.
 | default  | ✔ |   |
 | title  | ✔ | ✔ | no function, only for commenting schema
 | description  | ✔ | ✔ | no function, only for commenting schema
-| format | ✔ |   |
+| format | ✔ | ✔ |
 | divisibleBy  | ✔ |   |
 | disallow | ✔ |   |
 | extends  | ✔ |   |
@@ -74,7 +74,7 @@ Any non ticked of definition types are ignored.
 | `regex` | ✔ | ✔ | Any string is allowed
 | `color` | ✔ | ✔ |
 | `style` | ✔ | ✔ | Any string is allowed
-| `phone` |   | ✔ | Any string is allowed
+| `phone` | ✔ | ✔ | Any string is allowed
 | `uri` | ✔ | ✔ |
 | `email` | ✔ | ✔ |
 | `ip-address` | ✔ | ✔ |
