@@ -65,20 +65,20 @@ describe('Union', function () {
     });
   });
 
-  // describe('null and $ref', function () {
-  //   it('should validate for null', function () {
-  //     this.validator.validate(null, {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.true;
-  //     this.validator.errors.should.have.length(0);
-  //   });
+  describe('null and $ref', function () {
+    it('should validate for null', function () {
+      this.validator.validate(null, {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.true;
+      this.validator.errors.should.have.length(0);
+    });
 
-  //   it('should validate for string', function () {
-  //     this.validator.validate('test', {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.true;
-  //     this.validator.errors.should.have.length(0);
-  //   });
+    it('should validate for string', function () {
+      this.validator.validate('test', {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.true;
+      this.validator.errors.should.have.length(0);
+    });
 
-  //   it('should not validate if no string or number', function () {
-  //     this.validator.validate(true, {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.false;
-  //     this.validator.errors.should.have.length(1);
-  //   });
-  // });
+    it('should not validate if no string or number', function () {
+      this.validator.validate(true, {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.false;
+      this.validator.errors.should.have.length(1);
+    });
+  });
 });
