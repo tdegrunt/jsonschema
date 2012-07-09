@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/tdegrunt/bitset.png)](http://travis-ci.org/tdegrunt/bitset)
+[![Build Status](https://secure.travis-ci.org/tdegrunt/jsonschema.png)](http://travis-ci.org/tdegrunt/jsonschema)
 
 # jsonschema
 
