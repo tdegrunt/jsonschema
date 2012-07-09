@@ -1,6 +1,8 @@
+[![Build Status](https://secure.travis-ci.org/tdegrunt/bitset.png)](http://travis-ci.org/tdegrunt/bitset)
+
 # jsonschema
 
-Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-03) validator
+Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-03) validator.
 
 ## Usage
 ```javascript
