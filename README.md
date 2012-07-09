@@ -32,12 +32,12 @@ Any non ticked off definition types are ignored.
 | maximum  | ✔ | ✔ |
 | exclusiveMinimum | ✔ | ✔ |
 | exclusiveMaximum | ✔ | ✔ |
-| minItems | ✔ |   |
-| maxItems | ✔ |   |
+| minItems | ✔ | ✔ |
+| maxItems | ✔ | ✔ |
 | uniqueItems  | ✔ |   |
 | pattern  | ✔ | ✔ |
-| minLength  | ✔ |   |
-| maxLength  | ✔ |   |
+| minLength  | ✔ | ✔ |
+| maxLength  | ✔ | ✔ |
 | enum | ✔ |   |
 | default  | ✔ |   |
 | title  | ✔ | ✔ | no function, only for commenting schema

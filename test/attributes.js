@@ -97,19 +97,20 @@ describe('Attributes', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
-    it('should validate if number meets minumum', function () {
+
+    it('should validate if number meets minimum', function () {
       return this.validator.validate(1, {'type': 'number', 'minimum': '1'}).should.be.true;
     });
 
-    it('should not validate if number is below minumum', function () {
+    it('should not validate if number is below minimum', function () {
       return this.validator.validate(0, {'type': 'number', 'minimum': '1'}).should.be.false;
     });
 
-    it('should validate if number is above minumum, using exclusiveMinimum', function () {
+    it('should validate if number is above minimum, using exclusiveMinimum', function () {
       return this.validator.validate(2, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.be.true;
     });
 
-    it('should not validate if number is the minumum, using exclusiveMinimum', function () {
+    it('should not validate if number is the minimum, using exclusiveMinimum', function () {
       return this.validator.validate(1, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.be.false;
     });
 
@@ -119,6 +120,7 @@ describe('Attributes', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
+
     it('should validate if number is below the maximum', function () {
       return this.validator.validate(1, {'type': 'number', 'maximum': '2'}).should.be.true;
     });
@@ -141,6 +143,7 @@ describe('Attributes', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
+
     it('should validate if number is below the maximum', function () {
       return this.validator.validate(1, {'type': 'number', 'minimum': '1', 'maximum': '2'}).should.be.true;
     });
@@ -168,4 +171,33 @@ describe('Attributes', function () {
       return this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'}).should.be.false;
     });
   });
+
+  describe('minLength', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if string has a length larger than minLength', function () {
+      return this.validator.validate('abcde', {'type': 'string', 'minLength': 5}).should.be.true;
+    });
+
+    it('should not validate if string does has a length less than minLength', function () {
+      return this.validator.validate('abcde', {'type': 'string', 'minLength': 6}).should.be.false;
+    });
+  });
+
+  describe('maxLength', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if string has a length equal to maxLength', function () {
+      return this.validator.validate('abcde', {'type': 'string', 'maxLength': 5}).should.be.true;
+    });
+
+    it('should not validate if string does has a length larger than maxLength', function () {
+      return this.validator.validate('abcde', {'type': 'string', 'maxLength': 4}).should.be.false;
+    });
+  });
+
 });
