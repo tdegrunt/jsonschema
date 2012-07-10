@@ -17,6 +17,10 @@ describe('Arrays', function () {
       this.validator.validate([], {'type': 'array', 'items': {'type': 'string'}}).should.be.empty;
     });
 
+    it('should validate an undefined array', function () {
+      this.validator.validate(undefined, {'type': 'array', 'items': {'type': 'string'}}).should.be.empty;
+    });
+
     it('should validate an array with strings', function () {
       this.validator.validate(['1', '2', '3'], {'type': 'array', 'items': {'type': 'string'}}).should.be.empty;
     });

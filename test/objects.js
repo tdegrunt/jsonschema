@@ -17,6 +17,10 @@ describe('Objects', function () {
       this.validator.validate({}, {'type': 'object'}).should.be.empty;
     });
 
+    it('should validate an undefined object', function () {
+      this.validator.validate(undefined, {'type': 'object'}).should.be.empty;
+    });
+
     it('should not validate an invalid object', function () {
       return this.validator.validate(0, {'type': 'object'}).should.not.be.empty;
     });
