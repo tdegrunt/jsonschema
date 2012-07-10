@@ -26,14 +26,13 @@ describe('Mixed', function () {
             }
           }
         }
-      ).should.be.true;
-      this.validator.errors.should.have.length(0);
+      ).should.be.empty;
     });
   });
 
   describe('simple object with array with invalid items', function () {
     it('should not validate', function () {
-      this.validator.validate(
+      var result = this.validator.validate(
         {'name':'test', 'lines': [1]},
         {
           'type': 'object',
@@ -45,11 +44,11 @@ describe('Mixed', function () {
             }
           }
         }
-      ).should.be.false;
-      this.validator.errors.should.have.length(1);
-      this.validator.errors[0].should.have.property('validator', 'type');
-      this.validator.errors[0].should.have.property('message', 'is not string');
-      this.validator.errors[0].should.have.property('property', 'lines[0]');
+      );
+      result.should.have.length(1);
+      result[0].should.have.property('validator', 'type');
+      result[0].should.have.property('message', 'is not string');
+      result[0].should.have.property('property', 'lines[0]');
     });
   });
 

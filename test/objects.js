@@ -14,12 +14,11 @@ describe('Objects', function () {
 
   describe('simple object', function () {
     it('should validate a valid object', function () {
-      this.validator.validate({}, {'type': 'object'}).should.be.true;
-      this.validator.errors.should.have.length(0);
+      this.validator.validate({}, {'type': 'object'}).should.be.empty;
     });
 
     it('should not validate an invalid object', function () {
-      return this.validator.validate(0, {'type': 'object'}).should.be.false;
+      return this.validator.validate(0, {'type': 'object'}).should.not.be.empty;
     });
   });
 
@@ -33,12 +32,11 @@ describe('Objects', function () {
             'name': {'type': 'string'}
           }
         }
-      ).should.be.true;
-      this.validator.errors.should.have.length(0);
+      ).should.be.empty;
     });
 
     it('should not validate an invalid object', function () {
-      return this.validator.validate(0, {'type': 'object'}).should.be.false;
+      return this.validator.validate(0, {'type': 'object'}).should.not.be.empty;
     });
   });
 
@@ -53,8 +51,7 @@ describe('Objects', function () {
             'address': {'type': 'string'},
           }
         }
-      ).should.be.true;
-      this.validator.errors.should.have.length(0);
+      ).should.be.empty;
     });
 
     it('should validate a valid object with undefined property', function () {
@@ -67,8 +64,7 @@ describe('Objects', function () {
             'address': {'type': 'string'},
           }
         }
-      ).should.be.true;
-      this.validator.errors.should.have.length(0);
+      ).should.be.empty;
     });
 
   });

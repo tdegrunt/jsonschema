@@ -15,45 +15,44 @@ describe('Attributes', function () {
 
     describe('number', function () {
       it('should validate a valid number', function () {
-        this.validator.validate(0, {'type': 'number'}).should.be.true;
-        this.validator.errors.should.have.length(0);
+        this.validator.validate(0, {'type': 'number'}).should.be.empty;
       });
 
       it('should not validate an invalid number', function () {
-        return this.validator.validate('0', {'type': 'number'}).should.be.false;
+        return this.validator.validate('0', {'type': 'number'}).should.not.be.empty;
       });
     });
 
     describe('null', function () {
 
       it('should validate null', function () {
-        return this.validator.validate(null, {'type': 'null'}).should.be.true;
+        return this.validator.validate(null, {'type': 'null'}).should.be.empty;
       });
 
       it('should not validate no-null', function () {
-        return this.validator.validate('0', {'type': 'null'}).should.be.false;
+        return this.validator.validate('0', {'type': 'null'}).should.not.be.empty;
       });
     });
 
     describe('date', function () {
 
       it('should validate date', function () {
-        return this.validator.validate(new Date(), {'type': 'date'}).should.be.true;
+        return this.validator.validate(new Date(), {'type': 'date'}).should.be.empty;
       });
 
       it('should not validate no-null', function () {
-        return this.validator.validate('0', {'type': 'date'}).should.be.false;
+        return this.validator.validate('0', {'type': 'date'}).should.not.be.empty;
       });
     });
 
     describe('integer', function () {
 
       it('should validate integer', function () {
-        return this.validator.validate(12, {'type': 'integer'}).should.be.true;
+        return this.validator.validate(12, {'type': 'integer'}).should.be.empty;
       });
 
       it('should not validate non integer', function () {
-        return this.validator.validate(0.25, {'type': 'integer'}).should.be.false;
+        return this.validator.validate(0.25, {'type': 'integer'}).should.not.be.empty;
       });
 
     });
@@ -61,34 +60,34 @@ describe('Attributes', function () {
     describe('boolean', function () {
 
       it('should validate true', function () {
-        return this.validator.validate(true, {'type': 'boolean'}).should.be.true;
+        return this.validator.validate(true, {'type': 'boolean'}).should.be.empty;
       });
 
       it('should validate false', function () {
-        return this.validator.validate(false, {'type': 'boolean'}).should.be.true;
+        return this.validator.validate(false, {'type': 'boolean'}).should.be.empty;
       });
 
       it('should not validate non boolean', function () {
-        return this.validator.validate('true', {'type': 'boolean'}).should.be.false;
+        return this.validator.validate('true', {'type': 'boolean'}).should.not.be.empty;
       });
     });
 
     describe('any', function () {
 
       it('should validate true as any', function () {
-        return this.validator.validate(true, {'type': 'any'}).should.be.true;
+        return this.validator.validate(true, {'type': 'any'}).should.be.empty;
       });
 
       it('should validate "true" as any', function () {
-        return this.validator.validate('true', {'type': 'any'}).should.be.true;
+        return this.validator.validate('true', {'type': 'any'}).should.be.empty;
       });
 
       it('should validate 0 as any', function () {
-        return this.validator.validate(0, {'type': 'any'}).should.be.true;
+        return this.validator.validate(0, {'type': 'any'}).should.be.empty;
       });
 
       it('should validate Date as any', function () {
-        return this.validator.validate(new Date(), {'type': 'any'}).should.be.true;
+        return this.validator.validate(new Date(), {'type': 'any'}).should.be.empty;
       });
     });
   });
@@ -99,19 +98,19 @@ describe('Attributes', function () {
     });
 
     it('should validate if number meets minimum', function () {
-      return this.validator.validate(1, {'type': 'number', 'minimum': '1'}).should.be.true;
+      return this.validator.validate(1, {'type': 'number', 'minimum': '1'}).should.be.empty;
     });
 
     it('should not validate if number is below minimum', function () {
-      return this.validator.validate(0, {'type': 'number', 'minimum': '1'}).should.be.false;
+      return this.validator.validate(0, {'type': 'number', 'minimum': '1'}).should.not.be.empty;
     });
 
     it('should validate if number is above minimum, using exclusiveMinimum', function () {
-      return this.validator.validate(2, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.be.true;
+      return this.validator.validate(2, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.be.empty;
     });
 
     it('should not validate if number is the minimum, using exclusiveMinimum', function () {
-      return this.validator.validate(1, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.be.false;
+      return this.validator.validate(1, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).should.not.be.empty;
     });
 
   });
@@ -122,19 +121,19 @@ describe('Attributes', function () {
     });
 
     it('should validate if number is below the maximum', function () {
-      return this.validator.validate(1, {'type': 'number', 'maximum': '2'}).should.be.true;
+      return this.validator.validate(1, {'type': 'number', 'maximum': '2'}).should.be.empty;
     });
 
     it('should not validate if number is above maximum', function () {
-      return this.validator.validate(3, {'type': 'number', 'maximum': '2'}).should.be.false;
+      return this.validator.validate(3, {'type': 'number', 'maximum': '2'}).should.not.be.empty;
     });
 
     it('should validate if number is below maximum, using exclusiveMinimum', function () {
-      return this.validator.validate(1, {'type': 'number', 'maximum': '2', 'exclusiveMaximum': true}).should.be.true;
+      return this.validator.validate(1, {'type': 'number', 'maximum': '2', 'exclusiveMaximum': true}).should.be.empty;
     });
 
     it('should not validate if number is the maximum, using exclusiveMinimum', function () {
-      return this.validator.validate(2, {'type': 'number', 'maximum': '2', 'exclusiveMaximum': true}).should.be.false;
+      return this.validator.validate(2, {'type': 'number', 'maximum': '2', 'exclusiveMaximum': true}).should.not.be.empty;
     });
 
   });
@@ -145,12 +144,11 @@ describe('Attributes', function () {
     });
 
     it('should validate if number is below the maximum', function () {
-      return this.validator.validate(1, {'type': 'number', 'minimum': '1', 'maximum': '2'}).should.be.true;
+      return this.validator.validate(1, {'type': 'number', 'minimum': '1', 'maximum': '2'}).should.be.empty;
     });
 
     it('should not validate if number is above minumum', function () {
-      this.validator.validate(3, {'type': 'number', 'minimum': '1', 'maximum': '2'}).should.be.false;
-      this.validator.errors.should.have.length(1);
+      this.validator.validate(3, {'type': 'number', 'minimum': '1', 'maximum': '2'}).should.not.be.empty;
     });
   });
 
@@ -160,15 +158,15 @@ describe('Attributes', function () {
     });
 
     it('should validate if string matches the string pattern', function () {
-      return this.validator.validate('abbbc', {'type': 'string', 'pattern': 'ab+c'}).should.be.true;
+      return this.validator.validate('abbbc', {'type': 'string', 'pattern': 'ab+c'}).should.be.empty;
     });
 
     it('should validate if string matches the regexp pattern', function () {
-      return this.validator.validate('abbbc', {'type': 'string', 'pattern': /ab+c/}).should.be.true;
+      return this.validator.validate('abbbc', {'type': 'string', 'pattern': /ab+c/}).should.be.empty;
     });
 
     it('should validate if string does not match the string pattern', function () {
-      return this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'}).should.be.false;
+      return this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'}).should.not.be.empty;
     });
   });
 
@@ -178,11 +176,11 @@ describe('Attributes', function () {
     });
 
     it('should validate if string has a length larger than minLength', function () {
-      return this.validator.validate('abcde', {'type': 'string', 'minLength': 5}).should.be.true;
+      return this.validator.validate('abcde', {'type': 'string', 'minLength': 5}).should.be.empty;
     });
 
     it('should not validate if string does has a length less than minLength', function () {
-      return this.validator.validate('abcde', {'type': 'string', 'minLength': 6}).should.be.false;
+      return this.validator.validate('abcde', {'type': 'string', 'minLength': 6}).should.not.be.empty;
     });
   });
 
@@ -192,11 +190,11 @@ describe('Attributes', function () {
     });
 
     it('should validate if string has a length equal to maxLength', function () {
-      return this.validator.validate('abcde', {'type': 'string', 'maxLength': 5}).should.be.true;
+      return this.validator.validate('abcde', {'type': 'string', 'maxLength': 5}).should.be.empty;
     });
 
     it('should not validate if string does has a length larger than maxLength', function () {
-      return this.validator.validate('abcde', {'type': 'string', 'maxLength': 4}).should.be.false;
+      return this.validator.validate('abcde', {'type': 'string', 'maxLength': 4}).should.not.be.empty;
     });
   });
 

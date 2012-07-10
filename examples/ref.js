@@ -42,6 +42,5 @@ var p = {
 
 var v = new Validator();
 v.addSchema(addressSchema, 'Simple#Address');
-
+p.address = 1235;
 console.log(v.validate(p, schema));
-console.log(v.errors);
