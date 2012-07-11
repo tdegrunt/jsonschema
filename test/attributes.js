@@ -204,4 +204,26 @@ describe('Attributes', function () {
     });
   });
 
+  describe('enum', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if string is one of the enum values', function () {
+      return this.validator.validate('abcde', {'type': 'string', 'enum': ['abcdf', 'abcde']}).should.be.empty;
+    });
+
+    it('should not validate if string is not one of the enum values', function () {
+      return this.validator.validate('abcde', {'type': 'string', 'enum': ['abcdf', 'abcdd']}).should.not.be.empty;
+    });
+
+    it('should validate if number is one of the enum values', function () {
+      return this.validator.validate(1, {'type': 'number', 'enum': [1, 2]}).should.be.empty;
+    });
+
+    it('should not validate if number is not one of the enum values', function () {
+      return this.validator.validate(3, {'type': 'string', 'enum': [1, 2]}).should.not.be.empty;
+    });
+
+  });
 });

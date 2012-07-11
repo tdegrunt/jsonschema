@@ -38,7 +38,7 @@ Any non ticked off definition types are ignored.
 | pattern  | ✔ | ✔ |
 | minLength  | ✔ | ✔ |
 | maxLength  | ✔ | ✔ |
-| enum | ✔ |   |
+| enum | ✔ | ✔ |
 | default  | ✔ |   |
 | title  | ✔ | ✔ | no function, only for commenting schema
 | description  | ✔ | ✔ | no function, only for commenting schema
