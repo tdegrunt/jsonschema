@@ -6,10 +6,18 @@ Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-0
 
 ## Usage
 ```javascript
+	var Validator = require('jsonschema');
 	var v = new Validator();
 	var instance = 4;
 	var schema = {"type": "number"};
 	console.log(v.validate(instance, schema));
+```
+Alternative interface:
+```javascript
+	var jsonschema = require('jsonschema');
+	var instance = 4;
+	var schema = {"type": "number"};
+	console.log(jsonschema.validate(instance, schema));
 ```
 
 ## Features
