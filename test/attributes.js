@@ -226,4 +226,15 @@ describe('Attributes', function () {
     });
 
   });
+
+  describe('description', function () {
+
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should be ignored', function () {
+      this.validator.validate(1, {'description': 'some text'}).should.be.empty;
+    });
+  });
 });
