@@ -13,6 +13,7 @@
   "engines": {
     "node": "*"
   },
+  "keywords": ["json", "schema", "jsonschema", "validator"],
   "repository": {
     "type": "git",
     "url": "git://github.com/tdegrunt/jsonschema.git"
