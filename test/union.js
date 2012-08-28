@@ -145,5 +145,19 @@ describe('Union', function () {
       validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).should.be.empty;
     });
 
+    it('should validate for objectid and ignore title and description', function () {
+      var schema = {
+        "type": "object",
+        "properties": {
+          "wildcards": {
+            "type": "array",
+            "items": {"type": [{"$ref": "MongoDb#ObjectId", "title": "test", "description": "test"}, {"type": "string", "pattern": "^\\*$"}]}
+          }
+        }
+      };
+      var validator = new Validator();
+      validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).should.be.empty;
+    });
+
   });
 });
