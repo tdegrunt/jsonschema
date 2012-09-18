@@ -73,5 +73,32 @@ describe('Objects', function () {
 
   });
 
+  describe('nested object with property', function () {
+    it('should NOT validate a valid object', function () {
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2'},
+        {
+          'type': 'object',
+          'properties': {
+            'name': {'type': 'string'},
+            'nested': {'type': 'object'}
+          }
+        }
+      ).should.not.be.empty;
+    });
+
+    it('should validate a valid object', function () {
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2'},
+        {
+          'type': 'object',
+          'properties': {
+            'name': {'type': 'string'},
+            'nested': {'type': 'string'}
+          }
+        }
+      ).should.be.empty;
+    });
+  });
 
 });
