@@ -101,4 +101,25 @@ describe('Objects', function () {
     });
   });
 
+  describe('undefined but required object', function () {
+    it('should NOT validate an undefined object', function () {
+      var ret = this.validator.validate(
+        {'foo': {'baz': 1}},
+        {
+          'type': 'object',
+          'required': true,
+          'properties': {
+            'foo': {
+              'type': 'object',
+              'required': true,
+              'properties': {
+                'bar': {'type': 'object', 'required': true},
+                'baz': {'type': 'number', 'required': true}
+              }
+            }
+          }
+        }
+      ).should.not.be.empty;
+    });
+  });
 });
