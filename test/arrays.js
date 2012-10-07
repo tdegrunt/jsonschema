@@ -70,4 +70,54 @@ describe('Arrays', function () {
       return this.validator.validate([1, 2, 3], {'type': 'array', 'items': {'type': 'number'}, 'maxItems': 2}).should.not.be.empty;
     });
   });
+
+  describe('Unique', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if the array has a unique index property', function () {
+      var jsonArray = [
+        {index: 0},
+        {index: 1},
+      ];
+      var jsonSchema = {
+        'type': 'array',
+        'items': {'type': 'object'},
+        'uniqueField': 'index'
+      };
+
+      return this.validator.validate(jsonArray, jsonSchema).should.be.empty;
+    });
+
+    it('should not validate if the array does not have an unique index property', function () {
+      var jsonArray = [
+        {index: 0},
+        {index: 1},
+        {index: 0},
+      ];
+      var jsonSchema = {
+        'type': 'array',
+        'items': {'type': 'object'},
+        'uniqueField': 'index'
+      };
+
+      return this.validator.validate(jsonArray, jsonSchema).should.not.be.empty;
+    });
+
+    it('should validate if the array does not have an unique index property', function () {
+      var jsonArray = [
+        {index: 0},
+        {index: 1},
+        {index: 0},
+      ];
+      var jsonSchema = {
+        'type': 'array',
+        'items': {'type': 'object'},
+        'uniqueField': 'index'
+      };
+
+      return this.validator.validate(jsonArray, jsonSchema).should.not.be.empty;
+    });
+  });
 });
