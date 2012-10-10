@@ -23,7 +23,7 @@ Any non ticked off definition types are ignored.
 | type  | ✔ | ✔ |
 | properties | ✔ | ✔ |
 | patternProperties  | ✔ |   |
-| additionalProperties | ✔ |   |
+| additionalProperties | ✔ | ✔ |
 | items  | ✔ | ✔ |
 | additionalItems  | ✔ |   |
 | required | ✔ | ✔ |
@@ -49,6 +49,7 @@ Any non ticked off definition types are ignored.
 | id | ✔ | ✔ |
 | $ref | ✔ | ✔ |
 | $schema  | ✔ |  |
+| uniqueField |   | ✔ | Test if a property of the objects in an array is unique
 
 ### Types
 
