@@ -122,4 +122,62 @@ describe('Objects', function () {
       ).should.not.be.empty;
     });
   });
+
+  describe('additionalProperties', function () {
+    it('should validate if there are no additionalProperties', function () {
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2'},
+        {
+          'type': 'object',
+          'properties': {
+            'name': {'type': 'string'},
+            'nested': {'type': 'string'}
+          },
+          'additionalProperties': false
+        }
+      ).should.be.empty;
+    });
+
+    it('should not validate if there are additionalProperties', function () {
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2', 'extraProp': 1},
+        {
+          'type': 'object',
+          'properties': {
+            'name': {'type': 'string'},
+            'nested': {'type': 'string'}
+          },
+          'additionalProperties': false
+        }
+      ).should.not.be.empty;
+    });
+
+    it('should validate if the additionalProperties are compliant with additionalProperties', function () {
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2', 'extraProp': 1},
+        {
+          'type': 'object',
+          'properties': {
+            'name': {'type': 'string'},
+            'nested': {'type': 'string'}
+          },
+          'additionalProperties': {'type': 'number'}
+        }
+      ).should.be.empty;
+    });
+
+    it('should not validate if the additionalProperties are not compliant with additionalProperties', function () {
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2', 'extraProp': '1'},
+        {
+          'type': 'object',
+          'properties': {
+            'name': {'type': 'string'},
+            'nested': {'type': 'string'}
+          },
+          'additionalProperties': {'type': 'number'}
+        }
+      ).should.not.be.empty;
+    });
+  });
 });
