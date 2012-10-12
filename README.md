@@ -23,7 +23,7 @@ Any non ticked off definition types are ignored.
 | type  | ✔ | ✔ |
 | properties | ✔ | ✔ |
 | patternProperties  | ✔ |   |
-| additionalProperties | ✔ |   |
+| additionalProperties | ✔ | ✔ |
 | items  | ✔ | ✔ |
 | additionalItems  | ✔ |   |
 | required | ✔ | ✔ |
