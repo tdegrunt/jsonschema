@@ -2,9 +2,7 @@
   "author": "Tom de Grunt <tom@degrunt.nl>",
   "name": "jsonschema",
   "version": "0.1.5",
-  "dependencies": {
-    "deep-equal": "0.0.0"
-  },
+  "dependencies": {},
   "main": "./lib",
   "devDependencies": {
     "mocha": "~1.3",
