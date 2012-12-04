@@ -111,8 +111,12 @@ describe('Formats', function () {
       this.validator.validate("http://www.google.com/search", {'type': 'string', 'format': 'uri'}).should.be.empty;
     });
 
-    it('should not validate file:///Users/tdegrunt', function () {
-      this.validator.validate("file:///Users/tdegrunt", {'type': 'string', 'format': 'uri'}).should.not.be.empty;
+    it('should not validate relative URIs', function () {
+      this.validator.validate("tdegrunt", {'type': 'string', 'format': 'uri'}).should.not.be.empty;
+    });
+
+    it('should not validate with whitespace', function () {
+      this.validator.validate("The dog jumped", {'type': 'string', 'format': 'uri'}).should.not.be.empty;
     });
   });
 
