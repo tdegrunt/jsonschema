@@ -44,11 +44,11 @@ Any non ticked off definition types are ignored.
 | description  | ✔ | ✔ | no function, only for commenting schema
 | format | ✔ | ✔ |
 | divisibleBy  | ✔ | ✔ |
-| disallow | ✔ |   |
+| disallow | ✔ | ✔ |
 | extends  | ✔ |   |
 | id | ✔ | ✔ |
 | $ref | ✔ | ✔ |
-| $schema  | ✔ |  |
+| $schema  | ✔ |   |
 
 ### Types
 

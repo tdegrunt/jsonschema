@@ -246,13 +246,26 @@ describe('Attributes', function () {
   });
 
   describe('description', function () {
-
     beforeEach(function () {
       this.validator = new Validator();
     });
 
     it('should be ignored', function () {
       this.validator.validate(1, {'description': 'some text'}).should.be.empty;
+    });
+  });
+
+  describe('disallow', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should prohibit specified types', function () {
+      this.validator.validate(1, {'type': 'any', 'disallow':'array'}).should.be.empty;
+    });
+
+    it('should not prohibit unprohibited types', function () {
+      this.validator.validate(1, {'type':'any', 'disallow':'array'}).should.be.empty;
     });
   });
 });
