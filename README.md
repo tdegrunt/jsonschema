@@ -34,7 +34,7 @@ Any non ticked off definition types are ignored.
 | exclusiveMaximum | ✔ | ✔ |
 | minItems | ✔ | ✔ |
 | maxItems | ✔ | ✔ |
-| uniqueItems  | ✔ |   |
+| uniqueItems  | ✔ | ✔ |
 | pattern  | ✔ | ✔ |
 | minLength  | ✔ | ✔ |
 | maxLength  | ✔ | ✔ |
@@ -43,7 +43,7 @@ Any non ticked off definition types are ignored.
 | title  | ✔ | ✔ | no function, only for commenting schema
 | description  | ✔ | ✔ | no function, only for commenting schema
 | format | ✔ | ✔ |
-| divisibleBy  | ✔ |   |
+| divisibleBy  | ✔ | ✔ |
 | disallow | ✔ |   |
 | extends  | ✔ |   |
 | id | ✔ | ✔ |
