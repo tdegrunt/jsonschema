@@ -25,9 +25,9 @@ Any non ticked off definition types are ignored.
 | patternProperties  | ✔ |   |
 | additionalProperties | ✔ | ✔ |
 | items  | ✔ | ✔ |
-| additionalItems  | ✔ |   |
+| additionalItems  | ✔ | ✔ |
 | required | ✔ | ✔ |
-| dependencies | ✔ |   |
+| dependencies | ✔ | ✔ |
 | minimum  | ✔ | ✔ |
 | maximum  | ✔ | ✔ |
 | exclusiveMinimum | ✔ | ✔ |
