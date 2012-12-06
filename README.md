@@ -25,16 +25,16 @@ Any non ticked off definition types are ignored.
 | patternProperties  | ✔ |   |
 | additionalProperties | ✔ | ✔ |
 | items  | ✔ | ✔ |
-| additionalItems  | ✔ |   |
+| additionalItems  | ✔ | ✔ |
 | required | ✔ | ✔ |
-| dependencies | ✔ |   |
+| dependencies | ✔ | ✔ |
 | minimum  | ✔ | ✔ |
 | maximum  | ✔ | ✔ |
 | exclusiveMinimum | ✔ | ✔ |
 | exclusiveMaximum | ✔ | ✔ |
 | minItems | ✔ | ✔ |
 | maxItems | ✔ | ✔ |
-| uniqueItems  | ✔ |   |
+| uniqueItems  | ✔ | ✔ |
 | pattern  | ✔ | ✔ |
 | minLength  | ✔ | ✔ |
 | maxLength  | ✔ | ✔ |
@@ -43,12 +43,12 @@ Any non ticked off definition types are ignored.
 | title  | ✔ | ✔ | no function, only for commenting schema
 | description  | ✔ | ✔ | no function, only for commenting schema
 | format | ✔ | ✔ |
-| divisibleBy  | ✔ |   |
-| disallow | ✔ |   |
+| divisibleBy  | ✔ | ✔ |
+| disallow | ✔ | ✔ |
 | extends  | ✔ |   |
 | id | ✔ | ✔ |
 | $ref | ✔ | ✔ |
-| $schema  | ✔ |  |
+| $schema  | ✔ |   |
 
 ### Types
 

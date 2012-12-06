@@ -158,6 +158,24 @@ describe('Attributes', function () {
     });
   });
 
+  describe('dividibleBy', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if 0 is even', function () {
+      return this.validator.validate(2, {'type': 'number', 'divisibleBy': 2}).should.be.empty;
+    });
+
+    it('should validate if -2 is even', function () {
+      return this.validator.validate(-2, {'type': 'number', 'divisibleBy': 2}).should.be.empty;
+    });
+
+    it('should not validate 1 is even', function () {
+      return this.validator.validate(1, {'type': 'number', 'divisibleBy': 2}).should.not.be.empty;
+    });
+  });
+
   describe('pattern', function () {
     beforeEach(function () {
       this.validator = new Validator();
@@ -228,13 +246,26 @@ describe('Attributes', function () {
   });
 
   describe('description', function () {
-
     beforeEach(function () {
       this.validator = new Validator();
     });
 
     it('should be ignored', function () {
       this.validator.validate(1, {'description': 'some text'}).should.be.empty;
+    });
+  });
+
+  describe('disallow', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should prohibit specified types', function () {
+      this.validator.validate(1, {'type': 'any', 'disallow':'array'}).should.be.empty;
+    });
+
+    it('should not prohibit unprohibited types', function () {
+      this.validator.validate(1, {'type':'any', 'disallow':'array'}).should.be.empty;
     });
   });
 });

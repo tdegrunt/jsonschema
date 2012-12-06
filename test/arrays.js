@@ -70,4 +70,30 @@ describe('Arrays', function () {
       return this.validator.validate([1, 2, 3], {'type': 'array', 'items': {'type': 'number'}, 'maxItems': 2}).should.not.be.empty;
     });
   });
+
+  describe('uniqueItems', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if array has no duplicate items', function () {
+      return this.validator.validate([1], {'type': 'array', 'uniqueItems': true}).should.be.empty;
+    });
+
+    it('should validate if array has no duplicate objects', function () {
+      return this.validator.validate([1, 2, "1", "2", {a:1}, {a:1, b:1}], {'type': 'array', 'uniqueItems': true}).should.be.empty;
+    });
+
+    it('should not validate if array has duplicate numbers', function () {
+      return this.validator.validate([1, 2, 4, 1, 3, 5], {'type': 'array', 'uniqueItems': true}).should.not.be.empty;
+    });
+
+    it('should not validate if array has duplicate objects', function () {
+      return this.validator.validate([{a:1}, {a:1}], {'type': 'array', 'uniqueItems': true}).should.not.be.empty;
+    });
+
+    it('should validate if not an Array', function () {
+      return this.validator.validate(null, {'type': 'any', 'uniqueItems': true}).should.be.empty;
+    });
+  });
 });

@@ -48,7 +48,7 @@ describe('Mixed', function () {
       result.should.have.length(1);
       result[0].should.have.property('validator', 'type');
       result[0].should.have.property('message', 'is not string');
-      result[0].should.have.property('property', 'lines[0]');
+      result[0].should.have.property('property', 'instance.lines[0]');
     });
   });
 
