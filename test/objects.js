@@ -21,8 +21,12 @@ describe('Objects', function () {
       this.validator.validate(undefined, {'type': 'object'}).should.be.empty;
     });
 
-    it('should not validate an invalid object', function () {
+    it('should not validate a number', function () {
       return this.validator.validate(0, {'type': 'object'}).should.not.be.empty;
+    });
+
+    it('should not validate an array', function () {
+      return this.validator.validate([0], {'type': 'object'}).should.not.be.empty;
     });
   });
 
