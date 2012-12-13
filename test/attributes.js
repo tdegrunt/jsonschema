@@ -268,4 +268,22 @@ describe('Attributes', function () {
       this.validator.validate(1, {'type':'any', 'disallow':'array'}).should.be.empty;
     });
   });
+
+  describe('dependencies', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate with missing non-depended properties', function () {
+      this.validator.validate({foo: 1}, {'dependencies': {'quux': ['foo', 'bar']}}).should.be.empty;
+    });
+
+    it('should not validate with missing dependencies', function () {
+      this.validator.validate({quux: 1, foo: 1}, {'dependencies': {'quux': ['foo', 'bar']}}).should.not.be.empty;
+    });
+
+    it('should validate with satisfied dependencies', function () {
+      this.validator.validate({quux: 1, foo: 1, bar: 1}, {'dependencies': {'quux': ['foo', 'bar']}}).should.be.empty;
+    });    
+  });
 });
