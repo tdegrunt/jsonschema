@@ -73,10 +73,10 @@ Any non ticked off definition types are ignored.
 | `date` | ✔ | ✔ |
 | `time` | ✔ | ✔ |
 | `utc-millisec` | ✔ | ✔ | Any number (integer or float) is allowed
-| `regex` | ✔ | ✔ | Any string is allowed
+| `regex` | ✔ | ✔ | We test for valid regular expression
 | `color` | ✔ | ✔ |
-| `style` | ✔ | ✔ | Any string is allowed
-| `phone` | ✔ | ✔ | Any string is allowed
+| `style` | ✔ | ✔ |
+| `phone` | ✔ | ✔ | Should follow [http://en.wikipedia.org/wiki/E.123](E.123) standard.
 | `uri` | ✔ | ✔ |
 | `email` | ✔ | ✔ |
 | `ip-address` | ✔ | ✔ |
