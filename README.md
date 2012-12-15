@@ -85,16 +85,13 @@ Any non ticked off definition types are ignored.
 | `alpha` |   | ✔ |
 | `alphanumeric` |   | ✔ |
 
-## Test
+## Tests
 
 Uses [https://github.com/Julian/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own.
 You'll need to update and init the git submodules:
 
     git submodule update --init
-
-All tests are run with:
-
-    ./node_modules/.bin/mocha -R spec
+    npm test
 
 ## License
 

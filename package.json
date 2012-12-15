@@ -25,6 +25,6 @@
   },
   "description": "JSON Schema",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -i -g Suite"
+    "test": "./node_modules/.bin/mocha -R spec"
   }
 }
