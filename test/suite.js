@@ -1,5 +1,6 @@
 'use strict';
 
+var util = require('util');
 var fs = require('fs');
 var mocha = require('mocha');
 var should = require('should');
@@ -27,7 +28,7 @@ describe('JSON Schema Test Suite', function(){
               it(test.description, function() {
                 var validator = new Validator();
                 var result = validator.validate(test.data, suite.schema);
-                return should.equal(test.valid, result.length === 0);
+                return should.equal(test.valid, result.length === 0, util.inspect(result, true, null));
               });
 
             });
