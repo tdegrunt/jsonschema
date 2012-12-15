@@ -39,16 +39,16 @@ Any non ticked off definition types are ignored.
 | minLength  | ✔ | ✔ |
 | maxLength  | ✔ | ✔ |
 | enum | ✔ | ✔ |
-| default  | ✔ |   |
-| title  | ✔ | ✔ | no function, only for commenting schema
-| description  | ✔ | ✔ | no function, only for commenting schema
+| default  | ✔ | ✔ | informational only
+| title  | ✔ | ✔ | informational only
+| description  | ✔ | ✔ | informational only
 | format | ✔ | ✔ |
 | divisibleBy  | ✔ | ✔ |
 | disallow | ✔ | ✔ |
-| extends  | ✔ |   |
-| id | ✔ | ✔ |
+| extends  | ✔ | ✔ |
+| id | ✔ | ✔ | informational only
 | $ref | ✔ | ✔ |
-| $schema  | ✔ |   |
+| $schema  | ✔ |   | ignored
 
 ### Types
 

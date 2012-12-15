@@ -8,7 +8,7 @@ var should = require('should');
 var Validator = require('./../lib/validator');
 
 var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional'];
-var ignoredFiles = ['optional', 'extends.json'];
+var ignoredFiles = ['optional'];
 
 /**
  * Runs the JSON Schema Test Suite
