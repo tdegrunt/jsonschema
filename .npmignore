@@ -1,0 +1,9 @@
+.git*
+docs/
+examples/
+test/
+suite.js
+.DS_Store
+node_modules
+.idea
+.travis.yml
