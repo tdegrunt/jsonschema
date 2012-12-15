@@ -61,7 +61,9 @@ describe('Formats', function () {
       this.validator.validate("/a/", {'type': 'string', 'format': 'regex'}).should.be.empty;
     });
 
-    // TODO: Find a failing regex
+    it('should not validate an invalid regex', function () {
+      this.validator.validate("/^(abc]/", {'type': 'string', 'format': 'regex'}).should.not.be.empty;
+    });
   });
 
   describe('color', function () {
