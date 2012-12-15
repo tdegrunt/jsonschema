@@ -7,7 +7,8 @@ var should = require('should');
 
 var Validator = require('./../lib/validator');
 
-var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional']
+var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional'];
+var ignoredFiles = ['optional', 'extends.json'];
 
 /**
  * Runs the JSON Schema Test Suite
@@ -16,7 +17,7 @@ describe('JSON Schema Test Suite', function(){
 
   paths.forEach(function(path) {
     fs.readdirSync(path).forEach(function(file) {
-      if (file == 'optional') return;
+      if (~ignoredFiles.indexOf(file)) return;
 
         var suites = JSON.parse(fs.readFileSync(path+"/"+file));
         suites.forEach(function(suite) {
