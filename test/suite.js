@@ -2,8 +2,7 @@
 
 var util = require('util');
 var fs = require('fs');
-var mocha = require('mocha');
-var should = require('should');
+var should = require('chai').should();
 
 var Validator = require('./../lib/validator');
 
