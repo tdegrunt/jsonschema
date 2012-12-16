@@ -17,13 +17,14 @@
     "json",
     "schema",
     "jsonschema",
-    "validator"
+    "validator",
+    "validation"
   ],
   "repository": {
     "type": "git",
     "url": "git://github.com/tdegrunt/jsonschema.git"
   },
-  "description": "JSON Schema",
+  "description": "A fast and easy to use JSON Schema validator",
   "scripts": {
     "test": "./node_modules/.bin/mocha -R spec"
   }
