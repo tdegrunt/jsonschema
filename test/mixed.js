@@ -46,7 +46,7 @@ describe('Mixed', function () {
         }
       );
       result.should.have.length(1);
-      result[0].should.have.property('message', 'is not string');
+      result[0].should.have.property('message', 'is not of a type(s) string');
       result[0].should.have.property('property', 'instance.lines[0]');
     });
   });
