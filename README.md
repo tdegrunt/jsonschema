@@ -39,16 +39,16 @@ Any non ticked off definition types are ignored.
 | minLength  | ✔ | ✔ |
 | maxLength  | ✔ | ✔ |
 | enum | ✔ | ✔ |
-| default  | ✔ |   |
-| title  | ✔ | ✔ | no function, only for commenting schema
-| description  | ✔ | ✔ | no function, only for commenting schema
+| default  | ✔ | ✔ | informational only
+| title  | ✔ | ✔ | informational only
+| description  | ✔ | ✔ | informational only
 | format | ✔ | ✔ |
 | divisibleBy  | ✔ | ✔ |
 | disallow | ✔ | ✔ |
-| extends  | ✔ |   |
-| id | ✔ | ✔ |
+| extends  | ✔ | ✔ |
+| id | ✔ | ✔ | informational only
 | $ref | ✔ | ✔ |
-| $schema  | ✔ |   |
+| $schema  | ✔ |   | ignored
 
 ### Types
 
@@ -73,10 +73,10 @@ Any non ticked off definition types are ignored.
 | `date` | ✔ | ✔ |
 | `time` | ✔ | ✔ |
 | `utc-millisec` | ✔ | ✔ | Any number (integer or float) is allowed
-| `regex` | ✔ | ✔ | Any string is allowed
+| `regex` | ✔ | ✔ | We test for valid regular expression
 | `color` | ✔ | ✔ |
-| `style` | ✔ | ✔ | Any string is allowed
-| `phone` | ✔ | ✔ | Any string is allowed
+| `style` | ✔ | ✔ |
+| `phone` | ✔ | ✔ | Should follow [http://en.wikipedia.org/wiki/E.123](E.123) standard.
 | `uri` | ✔ | ✔ |
 | `email` | ✔ | ✔ |
 | `ip-address` | ✔ | ✔ |
@@ -84,6 +84,14 @@ Any non ticked off definition types are ignored.
 | `host-name` | ✔ | ✔ |
 | `alpha` |   | ✔ |
 | `alphanumeric` |   | ✔ |
+
+## Tests
+
+Uses [https://github.com/Julian/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own.
+You'll need to update and init the git submodules:
+
+    git submodule update --init
+    npm test
 
 ## License
 

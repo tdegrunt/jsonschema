@@ -3,9 +3,8 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var mocha = require('mocha');
 var Validator = require('../lib/validator');
-var should = require('should');
+var should = require('chai').should();
 
 describe('Objects', function () {
   beforeEach(function () {
@@ -56,7 +55,7 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'address': {'type': 'string'},
+            'address': {'type': 'string'}
           }
         }
       ).should.be.empty;
@@ -69,7 +68,7 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'address': {'type': 'string'},
+            'address': {'type': 'string'}
           }
         }
       ).should.be.empty;

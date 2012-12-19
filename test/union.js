@@ -3,9 +3,8 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var mocha = require('mocha');
 var Validator = require('../lib/validator');
-var should = require('should');
+var should = require('chai').should();
 
 describe('Union', function () {
   beforeEach(function () {

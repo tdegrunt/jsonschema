@@ -3,9 +3,8 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var mocha = require('mocha');
 var Validator = require('../lib/validator');
-var should = require('should');
+var should = require('chai').should();
 
 describe('Formats', function () {
   beforeEach(function () {
@@ -61,7 +60,9 @@ describe('Formats', function () {
       this.validator.validate("/a/", {'type': 'string', 'format': 'regex'}).should.be.empty;
     });
 
-    // TODO: Find a failing regex
+    it('should not validate an invalid regex', function () {
+      this.validator.validate("/^(abc]/", {'type': 'string', 'format': 'regex'}).should.not.be.empty;
+    });
   });
 
   describe('color', function () {
@@ -91,15 +92,28 @@ describe('Formats', function () {
       this.validator.validate("color: red;", {'type': 'string', 'format': 'style'}).should.be.empty;
     });
 
-    // TODO: Find a failing style
+    it('should validate a valid complex style', function () {
+      this.validator.validate("color: red; position: absolute; background-color: rgb(204, 204, 204); max-width: 150px;", {'type': 'string', 'format': 'style'}).should.be.empty;
+    });
+
+    it('should validate a valid complex style', function () {
+      this.validator.validate("color:red;position:absolute; background-color:     rgb(204, 204, 204); max-width: 150px;", {'type': 'string', 'format': 'style'}).should.be.empty;
+    });
+
+    it('should not validate an invalid style', function () {
+      this.validator.validate("0", {'type': 'string', 'format': 'style'}).should.not.be.empty;
+    });
+
   });
 
   describe('phone', function () {
     it('should validate a valid phone-number', function () {
-      this.validator.validate("+1 202-456-1111", {'type': 'string', 'format': 'phone'}).should.be.empty;
+      this.validator.validate("+31 42 123 4567", {'type': 'string', 'format': 'phone'}).should.be.empty;
     });
 
-    // TODO: Find a failing phone-number
+    it('should not validate an invalid phone-number', function () {
+      this.validator.validate("31 42 123 4567", {'type': 'string', 'format': 'phone'}).should.not.be.empty;
+    });
   });
 
   describe('uri', function () {
