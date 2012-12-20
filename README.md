@@ -1,7 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/tdegrunt/jsonschema.png)](http://travis-ci.org/tdegrunt/jsonschema)
 
 # jsonschema
-
 Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-03) validator.
 
 ## Usage
@@ -15,78 +14,15 @@ Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-0
 ## Features
 
 ### Definitions
-
-Any non ticked off definition types are ignored.
-
-| Value | JSON Schema Draft | jsonschema | Comments |
-|:------|:-----------------:|:----------:|:---------|
-| type  | ✔ | ✔ |
-| properties | ✔ | ✔ |
-| patternProperties  | ✔ | ✔ |
-| additionalProperties | ✔ | ✔ |
-| items  | ✔ | ✔ |
-| additionalItems  | ✔ | ✔ |
-| required | ✔ | ✔ |
-| dependencies | ✔ | ✔ |
-| minimum  | ✔ | ✔ |
-| maximum  | ✔ | ✔ |
-| exclusiveMinimum | ✔ | ✔ |
-| exclusiveMaximum | ✔ | ✔ |
-| minItems | ✔ | ✔ |
-| maxItems | ✔ | ✔ |
-| uniqueItems  | ✔ | ✔ |
-| pattern  | ✔ | ✔ |
-| minLength  | ✔ | ✔ |
-| maxLength  | ✔ | ✔ |
-| enum | ✔ | ✔ |
-| default  | ✔ | ✔ | informational only
-| title  | ✔ | ✔ | informational only
-| description  | ✔ | ✔ | informational only
-| format | ✔ | ✔ |
-| divisibleBy  | ✔ | ✔ |
-| disallow | ✔ | ✔ |
-| extends  | ✔ | ✔ |
-| id | ✔ | ✔ | informational only
-| $ref | ✔ | ✔ |
-| $schema  | ✔ |   | ignored
+All schema definitions are supported, $schema is ignored.
 
 ### Types
-
-| Value | JSON Schema Draft | jsonschema | Comments |
-|:------|:-----------------:|:----------:|:---------|
-| `string` | ✔ | ✔ |
-| `number` | ✔ | ✔ |
-| `integer` | ✔ | ✔ |
-| `boolean` | ✔ | ✔ |
-| `object` | ✔ | ✔ |
-| `array` | ✔ | ✔ |
-| `null` | ✔ | ✔ |
-| `date` |   | ✔ |
-| `any` | ✔ | ✔ |
-|  Union Types | ✔ | ✔ |
+All types are supported
 
 ### String Formats
-
-| Value | JSON Schema Draft | jsonschema | Comments |
-|:------|:-----------------:|:----------:|:---------|
-| `date-time` | ✔ | ✔ |
-| `date` | ✔ | ✔ |
-| `time` | ✔ | ✔ |
-| `utc-millisec` | ✔ | ✔ | Any number (integer or float) is allowed
-| `regex` | ✔ | ✔ | We test for valid regular expression
-| `color` | ✔ | ✔ |
-| `style` | ✔ | ✔ |
-| `phone` | ✔ | ✔ | Should follow [http://en.wikipedia.org/wiki/E.123](E.123) standard.
-| `uri` | ✔ | ✔ |
-| `email` | ✔ | ✔ |
-| `ip-address` | ✔ | ✔ |
-| `ipv6` | ✔ | ✔ |
-| `host-name` | ✔ | ✔ |
-| `alpha` |   | ✔ |
-| `alphanumeric` |   | ✔ |
+All formats are supported, phone numbers are expected to follow the [http://en.wikipedia.org/wiki/E.123](E.123) standard.
 
 ## Tests
-
 Uses [https://github.com/Julian/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own.
 You'll need to update and init the git submodules:
 
@@ -94,7 +30,6 @@ You'll need to update and init the git submodules:
     npm test
 
 ## License
-
 jsonschema is licensed under MIT license.
 
 	Copyright (C) 2012 Tom de Grunt <tom@degrunt.nl>
