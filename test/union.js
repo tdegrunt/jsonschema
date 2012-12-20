@@ -27,9 +27,9 @@ describe('Union', function () {
       }
     };
 
-    this.validator.addSchema(testSchema, 'Test#Simple');
-    this.validator.addSchema(numSchema, 'Test#Num');
-    this.validator.addSchema(objectIdSchema, 'MongoDb#ObjectId');
+    this.validator.addSchema(testSchema, '/Test#Simple');
+    this.validator.addSchema(numSchema, '/Test#Num');
+    this.validator.addSchema(objectIdSchema, '/MongoDb#ObjectId');
 
   });
 
