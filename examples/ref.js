@@ -5,8 +5,8 @@ var Validator = require('../lib/validator');
 
 // Address, to be embedded on Person
 var addressSchema = {
-  "id": "Simple#Address",
-  "type" : "object",
+  "id": "/SimpleAddress",
+  "type": "object",
   "properties": {
     "lines": {
       "type": "array",
@@ -20,11 +20,11 @@ var addressSchema = {
 
 // Person model
 var schema = {
-  "id": "Simple#Person",
-  "type" : "object",
+  "id": "/SimplePerson",
+  "type": "object",
   "properties": {
     "name": {"type": "string"},
-    "address": {"$ref": "Simple#Address"},
+    "address": {"$ref": "/SimpleAddress"},
     "votes": {"type": "integer", "minimum": 1}
   }
 };
@@ -41,6 +41,5 @@ var p = {
 };
 
 var v = new Validator();
-v.addSchema(addressSchema, 'Simple#Address');
-p.address = 1235;
+v.addSchema(addressSchema, '/SimpleAddress');
 console.log(v.validate(p, schema));
