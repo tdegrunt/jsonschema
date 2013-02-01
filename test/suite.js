@@ -7,7 +7,7 @@ var should = require('chai').should();
 var Validator = require('./../lib/validator');
 
 var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional'];
-var ignoredFiles = ['optional'];
+var ignoredFiles = ['optional', 'jsBrainDamage.json'];
 
 /**
  * Runs the JSON Schema Test Suite
@@ -28,7 +28,7 @@ describe('JSON Schema Test Suite', function(){
               it(test.description, function() {
                 var validator = new Validator();
                 var result = validator.validate(test.data, suite.schema);
-                return should.equal(test.valid, result.length === 0, util.inspect(result, true, null));
+                return should.equal(test.valid, result.valid, util.inspect(result, true, null));
               });
 
             });

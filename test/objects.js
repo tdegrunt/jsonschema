@@ -13,19 +13,19 @@ describe('Objects', function () {
 
   describe('simple object', function () {
     it('should validate a valid object', function () {
-      this.validator.validate({}, {'type': 'object'}).should.be.empty;
+      this.validator.validate({}, {'type': 'object'}).valid.should.be.true;
     });
 
     it('should validate an undefined object', function () {
-      this.validator.validate(undefined, {'type': 'object'}).should.be.empty;
+      this.validator.validate(undefined, {'type': 'object'}).valid.should.be.true;
     });
 
     it('should not validate a number', function () {
-      return this.validator.validate(0, {'type': 'object'}).should.not.be.empty;
+      return this.validator.validate(0, {'type': 'object'}).valid.should.be.false;
     });
 
     it('should not validate an array', function () {
-      return this.validator.validate([0], {'type': 'object'}).should.not.be.empty;
+      return this.validator.validate([0], {'type': 'object'}).valid.should.be.false;
     });
   });
 
@@ -39,11 +39,11 @@ describe('Objects', function () {
             'name': {'type': 'string'}
           }
         }
-      ).should.be.empty;
+      ).valid.should.be.true;
     });
 
     it('should not validate an invalid object', function () {
-      return this.validator.validate(0, {'type': 'object'}).should.not.be.empty;
+      return this.validator.validate(0, {'type': 'object'}).valid.should.be.false;
     });
   });
 
@@ -58,7 +58,7 @@ describe('Objects', function () {
             'address': {'type': 'string'}
           }
         }
-      ).should.be.empty;
+      ).valid.should.be.true;
     });
 
     it('should validate a valid object with undefined property', function () {
@@ -71,7 +71,7 @@ describe('Objects', function () {
             'address': {'type': 'string'}
           }
         }
-      ).should.be.empty;
+      ).valid.should.be.true;
     });
 
   });
@@ -87,7 +87,7 @@ describe('Objects', function () {
             'nested': {'type': 'object'}
           }
         }
-      ).should.not.be.empty;
+      ).valid.should.be.false;
     });
 
     it('should validate a valid object', function () {
@@ -100,7 +100,7 @@ describe('Objects', function () {
             'nested': {'type': 'string'}
           }
         }
-      ).should.be.empty;
+      ).valid.should.be.true;
     });
   });
 
@@ -122,7 +122,7 @@ describe('Objects', function () {
             }
           }
         }
-      ).should.not.be.empty;
+      ).valid.should.be.false;
     });
   });
 
@@ -138,7 +138,7 @@ describe('Objects', function () {
           },
           'additionalProperties': false
         }
-      ).should.be.empty;
+      ).valid.should.be.true;
     });
 
     it('should not validate if there are additionalProperties', function () {
@@ -152,7 +152,7 @@ describe('Objects', function () {
           },
           'additionalProperties': false
         }
-      ).should.not.be.empty;
+      ).valid.should.be.false;
     });
 
     it('should validate if the additionalProperties are compliant with additionalProperties', function () {
@@ -166,7 +166,7 @@ describe('Objects', function () {
           },
           'additionalProperties': {'type': 'number'}
         }
-      ).should.be.empty;
+      ).valid.should.be.true;
     });
 
     it('should not validate if the additionalProperties are not compliant with additionalProperties', function () {
@@ -180,7 +180,7 @@ describe('Objects', function () {
           },
           'additionalProperties': {'type': 'number'}
         }
-      ).should.not.be.empty;
+      ).valid.should.be.false;
     });
   });
 });
