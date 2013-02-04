@@ -35,69 +35,69 @@ describe('Union', function () {
 
   describe('string and number', function () {
     it('should validate for number', function () {
-      this.validator.validate(1, {'type': ['number', 'string']}).should.be.empty;
+      this.validator.validate(1, {'type': ['number', 'string']}).valid.should.be.true;
     });
     it('should validate for string', function () {
-      this.validator.validate('1', {'type': ['number', 'string']}).should.be.empty;
+      this.validator.validate('1', {'type': ['number', 'string']}).valid.should.be.true;
     });
 
     it('should not validate if no string or number', function () {
-      this.validator.validate(true, {'type': ['number', 'string']}).should.not.be.empty;
+      this.validator.validate(true, {'type': ['number', 'string']}).valid.should.be.false;
     });
   });
 
   describe('string and null', function () {
     it('should validate for null', function () {
-      this.validator.validate(null, {'type': ['null', 'string']}).should.be.empty;
+      this.validator.validate(null, {'type': ['null', 'string']}).valid.should.be.true;
       });
     it('should validate for string', function () {
-      this.validator.validate('1', {'type': ['null', 'string']}).should.be.empty;
+      this.validator.validate('1', {'type': ['null', 'string']}).valid.should.be.true;
       });
 
     it('should not validate if no string or number', function () {
-      this.validator.validate(true, {'type': ['null', 'string']}).should.not.be.empty;
+      this.validator.validate(true, {'type': ['null', 'string']}).valid.should.be.false;
     });
   });
 
   describe('string and null', function () {
     it('should validate for null', function () {
-      this.validator.validate(null, {'type': ['null', 'string']}).should.be.empty;
+      this.validator.validate(null, {'type': ['null', 'string']}).valid.should.be.true;
       });
     it('should validate for string', function () {
-      this.validator.validate('1', {'type': ['null', 'string']}).should.be.empty;
+      this.validator.validate('1', {'type': ['null', 'string']}).valid.should.be.true;
       });
 
     it('should not validate if no string or number', function () {
-      this.validator.validate(true, {'type': ['null', 'string']}).should.not.be.empty;
+      this.validator.validate(true, {'type': ['null', 'string']}).valid.should.be.false;
       });
   });
 
   describe('null and $ref', function () {
     it('should validate for null', function () {
-      this.validator.validate(null, {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.empty;
+      this.validator.validate(null, {'type': ['null', {'$ref':'Test#Simple'}]}).valid.should.be.true;
     });
 
     it('should validate for string', function () {
-      this.validator.validate('test', {'type': ['null', {'$ref':'Test#Simple'}]}).should.be.empty;
+      this.validator.validate('test', {'type': ['null', {'$ref':'Test#Simple'}]}).valid.should.be.true;
     });
 
     it('should not validate if no string or number', function () {
-      this.validator.validate(true, {'type': ['null', {'$ref':'Test#Simple'}]}).should.not.be.empty;
+      this.validator.validate(true, {'type': ['null', {'$ref':'Test#Simple'}]}).valid.should.be.false;
      });
   });
 
   describe('$ref and string', function () {
     it('should validate for *', function () {
-      this.validator.validate('*', {'type': [{ type: 'string', pattern: '^\\*$' }, {'$ref':'Test#Num'}]}).should.be.empty;
+      this.validator.validate('*', {'type': [{ type: 'string', pattern: '^\\*$' }, {'$ref':'Test#Num'}]}).valid.should.be.true;
     });
 
     it('should validate for 1', function () {
-      this.validator.validate(1, {'type': [{ type: 'string', pattern: '^\\*$' }, {'$ref':'Test#Num'}]}).should.be.empty;
+      this.validator.validate(1, {'type': [{ type: 'string', pattern: '^\\*$' }, {'$ref':'Test#Num'}]}).valid.should.be.true;
     });
 
     it('should not validate for -', function () {
       var result = this.validator.validate('-', {'type': [{ type: 'string', pattern: '^\\*$' }, {'$ref':'Test#Num'}]});
-      result.should.not.be.empty;
+      result.valid.should.be.false;
     });
   });
 
@@ -112,7 +112,7 @@ describe('Union', function () {
           }
         }
       };
-      this.validator.validate({'wildcards': ['*']}, schema).should.be.empty;
+      this.validator.validate({'wildcards': ['*']}, schema).valid.should.be.true;
     });
 
     it('should validate for empty array', function () {
@@ -125,7 +125,7 @@ describe('Union', function () {
           }
         }
       };
-      this.validator.validate({'wildcards': []}, schema).should.be.empty;
+      this.validator.validate({'wildcards': []}, schema).valid.should.be.true;
     });
 
     it('should validate for objectid', function () {
@@ -138,7 +138,7 @@ describe('Union', function () {
           }
         }
       };
-      this.validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).should.be.empty;
+      this.validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).valid.should.be.true;
     });
 
     it('should validate for objectid and ignore title and description', function () {
@@ -151,7 +151,7 @@ describe('Union', function () {
           }
         }
       };
-      this.validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).should.be.empty;
+      this.validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).valid.should.be.true;
     });
 
   });
@@ -186,15 +186,15 @@ describe('Union', function () {
     var exc = {class: 'testing...', message: 'this is only a test'};
     it('should validate for nulls', function () {
       var instance = {frames: [{filename: 'somefile.js', lineno: null}], exception: exc};
-      this.validator.validate(instance, schema).should.be.empty;
+      this.validator.validate(instance, schema).valid.should.be.true;
       });
     it('should validate for null and string', function () {
       var instance = {frames: [{filename: 'somefile.js', lineno: null}], exception: exc};
-      this.validator.validate(instance, schema).should.be.empty;
+      this.validator.validate(instance, schema).valid.should.be.true;
       });
     it('should not validate for string and string', function () {
       var instance = {frames: [{filename: 'somefile.js', lineno: {hello: 'world'}}], exception: exc};
-      this.validator.validate(instance, schema).should.not.be.empty;
+      this.validator.validate(instance, schema).valid.should.be.false;
       });
   });
 });
