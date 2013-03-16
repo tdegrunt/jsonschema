@@ -80,6 +80,52 @@ All types are supported
 ### String Formats
 All formats are supported, phone numbers are expected to follow the [http://en.wikipedia.org/wiki/E.123](E.123) standard.
 
+### Custom properties
+Specify your own JSON Schema properties with the validator.attributes property:
+
+```javascript
+validator.attributes.contains = function validateContains(instance, schema, options, ctx) {
+  if(typeof instance!='string') return;
+  if(typeof schema.contains!='string') throw new jsonschema.SchemaError('"contains" expects a string', schema);
+  if(instance.indexOf()<0){
+    return 'does not contain the string '+JSON.stringify(schema.contains);
+  }
+}
+var result = validator.validate({x:0, y:10}, {type:"object", radius:{x:10, y:10, radius:5}});
+
+```
+
+The instance passes validation if the function returns nothing. A single validation error is produced
+if the fuction returns a string. Any number of errors (maybe none at all) may be returned by passing a
+`ValidatorResult` object, which may be used like so:
+
+```javascript
+  var result = new ValidatorResult(instance, schema, options, ctx);
+  while(someErrorCondition()){
+    result.addError('fails some validation test');
+  }
+  return result;
+```
+
+### Dereferencing schemas
+Sometimes you may want to download schemas from remote sources, like a database, or over HTTP. When importing a schema,
+unknown references are inserted into the `validator.unresolvedRefs` Array. Asynchronously shift elements off this array and import
+them:
+
+```javascript
+  var v = new Validator();
+  v.addSchema(initialSchema);
+  function importNextSchema(){
+    var nextSchema = v.unresolvedRefs.shift();
+    if(!nextSchema){ done(); return; }
+    databaseGet(nextSchema, function(schema){
+      v.addSchema(schema);
+      importNextSchema();
+    });
+  }
+  importNextSchema();
+```
+
 ## Tests
 Uses [https://github.com/Julian/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own.
 You'll need to update and init the git submodules:
