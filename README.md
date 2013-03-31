@@ -2,6 +2,8 @@
 
 # jsonschema
 Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-03) validator.
+The latest IETF published draft is v3. This library is v3 compatible, but has some v4 additions.
+We aim to fully support v4 once it is is published.
 
 ## Usage
 
