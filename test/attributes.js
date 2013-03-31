@@ -242,6 +242,13 @@ describe('Attributes', function () {
       return this.validator.validate(3, {'type': 'string', 'enum': [1, 2]}).valid.should.be.false;
     });
 
+    it('should validate if value is undefined but defaults to one of the enum values', function () {
+      return this.validator.validate(undefined, {'enum': ['foo', 'bar', 'baz'], 'default': 'baz'}).valid.should.be.true;
+    });
+
+    it('should not validate if value is undefined and required, even if a default is given', function () {
+      return this.validator.validate(undefined, {'enum': ['foo', 'bar', 'baz'], 'required': true, 'default': 'baz'}).valid.should.be.false;
+    });
   });
 
   describe('description', function () {
