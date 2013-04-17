@@ -1,0 +1,7 @@
+{
+	"payment": {
+		"amount":5000,
+		"other_amount":100,
+    "usage":"Order 12345 pucrchase of concert tickets"
+	}
+}

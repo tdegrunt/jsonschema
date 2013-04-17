@@ -1,0 +1,16 @@
+{
+  "description" : "custom types",
+  "type":"object",
+  "amount": {
+    "description" : "Amount of the payment in cents, must be > 0",
+    "type" : "integer",
+    "minimum": 1,
+    "exclusiveMinimum": false
+  },
+  "usage": {
+    "description" : "text statement for bank statement",
+    "type" : "string",
+    "minLength": 1,
+    "maxLength": 255
+  }
+}

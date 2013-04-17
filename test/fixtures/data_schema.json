@@ -1,0 +1,26 @@
+{
+  "description" : "Application Data",
+  "type":"object",
+  "$schema": "http://json-schema.org/draft-03/schema",
+  "required":true,
+  "properties": {
+    "payment": {
+      "type":"object",
+      "required":true,
+      "additionalProperties":false,
+      "properties": {
+        "amount": {
+          "required":true,
+          "extends" : "types.json#/amount"
+        },
+        "other_amount": {
+          "required":true,
+          "extends" : {"$ref": "types.json#/amount"}
+        },
+       "usage": {
+          "$ref": "types.json#/usage"
+        }
+      }
+    }
+  }
+}
