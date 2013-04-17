@@ -11,6 +11,10 @@
       "properties": {
         "amount": {
           "required":true,
+          "extends" : "types.json#/amount"
+        },
+        "other_amount": {
+          "required":true,
           "extends" : {"$ref": "types.json#/amount"}
         },
        "usage": {

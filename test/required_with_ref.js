@@ -89,6 +89,46 @@ describe('required with $ref', function () {
 		})
 	})
 
+
+	describe('required positive integer via $ref (other_amount)', function() {
+		describe('valid', function() {
+			it('1', function () {
+				payment.other_amount = 1;
+				assertValid(data)
+			})
+			it('1000000000', function () {
+				payment.other_amount = 1000000000;
+				assertValid(data)
+			})
+		})
+		describe('not valid', function() {
+			it('missing', function () {
+				delete(payment.other_amount)
+				assertNotValid(data)
+			})
+			it('1.2', function () {
+				payment.other_amount = 1.2;
+				assertNotValid(data)
+			})
+			it('0', function () {
+				payment.other_amount = 0;
+				assertNotValid(data)
+			})
+			it('-1', function () {
+				payment.other_amount = -1;
+				assertNotValid(data)
+			})
+			it('-1.2', function () {
+				payment.other_amount = -1.2;
+				assertNotValid(data)
+			})
+			it('foo', function () {
+				payment.other_amount = 'foo';
+				assertNotValid(data)
+			})
+		})
+	})
+
 	describe('optional string 1..255 (usage)', function() {
 		describe('valid', function() {
 			it('missing', function () {
