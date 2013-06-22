@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('util');
-var Validator = require('../lib/validator');
+var Validator = require('jsonschema').Validator;
 
 // Address, to be embedded on Person
 var addressSchema = {
