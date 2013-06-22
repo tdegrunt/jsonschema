@@ -20,10 +20,11 @@ describe('Attributes', function () {
       it('should not validate an invalid number', function () {
         return this.validator.validate('0', {'type': 'number'}).valid.should.be.false;
       });
+
     });
 
     describe('required', function () {
-      it('should validate an undefined instance', function () {
+      it('should not validate an undefined instance', function () {
         this.validator.validate(undefined, {'type': 'number', 'required': true}).valid.should.be.false;
       });
     });
@@ -37,6 +38,11 @@ describe('Attributes', function () {
       it('should not validate no-null', function () {
         return this.validator.validate('0', {'type': 'null'}).valid.should.be.false;
       });
+
+      // I don't know - strictly undefined should not be a valid null
+      it('should not validate an undefined instance', function () {
+        this.validator.validate(undefined, {'type': 'date', 'required': true}).valid.should.be.false;
+      });
     });
 
     describe('date', function () {
@@ -47,6 +53,10 @@ describe('Attributes', function () {
 
       it('should not validate no-null', function () {
         return this.validator.validate('0', {'type': 'date'}).valid.should.be.false;
+      });
+
+      it('should not validate an undefined instance', function () {
+        this.validator.validate(undefined, {'type': 'date', 'required': true}).valid.should.be.false;
       });
     });
 
@@ -60,6 +70,9 @@ describe('Attributes', function () {
         return this.validator.validate(0.25, {'type': 'integer'}).valid.should.be.false;
       });
 
+      it('should not validate an undefined instance', function () {
+        this.validator.validate(undefined, {'type': 'integer', 'required': true}).valid.should.be.false;
+      });
     });
 
     describe('boolean', function () {
@@ -74,6 +87,10 @@ describe('Attributes', function () {
 
       it('should not validate non boolean', function () {
         return this.validator.validate('true', {'type': 'boolean'}).valid.should.be.false;
+      });
+
+      it('should not validate an undefined instance', function () {
+        this.validator.validate(undefined, {'type': 'boolean', 'required': true}).valid.should.be.false;
       });
     });
 
@@ -93,6 +110,10 @@ describe('Attributes', function () {
 
       it('should validate Date as any', function () {
         return this.validator.validate(new Date(), {'type': 'any'}).valid.should.be.true;
+      });
+
+      it('should not validate an undefined instance', function () {
+        this.validator.validate(undefined, {'type': 'any', 'required': true}).valid.should.be.false;
       });
     });
   });
@@ -249,6 +270,18 @@ describe('Attributes', function () {
     it('should not validate if value is undefined and required, even if a default is given', function () {
       return this.validator.validate(undefined, {'enum': ['foo', 'bar', 'baz'], 'required': true, 'default': 'baz'}).valid.should.be.false;
     });
+
+    it('should not validate if a required field is ommited', function () {
+      return this.validator.validate({}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.false;
+    });
+
+    it('should not validate if a required field is undefined', function () {
+      return this.validator.validate({'the_field':undefined}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.false;
+    });
+
+    it('should validate if a required field has a value out of enum', function () {
+      return this.validator.validate({'the_field':'bar'}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.true;
+    });
   });
 
   describe('description', function () {
@@ -290,6 +323,6 @@ describe('Attributes', function () {
 
     it('should validate with satisfied dependencies', function () {
       this.validator.validate({quux: 1, foo: 1, bar: 1}, {'dependencies': {'quux': ['foo', 'bar']}}).valid.should.be.true;
-    });    
+    });
   });
 });
