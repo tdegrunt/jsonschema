@@ -11,6 +11,7 @@ We aim to fully support v4 once it is is published.
 Simple object validation using JSON schemas.
 
 ```javascript
+  var Validator = require('jsonschema').Validator;
   var v = new Validator();
   var instance = 4;
   var schema = {"type": "number"};
@@ -27,6 +28,7 @@ Simple object validation using JSON schemas.
 ### Complex example, with split schemas and references
 
 ```javascript
+  var Validator = require('jsonschema').Validator;
   var v = new Validator();
 
   // Address, to be embedded on Person
@@ -66,7 +68,6 @@ Simple object validation using JSON schemas.
     "votes": "lots"
   };
 
-  var v = new Validator();
   v.addSchema(addressSchema, '/SimpleAddress');
   console.log(v.validate(p, schema));
 ```
@@ -115,6 +116,7 @@ unknown references are inserted into the `validator.unresolvedRefs` Array. Async
 them:
 
 ```javascript
+  var Validator = require('jsonschema').Validator;
   var v = new Validator();
   v.addSchema(initialSchema);
   function importNextSchema(){
