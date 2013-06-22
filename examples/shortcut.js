@@ -1,6 +1,6 @@
 'use strict';
 
-var validate = require('../lib/index').validate;
+var validate = require('jsonschema').validate;
 
 var instance = 4;
 var schema = {"type": "number"};
