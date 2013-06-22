@@ -16,10 +16,17 @@ describe('Formats', function () {
       this.validator.validate("2012-07-08T16:41:41.532Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
     });
 
+    it('should validate a valid date-time without milliseconds', function () {
+      this.validator.validate("2012-07-08T16:41:41Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+    });
+
+    it('should not validate a date-time with the time missing', function () {
+      this.validator.validate("2012-07-08", {'type': 'string', 'format': 'date-time'}).valid.should.be.false;
+    });
+
     it('should not validate an invalid date-time', function () {
       this.validator.validate("TEST2012-07-08T16:41:41.532Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.false;
     });
-
   });
 
   describe('date', function () {
