@@ -52,6 +52,10 @@ describe('Formats', function () {
   });
 
   describe('utc-millisec', function () {
+    it('should validate a valid utc-millisec number', function () {
+      this.validator.validate(new Date().getTime(), {'type': 'number', 'format': 'utc-millisec'}).valid.should.be.true;
+    });
+
     it('should validate a valid utc-millisec', function () {
       this.validator.validate("-1234567890", {'type': 'string', 'format': 'utc-millisec'}).valid.should.be.true;
     });
