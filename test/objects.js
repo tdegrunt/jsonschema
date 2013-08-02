@@ -74,6 +74,18 @@ describe('Objects', function () {
       ).valid.should.be.true;
     });
 
+    it('should not throw when checking properties on a non-object', function() {
+      this.validator.validate(
+        null,
+        {
+          'type': 'object',
+          'properties': {
+            'name': {'type': 'string'}
+          }
+        }
+      ).valid.should.be.false;
+    });
+
   });
 
   describe('nested object with property', function () {
