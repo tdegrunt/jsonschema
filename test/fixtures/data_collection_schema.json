@@ -1,0 +1,8 @@
+{
+  "id": "data_collection_schema.json",
+  "title": "Collection of data",
+  "type": "array",
+  "items": {
+    "$ref": "/data_schema.json"
+  }
+}
