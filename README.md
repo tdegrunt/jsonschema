@@ -1,9 +1,14 @@
 [![Build Status](https://secure.travis-ci.org/tdegrunt/jsonschema.png)](http://travis-ci.org/tdegrunt/jsonschema)
 
 # jsonschema
-Simple and fast [JSON schema](http://tools.ietf.org/html/draft-zyp-json-schema-03) validator.
-The latest IETF published draft is v3. This library is v3 compatible, but has some v4 additions.
-We aim to fully support v4 once it is is published.
+[JSON schema](http://json-schema.org/) validator, which is designed to be fast and simple to use.
+The latest IETF published draft is v4, this library is mostly v4 compatible.
+
+## Contributing & bugs
+Please fork the repository, make the changes in you fork and include tests. Once you're done making changes, send in a pull request.
+
+### Bug reports
+Please include a test which shows why the code fails.
 
 ## Usage
 
@@ -134,7 +139,7 @@ them:
 ```
 
 ## Tests
-Uses [https://github.com/Julian/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own.
+Uses [https://github.com/json-schema/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own tests.
 You'll need to update and init the git submodules:
 
     git submodule update --init
@@ -144,7 +149,7 @@ You'll need to update and init the git submodules:
 
     jsonschema is licensed under MIT license.
 
-    Copyright (C) 2012-2013 Tom de Grunt <tom@degrunt.nl>
+    Copyright (C) 2012-2014 Tom de Grunt <tom@degrunt.nl>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of
     this software and associated documentation files (the "Software"), to deal in
