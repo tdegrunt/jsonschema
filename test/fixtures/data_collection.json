@@ -1,0 +1,16 @@
+[
+  {
+    "payment": {
+      "amount":5000,
+      "other_amount":100,
+      "usage":"Order 12345 purchase of concert tickets"
+    }
+  },
+  {
+    "payment": {
+      "amount":10,
+      "other_amount":20,
+      "usage":"Order 12346 purchase of one teddy bear"
+    }
+  }
+]
