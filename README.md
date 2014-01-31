@@ -5,7 +5,7 @@
 The latest IETF published draft is v4, this library is mostly v4 compatible.
 
 ## Contributing & bugs
-Please fork the repository, make the changes in you fork and include tests. Once you're done making changes, send in a pull request.
+Please fork the repository, make the changes in your fork and include tests. Once you're done making changes, send in a pull request.
 
 ### Bug reports
 Please include a test which shows why the code fails.
