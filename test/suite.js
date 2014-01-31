@@ -6,8 +6,8 @@ var should = require('chai').should();
 
 var Validator = require('./../lib/validator');
 
-var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional'];
-var ignoredFiles = ['optional', 'zeroTerminatedFloats.json'];
+var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional'];
+var ignoredFiles = ['optional', 'zeroTerminatedFloats.json', 'refRemote.json'];
 
 /**
  * Runs the JSON Schema Test Suite
