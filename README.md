@@ -89,10 +89,10 @@ All types are supported
 All formats are supported, phone numbers are expected to follow the [http://en.wikipedia.org/wiki/E.123](E.123) standard.
 
 ### Results
-The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array which also contains the success flag `result.valid`.
+The first error found will be thrown as an `Error` object if `options.throwError` is `true`. Otherwise all results will be appended to the `result.errors` array which also contains the success flag `result.valid`.
 
 ### Filter
-Filter away any properties not in schema if `options.filter` is `true` and  `options.additionalProperties` is `false`. By default: `false`
+Filter away any properties not in schema if `options.filter` is `true` and `options.additionalProperties` is `false`. By default: `false`.
 
 ### Custom properties
 Specify your own JSON Schema properties with the validator.attributes property:
