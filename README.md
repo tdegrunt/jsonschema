@@ -99,11 +99,11 @@ validator.attributes.contains = function validateContains(instance, schema, opti
   if(typeof instance!='string') return;
   if(typeof schema.contains!='string') throw new jsonschema.SchemaError('"contains" expects a string', schema);
   if(instance.indexOf()<0){
-    return 'does not contain the string '+JSON.stringify(schema.contains);
+    return 'does not contain the string ' + JSON.stringify(schema.contains);
   }
 }
-var result = validator.validate({x:0, y:10}, {type:"object", radius:{x:10, y:10, radius:5}});
-
+var result = validator.validate("i am an instance", { type:"string", contains: "i am" });
+// result.valid === true;
 ```
 
 The instance passes validation if the function returns nothing. A single validation error is produced
