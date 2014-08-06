@@ -26,6 +26,13 @@ describe('Formats', function() {
       }).valid.should.be.true;
     });
 
+    it('should validate a RFC3339 format', function() {
+      this.validator.validate("1996-12-19T16:39:57-08:00", {
+        'type': 'string',
+        'format': 'date-time'
+      }).valid.should.be.true;
+    });
+
     it('should validate a date-time with a timezone offset instead of Z', function() {
       this.validator.validate("2012-07-08T16:41:41.532+00:00", {
         'type': 'string',
