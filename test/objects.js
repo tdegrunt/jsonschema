@@ -195,4 +195,63 @@ describe('Objects', function () {
       ).valid.should.be.false;
     });
   });
+
+  describe('validate with filter', function () {
+    var schema = {
+      description: "Simple object",
+        required: true,
+        type: "object",
+        additionalProperties: false,
+        properties:{
+        a: {
+          type: "number",
+            required: true
+        },
+        b: {
+          type: "string",
+            required: false,
+            readonly: true
+        }
+      }
+    };
+
+    describe('simple schema validation without filter: true', function () {
+      var result;
+      var document = {a: 1, c: 'd', notInSchemaField: 'foo'};
+
+      before(function () {
+        result = this.validator.validate(document, schema);
+      });
+
+      it('should not validate', function () {
+        result.should.have.property("valid", false);
+      });
+
+      it('should provide errors', function () {
+        console.log(result);
+        result.errors.should.not.deep.equal([]);
+      });
+    });
+
+    describe('simple schema validation with filter: true', function () {
+      var result;
+      var document = {a: 1, c: 'd', thisIsNotInSchemaField: 'foo'};
+
+      before(function () {
+        result = this.validator.validate(document, schema, {filter: true});
+      });
+
+      it('should validate', function () {
+        result.should.have.property("valid", true);
+      });
+
+      it('should remove properties that are not in schema', function () {
+        document.should.not.have.property("thisIsNotInSchemaField");
+      });
+
+      it('should have no errors', function () {
+        result.errors.should.deep.equal([]);
+      });
+    });
+  });
 });
