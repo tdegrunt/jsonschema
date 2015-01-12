@@ -47,8 +47,9 @@ Simple object validation using JSON schemas.
       },
       "zip": {"type": "string"},
       "city": {"type": "string"},
-      "country": {"type": "string", "required": true}
-    }
+      "country": {"type": "string"}
+    },
+    "required": ["country"]
   };
 
   // Person
