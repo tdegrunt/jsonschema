@@ -150,7 +150,7 @@ You'll need to update and init the git submodules:
 
     jsonschema is licensed under MIT license.
 
-    Copyright (C) 2012-2014 Tom de Grunt <tom@degrunt.nl>
+    Copyright (C) 2012-2015 Tom de Grunt <tom@degrunt.nl>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of
     this software and associated documentation files (the "Software"), to deal in
