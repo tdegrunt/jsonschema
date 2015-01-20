@@ -87,7 +87,7 @@ All schema definitions are supported, $schema is ignored.
 All types are supported
 
 ### String Formats
-All formats are supported, phone numbers are expected to follow the [http://en.wikipedia.org/wiki/E.123](E.123) standard.
+All formats are supported, phone numbers are expected to follow the [E.123](http://en.wikipedia.org/wiki/E.123) standard.
 
 ### Results
 The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array which also contains the success flag `result.valid`.
@@ -99,7 +99,7 @@ Specify your own JSON Schema properties with the validator.attributes property:
 validator.attributes.contains = function validateContains(instance, schema, options, ctx) {
   if(typeof instance!='string') return;
   if(typeof schema.contains!='string') throw new jsonschema.SchemaError('"contains" expects a string', schema);
-  if(instance.indexOf()<0){
+  if(instance.indexOf(schema.contains)<0){
     return 'does not contain the string ' + JSON.stringify(schema.contains);
   }
 }
@@ -140,7 +140,7 @@ them:
 ```
 
 ## Tests
-Uses [https://github.com/json-schema/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own tests.
+Uses [JSON Schema Test Suite](https://github.com/json-schema/JSON-Schema-Test-Suite) as well as our own tests.
 You'll need to update and init the git submodules:
 
     git submodule update --init
