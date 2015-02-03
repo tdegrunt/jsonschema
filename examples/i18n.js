@@ -17,6 +17,18 @@ var errorMap = {
       'format': {
         'ipv4': 'Not an IP address'
       }
+    },
+    'instance.array1': {
+      'minItems': 'Not enough items'
+    },
+    'instance.array2': {
+      'minItems': 'Not enough items'
+    },
+    'instance.array2[]': {
+      'type': 'Array item must be an integer'
+    },
+    'instance.array2[3]': {
+      'type': 'Array item 3 must be an integer'
     }
   },
   "fr": {
@@ -51,6 +63,17 @@ var schema = {
     customValidatorSubTypeMessage: {
       type: 'string',
       format: 'ipv4'
+    },
+    array1: {
+      type: 'array',
+      minItems: 2
+    },
+    array2: {
+      type: 'array',
+      minItems: 2,
+      items: {
+        type: 'integer'
+      }
     }
   }
 };
@@ -58,7 +81,9 @@ var instance = {
   noCustomMessage: 'not-an-int',
   customPropertyMessage: 'not-an-int',
   customValidatorTypeMessage: 2, // Below minimum
-  customValidatorSubTypeMessage: 'not-an-IP-address'
+  customValidatorSubTypeMessage: 'not-an-IP-address',
+  array1: [1],
+  array2: [1, 2, 'a', 'b']
 };
 
 // English
