@@ -4,11 +4,6 @@ var util = require('util');
 var Validator = require('jsonschema').Validator;
 
 /*
-  Default locale for errors
-*/
-var DEFAULT_ERROR_LOCALE = 'en';
-
-/*
   Translation/custom error mappings
 */
 var errorMap = {
@@ -65,69 +60,11 @@ var instance = {
   customValidatorTypeMessage: 2, // Below minimum
   customValidatorSubTypeMessage: 'not-an-IP-address'
 };
-console.log(i18n(v.validate(instance, schema), errorMap));
-console.log(i18n(v.validate(instance, schema), errorMap, 'fr'));
 
-/**
-  Provides custom error messages or localises a validation result
- */
-function i18n(result, errorMap, locale) {
-  locale = locale || DEFAULT_ERROR_LOCALE;
-  var map = errorMap[locale];
-  if (!map) throw new Error('Missing error map for locale: ' + locale);
+// English
+console.log(v.validate(instance, schema).mapErrors(errorMap.en));
 
-  // Only process results which have failed validation
-  if (!result.valid && result.errors) {
-    result.errors = result.errors.map(function (err) {
-      return mapError(map, err);
-    });
-  }
-  return result;
-}
+// French
+console.log(v.validate(instance, schema).mapErrors(errorMap.fr));
 
-/**
-  Maps a validation error to a custom error
-*/
-function mapError(map, err) {
-  if (!err) return err;
 
-  // Get the property path, validator type and validator sub-type from the error
-  var propPath = err.property;
-  var validatorType = err.validatorType;
-  var validatorSubType = err.validatorSubType;
-
-  // Check for a custom error for the property path
-  var msgProp = map[propPath];
-  if (!msgProp) {
-    // No custom message
-    return err;
-  }
-  if (typeof msgProp === 'string') {
-    // Only a single message for this property
-    err.message = msgProp;
-    return err;
-  }
-
-  // Check for a custom error for the validator type
-  var valProp = validatorType ? msgProp[validatorType] : null;
-  if (!valProp) {
-    // No custom validator message
-    err.message = msgProp.message || err.message;
-    return err;
-  }
-  if (typeof valProp === 'string') {
-    // Only a single message for this validator
-    err.message = valProp;
-    return err;
-  }
-
-  // Check for a custom error for the validator sub-type
-  var subValProp = validatorSubType ? valProp[validatorSubType] : null;
-  if (!subValProp) {
-    err.message = valProp.message || err.message;
-    return err;
-  }
-
-  err.message = subValProp;
-  return err;
-}
