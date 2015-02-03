@@ -54,6 +54,14 @@ describe('i18n', function () {
     });
 
     describe('type', function () {
+
+      it('should handle multiple types', function () {
+        //NOTE: Not sure this is the correct way to handle this scenario...
+        this.validator.validate('not-number', { type: ['number', 'null'] }).mapErrors({
+          'instance': 'Custom error message'
+        }).errors[0].validatorSubType.should.equal('null,number');
+      });
+
       describe('number', function () {
 
         it('should provide custom error message for property', function () {
