@@ -67,4 +67,23 @@ console.log(v.validate(instance, schema).mapErrors(errorMap.en));
 // French
 console.log(v.validate(instance, schema).mapErrors(errorMap.fr));
 
+// Custom error function
+console.log(v.validate(instance, schema).mapErrors(function (err) {
+  if (!err) return err;
 
+  // The path to the property
+  var propPath = err.property;
+  // The validator type (name of validator)
+  var validatorType = err.validatorType;
+  // The validator sub-type (only applicable for validators like format)
+  var validatorSubType = err.validatorSubType;
+
+  if (propPath === 'instance.customValidatorSubTypeMessage'
+    && validatorType === 'format'
+    && validatorSubType === 'ipv4') {
+      err.message = 'Not an IP address';
+      return err;
+  }
+
+  return err;
+}));
