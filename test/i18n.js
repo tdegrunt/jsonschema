@@ -55,13 +55,6 @@ describe('i18n', function () {
 
     describe('type', function () {
 
-      it('should handle multiple types', function () {
-        //NOTE: Not sure this is the correct way to handle this scenario...
-        this.validator.validate('not-number', { type: ['number', 'null'] }).mapErrors({
-          'instance': 'Custom error message'
-        }).errors[0].validatorSubType.should.equal('null,number');
-      });
-
       describe('number', function () {
 
         it('should provide custom error message for property', function () {
@@ -78,24 +71,14 @@ describe('i18n', function () {
           }).errors[0].message.should.equal('Custom error message');
         });
 
-        it('should provide custom error message for validator sub-type', function () {
-          this.validator.validate('not-number', {'type': 'number'}).mapErrors({
-            'instance': {
-              'type': {
-                'number': 'Custom error message'
-              }
-            }
-          }).errors[0].message.should.equal('Custom error message');
-        });
-
         it('should provide a validator type', function () {
           this.validator.validate('not-number', {'type': 'number'}).mapErrors({
           }).errors[0].validatorType.should.equal('type');
         });
 
-        it('should provide a validator sub-type', function () {
-          this.validator.validate('not-number', {'type': 'number'}).mapErrors({
-          }).errors[0].validatorSubType.should.equal('number');
+        it('should not provide a validator sub-type', function () {
+          should.not.exist(this.validator.validate('not-number', {'type': 'number'}).mapErrors({
+          }).errors[0].validatorSubType);
         });
 
       });
@@ -144,24 +127,14 @@ describe('i18n', function () {
           }).errors[0].message.should.equal('Custom error message');
         });
 
-        it('should provide custom error message for validator sub-type', function () {
-          this.validator.validate('0', {'type': 'null'}).mapErrors({
-            'instance': {
-              'type': {
-                'null': 'Custom error message'
-              }
-            }
-          }).errors[0].message.should.equal('Custom error message');
-        });
-
         it('should provide a validator type', function () {
           this.validator.validate('0', {'type': 'null'}).mapErrors({
           }).errors[0].validatorType.should.equal('type');
         });
 
-        it('should provide a validator sub-type', function () {
-          this.validator.validate('0', {'type': 'null'}).mapErrors({
-          }).errors[0].validatorSubType.should.equal('null');
+        it('should not provide a validator sub-type', function () {
+          should.not.exist(this.validator.validate('0', {'type': 'null'}).mapErrors({
+          }).errors[0].validatorSubType);
         });
 
       });
@@ -182,24 +155,14 @@ describe('i18n', function () {
           }).errors[0].message.should.equal('Custom error message');
         });
 
-        it('should provide custom error message for validator sub-type', function () {
-          this.validator.validate('0', {'type': 'date'}).mapErrors({
-            'instance': {
-              'type': {
-                'date': 'Custom error message'
-              }
-            }
-          }).errors[0].message.should.equal('Custom error message');
-        });
-
         it('should provide a validator type', function () {
           this.validator.validate('0', {'type': 'date'}).mapErrors({
           }).errors[0].validatorType.should.equal('type');
         });
 
-        it('should provide a validator sub-type', function () {
-          this.validator.validate('0', {'type': 'date'}).mapErrors({
-          }).errors[0].validatorSubType.should.equal('date');
+        it('should not provide a validator sub-type', function () {
+          should.not.exist(this.validator.validate('0', {'type': 'date'}).mapErrors({
+          }).errors[0].validatorSubType);
         });
 
       });
@@ -220,24 +183,14 @@ describe('i18n', function () {
           }).errors[0].message.should.equal('Custom error message');
         });
 
-        it('should provide custom error message for validator sub-type', function () {
-          this.validator.validate(0.25, {'type': 'integer'}).mapErrors({
-            'instance': {
-              'type': {
-                'integer': 'Custom error message'
-              }
-            }
-          }).errors[0].message.should.equal('Custom error message');
-        });
-
         it('should provide a validator type', function () {
           this.validator.validate(0.25, {'type': 'integer'}).mapErrors({
           }).errors[0].validatorType.should.equal('type');
         });
 
-        it('should provide a validator sub-type', function () {
-          this.validator.validate(0.25, {'type': 'integer'}).mapErrors({
-          }).errors[0].validatorSubType.should.equal('integer');
+        it('should not provide a validator sub-type', function () {
+          should.not.exist(this.validator.validate(0.25, {'type': 'integer'}).mapErrors({
+          }).errors[0].validatorSubType);
         });
 
       });
@@ -258,24 +211,14 @@ describe('i18n', function () {
           }).errors[0].message.should.equal('Custom error message');
         });
 
-        it('should provide custom error message for validator sub-type', function () {
-          this.validator.validate('true', {'type': 'boolean'}).mapErrors({
-            'instance': {
-              'type': {
-                'boolean': 'Custom error message'
-              }
-            }
-          }).errors[0].message.should.equal('Custom error message');
-        });
-
         it('should provide a validator type', function () {
           this.validator.validate('true', {'type': 'boolean'}).mapErrors({
           }).errors[0].validatorType.should.equal('type');
         });
 
-        it('should provide a validator sub-type', function () {
-          this.validator.validate('true', {'type': 'boolean'}).mapErrors({
-          }).errors[0].validatorSubType.should.equal('boolean');
+        it('should not provide a validator sub-type', function () {
+          should.not.exist(this.validator.validate('true', {'type': 'boolean'}).mapErrors({
+          }).errors[0].validatorSubType);
         });
 
       });
@@ -1253,24 +1196,14 @@ describe('i18n', function () {
         }).errors[0].message.should.equal('Custom error message');
       });
 
-      it('should provide custom error message for validator sub-type', function () {
-        this.validator.validate(0, {'type': 'array'}).mapErrors({
-          'instance': {
-            'type': {
-              'array': 'Custom error message'
-            }
-          }
-        }).errors[0].message.should.equal('Custom error message');
-      });
-
       it('should provide a validator type', function () {
         this.validator.validate(0, {'type': 'array'}).mapErrors({
         }).errors[0].validatorType.should.equal('type');
       });
 
-      it('should provide a validator sub-type', function () {
-        this.validator.validate(0, {'type': 'array'}).mapErrors({
-        }).errors[0].validatorSubType.should.equal('array');
+      it('should not provide a validator sub-type', function () {
+        should.not.exist(this.validator.validate(0, {'type': 'array'}).mapErrors({
+        }).errors[0].validatorSubType);
       });
 
       describe('attribute on array items', function () {
@@ -1289,10 +1222,10 @@ describe('i18n', function () {
         });
 
         it('should provide custom error message for validator sub-type', function () {
-          this.validator.validate(['1', '2', '3', 4], {'type': 'array', 'items': {'type': 'string'}}).mapErrors({
+          this.validator.validate(['1', '2', '3', '4$'], {'type': 'array', 'items': {'type': 'string', 'format': 'alphanumeric'}}).mapErrors({
             'instance[]': {
-              'type': {
-                'string': 'Custom error message'
+              'format': {
+                'alphanumeric': 'Custom error message'
               }
             }
           }).errors[0].message.should.equal('Custom error message');
@@ -1304,8 +1237,8 @@ describe('i18n', function () {
         });
 
         it('should provide a validator sub-type', function () {
-          this.validator.validate(['1', '2', '3', 4], {'type': 'array', 'items': {'type': 'string'}}).mapErrors({
-          }).errors[0].validatorSubType.should.equal('string');
+          this.validator.validate(['1', '2', '3', '4$'], {'type': 'array', 'items': {'type': 'string', 'format': 'alphanumeric'}}).mapErrors({
+          }).errors[0].validatorSubType.should.equal('alphanumeric');
         });
 
         it('should provide custom error message for specific array item', function () {
@@ -1415,7 +1348,7 @@ describe('i18n', function () {
           'name': {'type': 'string'},
           'lines': {
             'type': 'array',
-            'items': {'type': 'string'}
+            'items': {'type': 'string', 'format': 'alphanumeric'}
           }
         }
       };
@@ -1423,47 +1356,47 @@ describe('i18n', function () {
 
     describe('simple object with array with invalid items', function () {
       it('should provide custom error message for property', function () {
-        this.validator.validate({'name':'test', 'lines': [1]},this.mixedSchema).mapErrors({
+        this.validator.validate({'name':'test', 'lines': ['1$']},this.mixedSchema).mapErrors({
           'instance.lines[]': 'Custom error message'
         }).errors[0].message.should.equal('Custom error message');
       });
 
       it('should provide custom error message for validator type', function () {
-        this.validator.validate({'name':'test', 'lines': [1]},this.mixedSchema).mapErrors({
+        this.validator.validate({'name':'test', 'lines': ['1$']},this.mixedSchema).mapErrors({
           'instance.lines[]': {
-            'type': 'Custom error message'
+            'format': 'Custom error message'
           }
         }).errors[0].message.should.equal('Custom error message');
       });
 
       it('should provide custom error message for validator sub-type', function () {
-        this.validator.validate({'name':'test', 'lines': [1]},this.mixedSchema).mapErrors({
+        this.validator.validate({'name':'test', 'lines': ['1$']},this.mixedSchema).mapErrors({
           'instance.lines[]': {
-            'type': {
-              'string': 'Custom error message'
+            'format': {
+              'alphanumeric': 'Custom error message'
             }
           }
         }).errors[0].message.should.equal('Custom error message');
       });
 
       it('should provide a validator type', function () {
-        this.validator.validate({'name':'test', 'lines': [1]},this.mixedSchema).mapErrors({
+        this.validator.validate({'name':'test', 'lines': ['1$']},this.mixedSchema).mapErrors({
           'instance.lines[]': {
-            'type': {
-              'string': 'Custom error message'
+            'format': {
+              'alphanumeric': 'Custom error message'
             }
           }
-        }).errors[0].validatorType.should.equal('type');
+        }).errors[0].validatorType.should.equal('format');
       });
 
       it('should provide a validator sub-type', function () {
-        this.validator.validate({'name':'test', 'lines': [1]},this.mixedSchema).mapErrors({
+        this.validator.validate({'name':'test', 'lines': ['1$']},this.mixedSchema).mapErrors({
           'instance.lines[]': {
-            'type': {
-              'string': 'Custom error message'
+            'format': {
+              'alphanumeric': 'Custom error message'
             }
           }
-        }).errors[0].validatorSubType.should.equal('string');
+        }).errors[0].validatorSubType.should.equal('alphanumeric');
       });
     });
   });
