@@ -27,6 +27,8 @@ describe('JSON Schema Test Suite', function(){
 
               it(test.description, function() {
                 var validator = new Validator();
+                validator.addSchema(require('./fixtures/draft-03.json', 'http://json-schema.org/draft-03/schema#'));
+                validator.addSchema(require('./fixtures/draft-04.json', 'http://json-schema.org/draft-04/schema#'));
                 var result = validator.validate(test.data, suite.schema);
                 return should.equal(test.valid, result.valid, util.inspect(result, true, null));
               });
