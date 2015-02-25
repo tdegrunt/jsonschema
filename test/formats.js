@@ -275,7 +275,6 @@ describe('Formats', function () {
 
     it('should not validate empty', function () {
       var result = this.validator.validate("", {'type': 'string', 'format': 'non-empty'});
-      console.log('sss', result);
       result.valid.should.be.false;
       result.errors[0].message.should.equal('must not be empty');
     });
