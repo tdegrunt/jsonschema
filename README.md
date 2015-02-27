@@ -146,6 +146,14 @@ You'll need to update and init the git submodules:
     git submodule update --init
     npm test
 
+## Contributions
+
+This library would not be possible without the valuable contributions by:
+
+- Austin Wright
+
+... and many others!
+
 ## License
 
     jsonschema is licensed under MIT license.
