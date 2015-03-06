@@ -49,10 +49,10 @@ describe('Union', function () {
   describe('string and null', function () {
     it('should validate for null', function () {
       this.validator.validate(null, {'type': ['null', 'string']}).valid.should.be.true;
-      });
+    });
     it('should validate for string', function () {
       this.validator.validate('1', {'type': ['null', 'string']}).valid.should.be.true;
-      });
+    });
 
     it('should not validate if no string or number', function () {
       this.validator.validate(true, {'type': ['null', 'string']}).valid.should.be.false;
@@ -62,14 +62,14 @@ describe('Union', function () {
   describe('string and null', function () {
     it('should validate for null', function () {
       this.validator.validate(null, {'type': ['null', 'string']}).valid.should.be.true;
-      });
+    });
     it('should validate for string', function () {
       this.validator.validate('1', {'type': ['null', 'string']}).valid.should.be.true;
-      });
+    });
 
     it('should not validate if no string or number', function () {
       this.validator.validate(true, {'type': ['null', 'string']}).valid.should.be.false;
-      });
+    });
   });
 
   describe('null and $ref', function () {
@@ -83,7 +83,7 @@ describe('Union', function () {
 
     it('should not validate if no string or number', function () {
       this.validator.validate(true, {'type': ['null', {'$ref':'Test#Simple'}]}).valid.should.be.false;
-     });
+    });
   });
 
   describe('$ref and string', function () {
@@ -187,14 +187,14 @@ describe('Union', function () {
     it('should validate for nulls', function () {
       var instance = {frames: [{filename: 'somefile.js', lineno: null}], exception: exc};
       this.validator.validate(instance, schema).valid.should.be.true;
-      });
+    });
     it('should validate for null and string', function () {
       var instance = {frames: [{filename: 'somefile.js', lineno: null}], exception: exc};
       this.validator.validate(instance, schema).valid.should.be.true;
-      });
+    });
     it('should not validate for string and string', function () {
       var instance = {frames: [{filename: 'somefile.js', lineno: {hello: 'world'}}], exception: exc};
       this.validator.validate(instance, schema).valid.should.be.false;
-      });
+    });
   });
 });
