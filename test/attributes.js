@@ -334,27 +334,27 @@ describe('Attributes', function () {
     });
 
     it('should validate 1 as valid with integer-positive format', function () {
-      return this.validator.validate(1, {'format':'integer-positive'}, {}, {'propertyPath':'apath'}).valid.should.be.true;
+      return this.validator.validate(1, {'format': 'integer-positive'}, {}, {'propertyPath': 'apath'}).valid.should.be.true;
     });
 
     it('should validate 0 as valid with integer-positive format', function () {
-      return this.validator.validateSchema(0, {'format': 'integer-positive'}, {}, {'propertyPath':'apath'}).valid.should.be.true;
+      return this.validator.validateSchema(0, {'format': 'integer-positive'}, {}, {'propertyPath': 'apath'}).valid.should.be.true;
     });
 
     it('should validate 2.1 as invalid with integer-positive format', function () {
-      return this.validator.validateSchema(2.1, {'format': 'integer-positive'}, {}, {'propertyPath':'apath'}).valid.should.be.false;
+      return this.validator.validateSchema(2.1, {'format': 'integer-positive'}, {}, {'propertyPath': 'apath'}).valid.should.be.false;
     });
 
     it('should validate somename as valid with alphanumeric format', function () {
-      return this.validator.validateSchema('somename', {'format': 'alphanumeric'}, {}, {'propertyPath':'apath'}).valid.should.be.true;
+      return this.validator.validateSchema('somename', {'format': 'alphanumeric'}, {}, {'propertyPath': 'apath'}).valid.should.be.true;
     });
 
     it('should validate null as invalid with integer-positive format', function () {
-      return this.validator.validateSchema(null, {'format': 'integer-positive'}, {}, {'propertyPath':'apath'}).valid.should.be.false;
+      return this.validator.validateSchema(null, {'format': 'integer-positive'}, {}, {'propertyPath': 'apath'}).valid.should.be.false;
     });
 
     it('should validate null as invalid with alpha-numeric format', function () {
-      return this.validator.validateSchema(null, {'format': 'alphanumeric'}, {}, {'propertyPath':'apath'}).valid.should.be.false;
+      return this.validator.validateSchema(null, {'format': 'alphanumeric'}, {}, {'propertyPath': 'apath'}).valid.should.be.false;
     });
   })
 });
