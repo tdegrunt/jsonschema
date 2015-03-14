@@ -3,6 +3,7 @@ lib-cov
 *.log
 *.csv
 *.dat
+*.iml
 *.out
 *.pid
 *.gz

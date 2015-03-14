@@ -261,4 +261,26 @@ describe('Formats', function () {
       this.validator.validate("1test!", {'type': 'string', 'format': 'alphanumeric'}).valid.should.be.false;
     });
   });
+
+  describe('custom', function () {
+    beforeEach(function () {
+      this.validator.addFormat('non-empty', function(value) {
+        return ((value || '').toString().length == 0) ? 'must not be empty': (typeof value == 'string')
+      });
+    });
+
+    it('should not validate non-empty', function () {
+      this.validator.validate("a", {'type': 'string', 'format': 'non-empty'}).valid.should.be.true;
+    });
+
+    it('should not validate empty', function () {
+      var result = this.validator.validate("", {'type': 'string', 'format': 'non-empty'});
+      result.valid.should.be.false;
+      result.errors[0].message.should.equal('must not be empty');
+    });
+
+    it('should not validate empty', function () {
+      this.validator.validate(1, {'type': 'string', 'format': 'non-empty'}).valid.should.be.false;
+    });
+  });
 });
