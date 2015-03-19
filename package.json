@@ -1,7 +1,7 @@
 {
   "author": "Tom de Grunt <tom@degrunt.nl>",
   "name": "jsonschema",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "dependencies": {
   },
   "contributors": [
