@@ -139,6 +139,124 @@ them:
   importNextSchema();
 ```
 
+### Specific format
+jsonschema defines all standard formats.
+But, in some cases, you may want to define a specific format as if it is was a standard.
+For example, if you use Mongodb as database, `objectid` is a standard to you.
+You can describe it as a `type` or as a `format`... or more interesting : both.
+
+```javascript
+  var ObjectID = require('mongodb').ObjectID;
+  Validator.prototype.types.objectid = function testObjectID (instance) {
+        return instance instanceof ObjectID;
+  };
+```
+
+```javascript
+  Validator.prototype.addFormat("objectid", /^[0-9a-fA-F]{24}$/);
+```
+
+You can make your validator check the value is either an `ObjectId` object type or a string with `objectid` format.
+
+```javascript
+var schema= {
+        "id" : "/MySchema",
+        "type" : "object",
+        "properties" : {
+            "_id" : {
+                "type" : ["string", "objectid"],
+                "format" : "objectid"
+            }
+        },
+        "additionalProperties" : false
+};
+```
+
+In this example, the property `_id` is valid if :
+*  it is a string and this string matches the `objectid` pattern (ie : /^[0-9a-fA-F]{24}$/)
+*  or it is an ObjectId
+
+Then both cases bellow will work
+
+```javascript
+var struct = {"_id" : new ObjectID()};
+var validation = v.validate(struct, schema);
+console.log('%j', validation.errors); // No error : _id is an "ObjectID" object then "testObjectID" we configured before returns true.
+
+struct = {"_id" : new ObjectID().toString()};
+validation = v.validate(struct, schema);
+console.log('%j', validation.errors); // No error : _id is a string and its value matches "objectid" format pattern we added by "Validator.prototype.addFormat" function.
+```
+
+### String value replacement depending on the format
+
+When you receive a json structure in a REST service or when you read json from a file... you may want to cast some property values to an object.
+For example, when you receive a date, it is read as a string in ISO8601 format.
+After validating your json, you may want to manipulate all the dates as Date objects instead of strings.
+You can configure a validator to do this. We can make it replace string values by an associated object depending on the `format` attribute.
+This configuration has to be made on each validator instance. It also means you can have different configurations if you have many validators in your app.
+
+The property we have to add is a structure named `replacingValueIfStringIsFormat`.
+
+```javascript
+  var Validator = require('jsonschema').Validator;
+  var v = new Validator();
+  v.replacingValueIfStringIsFormat = {
+          "date-time" : Date,
+          "objectid" : ObjectID
+  };
+```
+
+Then, we can validate json structures :
+
+```javascript
+var schema1= {
+        "id" : "/Schema1",
+        "type" : "object",
+        "properties" : {
+            "mydate" : {
+                "type" : ["string", "date"],
+                "format" : "date-time"
+            }
+        },
+        "additionalProperties" : false
+ };
+
+var schema2= {
+        "id" : "/Schema2",
+        "type" : "object",
+        "properties" : {
+            "_id" : {
+                "type" : ["string", "objectid"],
+                "format" : "objectid"
+            }
+        },
+        "additionalProperties" : false
+ };
+
+
+var struct = {"mydate" : new Date()};
+var validation = v.validate(struct, schema1);
+console.log('Date validation with a date : %j', validation.errors); // No error : my property is a already a Date object
+console.log('After validation : ' + (struct.mydate instanceof Date); // After validation struct.mydate is still a Date object
+
+struct = {"mydate" : new Date().toISOString()};
+var validation = v.validate(struct, schema1);
+console.log('Date validation with a string date : %j', validation.errors); // No error : my property is a string with ISO8601 date format
+console.log('After validation : ' + (struct.mydate instanceof Date); // After validation struct.mydate is NOW a Date object
+
+
+struct = {"_id" : new ObjectID()};
+var validation = v.validate(struct, schema2);
+console.log('ObjectID validation with a Mongodb ObjectID object : %j', validation.errors); // No error : my property is already an ObjectID object
+console.log('After validation : ' + (struct._id instanceof ObjectID); // After validation struct._id is still an ObjectID object
+
+struct = {"_id" : new ObjectID().toString()};
+var validation = v.validate(struct, schema2);
+console.log('ObjectID validation with a Mongodb ObjectID as string : %j', validation.errors); // No error : my property is a string representation of an ObjectID then the value matches the pattern
+console.log('After validation : ' + (struct._id instanceof ObjectID); // After validation struct._id is NOW an ObjectID object
+```
+
 ## Tests
 Uses [JSON Schema Test Suite](https://github.com/json-schema/JSON-Schema-Test-Suite) as well as our own tests.
 You'll need to update and init the git submodules:
