@@ -256,6 +256,15 @@ console.log('ObjectID validation with a Mongodb ObjectID as string : %j', valida
 console.log('After validation : ' + (struct._id instanceof ObjectID); // After validation struct._id is NOW an ObjectID object
 ```
 
+### Removing non expected properties from json
+By setting a property `removePropertiesIfNotInSchema` to `true` on a validator object, the validation will remove all properties in json when :
+- the property is not in the schema
+- AND the schema doesn't allow additiona properties (ie: "additionalProperties" set to false)
+```javascript
+Validator validator = new Validator();
+validator.removePropertiesIfNotInSchema = true;
+ ```
+
 ## Tests
 Uses [https://github.com/json-schema/JSON-Schema-Test-Suite](JSON Schema Test Suite) as well as our own tests.
 You'll need to update and init the git submodules:
