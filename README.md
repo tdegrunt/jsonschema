@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/tdegrunt/jsonschema.png)](http://travis-ci.org/tdegrunt/jsonschema)
+[![Build Status](https://secure.travis-ci.org/tdegrunt/jsonschema.svg)](http://travis-ci.org/tdegrunt/jsonschema)
 
 # jsonschema
 [JSON schema](http://json-schema.org/) validator, which is designed to be fast and simple to use.
