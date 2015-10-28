@@ -5,6 +5,12 @@ var fs = require('fs');
 var should = require('chai').should();
 
 var Validator = require('./../lib/validator');
+var schemas = [
+  require('../schema/draft-03/schema.json'),
+  require('../schema/draft-03/hyper-schema.json'),
+  require('../schema/draft-04/schema.json'),
+  require('../schema/draft-04/hyper-schema.json'),
+];
 
 var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional'];
 var ignoredFiles = ['optional', 'zeroTerminatedFloats.json', 'refRemote.json'];
@@ -27,6 +33,7 @@ describe('JSON Schema Test Suite', function(){
 
               it(test.description, function() {
                 var validator = new Validator();
+		schemas.forEach(function(s){ validator.addSchema(s); });
                 var result = validator.validate(test.data, suite.schema);
                 return should.equal(test.valid, result.valid, util.inspect(result, true, null));
               });
