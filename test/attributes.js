@@ -21,6 +21,18 @@ describe('Attributes', function () {
         return this.validator.validate('0', {'type': 'number'}).valid.should.be.false;
       });
 
+      it('should not validate NaN', function () {
+        return this.validator.validate(NaN, {'type': 'number'}).valid.should.be.false;
+      });
+
+      it('should not validate Infinity', function () {
+        return this.validator.validate(Infinity, {'type': 'number'}).valid.should.be.false;
+      });
+
+      it('should not validate -Infinity', function () {
+        return this.validator.validate(-Infinity, {'type': 'number'}).valid.should.be.false;
+      });
+
     });
 
     describe('required', function () {
