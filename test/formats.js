@@ -261,4 +261,10 @@ describe('Formats', function () {
       this.validator.validate("1test!", {'type': 'string', 'format': 'alphanumeric'}).valid.should.be.false;
     });
   });
+
+  describe('invalid format', function() {
+    it('should validate', function () {
+      this.validator.validate("url", {'type': 'string', 'format': 'url'}).valid.should.be.true;
+    });
+  });
 });
