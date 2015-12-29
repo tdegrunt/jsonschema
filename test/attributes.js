@@ -295,6 +295,23 @@ describe('Attributes', function () {
       return this.validator.validate({'the_field':'bar'}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.true;
     });
   });
+  
+  describe('default', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+    it('should preserve value if field is defined', function () {
+      var validation = this.validator.validate({'the_field': 'foo'}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}});
+      validation.valid.should.be.true; 
+      validation.instance.the_field.should.equal('foo');
+    });
+    
+    it('should set default value if field is undefined', function () {
+      var validation = this.validator.validate({}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}})
+      validation.valid.should.be.true; 
+      validation.instance.the_field.should.equal('bar');
+    });
+  });
 
   describe('description', function () {
     beforeEach(function () {
