@@ -300,14 +300,21 @@ describe('Attributes', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
+    
     it('should preserve value if field is defined', function () {
-      var validation = this.validator.validate({'the_field': 'foo'}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}});
+      var validation = this.validator.validate({'the_field': 'foo'}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}}, {setDefaults: true});
       validation.valid.should.be.true; 
       validation.instance.the_field.should.equal('foo');
     });
     
-    it('should set default value if field is undefined', function () {
-      var validation = this.validator.validate({}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}})
+    it('should not set default value even field is undefined if options.setDefaults is not true', function () {
+      var validation = this.validator.validate({}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}});
+      validation.valid.should.be.true; 
+      validation.instance.should.not.have.property('the_field');
+    });
+    
+    it('should set default value if field is undefined and options.setDefaults is true', function () {
+      var validation = this.validator.validate({}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}}, {setDefaults: true})
       validation.valid.should.be.true; 
       validation.instance.the_field.should.equal('bar');
     });
