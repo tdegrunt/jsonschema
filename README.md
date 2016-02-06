@@ -88,8 +88,37 @@ All schema definitions are supported, $schema is ignored.
 ### Types
 All types are supported
 
-### String Formats
+### Formats
+#### Disabling the format keyword.
+
+You may disable format validation by providing `disableFormat: true` to the validator
+options.
+
+#### String Formats
 All formats are supported, phone numbers are expected to follow the [E.123](http://en.wikipedia.org/wiki/E.123) standard.
+
+#### Custom Formats
+You may add your own custom format functions.  Format functions accept the input
+being validated and return a boolean value.  If the returned value is `true`, then
+validation succeeds.  If the returned value is `false`, then validation fails.
+
+* Formats added to `Validator.prototype.customFormats` do not affect previously instantiated
+Validators.  This is to prevent validator instances from being altered once created.
+It is conceivable that multiple validators may be created to handle multiple schemas
+with different formats in a program.
+* Formats added to `validator.customFormats` affect only that Validator instance.
+
+Here is an example that uses custom formats:
+
+```
+Validator.prototype.customFormats.myFormat = function(input) {
+  return input === 'myFormat';
+};
+
+var validator = new Validator();
+validator.validate('myFormat', {type: 'string', format: 'myFormat'}).valid; // true
+validator.validate('foo', {type: 'string', format: 'myFormat'}).valid; // false
+```
 
 ### Results
 The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array which also contains the success flag `result.valid`.
