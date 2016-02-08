@@ -292,34 +292,34 @@ var schema = {
     //
     // The property must match one or more of the validation schema provided in
     // the array, which can be as simple or complex and nested as desired.
-    "validateAnyOf": [
+    "validateAnyOf": { "anyOf" : [
       {
         "type": "boolean"
       },
       {
         "type": "string"
       }
-    ],
+    ]},
     // The property must match all of the validation schema provided in the
     // array, which can be as simple or complex and nested as desired.
-    "validateAllOf": [
+    "validateAllOf": { "allOf" : [
       {
         "type": "boolean"
       },
       {
         "enum": [true]
       }
-    ],
+    ]},
     // The property must match only one of the validation schema provided in the
     // array, which can be as simple or complex and nested as desired.
-    "validateOneOf": [
+    "validateOneOf": { "oneOf" : [
       {
         "type": "boolean"
       },
       {
         "type": "integer"
       }
-    ],
+    ]},
 
     // --------------------------------------------------------------------
     // References.
