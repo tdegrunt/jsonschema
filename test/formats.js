@@ -272,7 +272,7 @@ describe('Formats', function () {
       };
 
       this.validator.customFormats.float = function(input) {
-        console.log(input);
+        //console.log(input);
         return /^\d+(?:\.\d+)?$/.test(input);
       };
     });
