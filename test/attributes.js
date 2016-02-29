@@ -294,6 +294,11 @@ describe('Attributes', function () {
     it('should validate if a required field has a value out of enum', function () {
       return this.validator.validate({'the_field':'bar'}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.true;
     });
+    
+    it('should validate if number enum is undefined', function () {
+      return this.validator.validate(1, {'type': 'number', 'enum': undefined}).valid.should.be.true;
+    });
+    
   });
 
   describe('description', function () {
