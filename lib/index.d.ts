@@ -8,7 +8,7 @@ export declare class Validator {
     schemas: {[id:string]: Schema};
     unresolvedRefs: string[];
 
-    attributes: {(property:string): CustomProperty};
+    attributes: {[property:string]: CustomProperty};
 
     addSchema(schema?: Schema, uri?: string): Schema|void;
     validate(instance: any, schema: Schema, options?: Options, ctx?: SchemaContext);
