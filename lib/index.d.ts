@@ -11,7 +11,7 @@ export declare class Validator {
     attributes: {[property:string]: CustomProperty};
 
     addSchema(schema?: Schema, uri?: string): Schema|void;
-    validate(instance: any, schema: Schema, options?: Options, ctx?: SchemaContext);
+    validate(instance: any, schema: Schema, options?: Options, ctx?: SchemaContext): ValidatorResult;
 }
 
 export declare class ValidatorResult {
