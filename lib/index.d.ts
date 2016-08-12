@@ -2,51 +2,51 @@
 This is type definition for typescript.
 This is for library users. Thus, properties and methods for internal use is omitted.
  */
-export declare class Validator {
+export declare class Validator<S extends Schema<S>> {
     constructor();
     customFormats: CustomFormat[];
-    schemas: {[id:string]: Schema};
+    schemas: {[id:string]: Schema<S>};
     unresolvedRefs: string[];
 
-    attributes: {[property:string]: CustomProperty};
+    attributes: {[property:string]: CustomProperty<S>};
 
-    addSchema(schema?: Schema, uri?: string): Schema|void;
-    validate(instance: any, schema: Schema, options?: Options, ctx?: SchemaContext): ValidatorResult;
+    addSchema(schema?: S, uri?: string): S | void;
+    validate(instance: any, schema: S | string, options?: Options<S>, ctx?: SchemaContext<S>): ValidatorResult<S>;
 }
 
-export declare class ValidatorResult {
-    constructor(instance: any, schema: Schema, options: Options, ctx: SchemaContext)
+export declare class ValidatorResult<S extends Schema<S>> {
+    constructor(instance: any, schema: S, options: Options<S>, ctx: SchemaContext<S>)
     instance: any;
-    schema: Schema;
+    schema: S;
     propertyPath: string;
-    errors: ValidationError[];
+    errors: ValidationError<S>[];
     throwError: boolean;
     disableFormat: boolean;
     valid: boolean;
-    addError(detail:string|ErrorDetail): ValidationError;
+    addError(detail:string | ErrorDetail): ValidationError<S>;
     toString(): string;
 }
 
-export declare class ValidationError {
-    constructor(message?: string, instance?: any, schema?: Schema, propertyPath?: any, name?: string, argument?: any);
+export declare class ValidationError<S extends Schema<S>> {
+    constructor(message?: string, instance?: any, schema?: S, propertyPath?: any, name?: string, argument?: any);
     property: string;
     message: string;
-    schema: string|Schema;
+    schema: string | S;
     instance: any;
     name: string;
     argument: any;
     toString(): string;
 }
 
-export declare class SchemaError extends Error{
-    constructor(msg: string, schema: Schema);
-    schema: Schema;
+export declare class SchemaError<S extends Schema<S>> extends Error{
+    constructor(msg: string, schema: S);
+    schema: S;
     message: string;
 }
 
-export declare function validate(instance: any, schema: any, options?: Options): ValidatorResult
+export declare function validate<S extends Schema<S>>(instance: any, schema: any, options?: Options<S>): ValidatorResult<S>
 
-export interface Schema {
+export interface Schema<S extends Schema<S>> {
     id?: string
     $schema?: string
     title?: string
@@ -59,61 +59,61 @@ export interface Schema {
     maxLength?: number
     minLength?: number
     pattern?: string
-    additionalItems?: boolean | Schema
-    items?: Schema | Schema[]
+    additionalItems?: boolean | Schema<S>
+    items?: Schema<S> | Schema<S>[]
     maxItems?: number
     minItems?: number
     uniqueItems?: boolean
     maxProperties?: number
     minProperties?: number
     required?: string[]
-    additionalProperties?: boolean | Schema
+    additionalProperties?: boolean | Schema<S>
     definitions?: {
-        [name: string]: Schema
+        [name: string]: Schema<S>
     }
     properties?: {
-        [name: string]: Schema
+        [name: string]: Schema<S>
     }
     patternProperties?: {
-        [name: string]: Schema
+        [name: string]: Schema<S>
     }
     dependencies?: {
-        [name: string]: Schema | string[]
+        [name: string]: Schema<S> | string[]
     }
     'enum'?: any[]
     type?: string | string[]
-    allOf?: Schema[]
-    anyOf?: Schema[]
-    oneOf?: Schema[]
-    not?: Schema
+    allOf?: Schema<S>[]
+    anyOf?: Schema<S>[]
+    oneOf?: Schema<S>[]
+    not?: Schema<S>
 }
 
-export interface Options {
+export interface Options<S extends Schema<S>> {
     skipAttributes?: string[];
     allowUnknownAttributes?: boolean;
-    rewrite?: RewriteFunction;
+    rewrite?: RewriteFunction<S>
     propertyName?: string;
     base?: string;
 }
 
-export interface RewriteFunction {
-    (instance: any, schema: Schema, options: Options, ctx: SchemaContext): any;
+export interface RewriteFunction<S extends Schema<S>> {
+    (instance: any, schema?: S, options?: Options<S>, ctx?: SchemaContext<S>): any;
 }
 
-export interface SchemaContext {
-    schema: Schema;
-    options: Options;
+export interface SchemaContext<S extends Schema<S>> {
+    schema: S;
+    options: Options<S>;
     propertyPath: string;
     base: string;
-    schemas: {[base:string]: Schema};
+    schemas: {[base:string]: S};
 }
 
 export interface CustomFormat {
     (input: any): boolean;
 }
 
-export interface CustomProperty {
-    (instance: any, schema: Schema, options: Options, ctx: SchemaContext): string|ValidatorResult;
+export interface CustomProperty<S extends Schema<S>> {
+    (instance: any, schema: S, options: Options<S>, ctx: SchemaContext<S>): string | ValidatorResult<S>;
 }
 
 export interface ErrorDetail {
