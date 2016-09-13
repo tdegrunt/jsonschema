@@ -94,6 +94,7 @@ export interface Options<S extends Schema<S>> {
     rewrite?: RewriteFunction<S>
     propertyName?: string;
     base?: string;
+    [option: string]: any;
 }
 
 export interface RewriteFunction<S extends Schema<S>> {
