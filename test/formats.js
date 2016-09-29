@@ -262,6 +262,75 @@ describe('Formats', function () {
     });
   });
 
+  describe('custom formats', function() {
+    beforeEach(function() {
+      this.validator.customFormats.foo = function(input) {
+        if (input === 'foo') {
+          return true;
+        }
+        return false;
+      };
+
+      this.validator.customFormats.float = function(input) {
+        //console.log(input);
+        return /^\d+(?:\.\d+)?$/.test(input);
+      };
+    });
+
+    it('should validate input', function() {
+      this.validator.validate("foo", {'type': 'string', 'format': 'foo'}).valid.should.be.true;
+    });
+
+    it('should validate numeric input', function() {
+      this.validator.validate(32.45, {'type': 'number', 'format': 'float'}).valid.should.be.true;
+    });
+
+    it('should fail input that fails validation', function() {
+      this.validator.validate("boo", {'type': 'string', 'format': 'foo'}).valid.should.be.false;
+    });
+
+    it('should fail numeric input that fails validation', function() {
+      this.validator.validate(NaN, {'type': 'number', 'format': 'float'}).valid.should.be.false;
+    });
+
+    describe('assigned to validator instances', function() {
+      var format;
+
+      beforeEach(function() {
+        format = function() {};
+        this.validator.customFormats.boo = format;
+      });
+
+      it('should not be assigned to the Validator prototype', function() {
+        (typeof Validator.prototype.customFormats.boo).should.equal('undefined');
+      });
+    });
+
+    describe('assigned to the Validator.prototype before validator instances are created', function() {
+      var format;
+
+      beforeEach(function() {
+        format = function() {};
+        Validator.prototype.customFormats.boo = format;
+      });
+
+      afterEach(function() {
+        delete Validator.prototype.customFormats.boo;
+      });
+
+      it('should be assigned to the instances', function() {
+        ((new Validator()).customFormats.boo).should.be.a.function;
+      });
+    });
+  });
+
+  describe('with options.disableFormat === true', function() {
+    it('should validate invalid formats', function() {
+      this.validator.validate("2012-07-08", {'type': 'string', 'format': 'date-time'},
+          {disableFormat: true}).valid.should.be.true;
+    });
+  });
+
   describe('invalid format', function() {
     it('should validate', function () {
       this.validator.validate("url", {'type': 'string', 'format': 'url'}).valid.should.be.true;
