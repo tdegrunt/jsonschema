@@ -123,6 +123,8 @@ validator.validate('foo', {type: 'string', format: 'myFormat'}).valid; // false
 ### Results
 The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array which also contains the success flag `result.valid`.
 
+When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are not reported, unless `options.nestedErrors` is truthy. This option may be useful when troubleshooting validation errors in complex schemas. 
+
 ### Custom properties
 Specify your own JSON Schema properties with the validator.attributes property:
 
