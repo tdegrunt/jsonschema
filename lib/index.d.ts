@@ -94,6 +94,7 @@ export interface Options {
     rewrite?: RewriteFunction;
     propertyName?: string;
     base?: string;
+    throwError?: boolean;
 }
 
 export interface RewriteFunction {
