@@ -30,6 +30,7 @@
     "url": "git://github.com/tdegrunt/jsonschema.git"
   },
   "description": "A fast and easy to use JSON Schema validator",
+  "license": "MIT",
   "scripts": {
     "test": "./node_modules/.bin/mocha -R spec"
   }
