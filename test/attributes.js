@@ -12,6 +12,25 @@ describe('Attributes', function () {
       this.validator = new Validator();
     });
 
+    describe('string', function () {
+      it('should validate a valid string', function () {
+        this.validator.validate("foo", {'type': 'string'}).valid.should.be.true;
+      });
+
+      it('should not validate an invalid string', function () {
+        return this.validator.validate(0.25, { 'type': 'string' }).valid.should.be.false;
+      });
+
+      it('should validate an invalid string with casting enabled', function () {
+        return this.validator.validate(0.25, {'type': 'string'}, {castTypes: true}).valid.should.be.true;
+      });
+
+      it('should convert type of invalid string with casting enabled', function () {
+        return typeof (this.validator.validate(2, {'type': 'string'}, {castTypes: true}).instance) == 'number';
+      });
+
+    });
+
     describe('number', function () {
       it('should validate a valid number', function () {
         this.validator.validate(0, {'type': 'number'}).valid.should.be.true;
@@ -19,6 +38,14 @@ describe('Attributes', function () {
 
       it('should not validate an invalid number', function () {
         return this.validator.validate('0', {'type': 'number'}).valid.should.be.false;
+      });
+
+      it('should validate an invalid number with casting enabled', function () {
+        return this.validator.validate('0', {'type': 'number'}, {castTypes: true}).valid.should.be.true;
+      });
+
+       it('should convert type of invalid number with casting enabled', function () {
+        return typeof (this.validator.validate('0', {'type': 'integer'}, {castTypes: true}).instance) == 'number';
       });
 
       it('should not validate NaN', function () {
@@ -78,8 +105,20 @@ describe('Attributes', function () {
         return this.validator.validate(12, {'type': 'integer'}).valid.should.be.true;
       });
 
+      it('should validate invalid integer with casting enabled', function () {
+        return this.validator.validate("12", {'type': 'integer'}, {castTypes: true}).valid.should.be.true;
+      });
+
+      it('should convert type of invalid integer with casting enabled', function () {
+        return typeof (this.validator.validate("12", {'type': 'integer'}, {castTypes: true}).instance) == 'number';
+      });
+
       it('should not validate non integer', function () {
         return this.validator.validate(0.25, {'type': 'integer'}).valid.should.be.false;
+      });
+
+      it('should not validate non integer with casting enabled', function () {
+        return this.validator.validate("0.25", {'type': 'integer'}, {castTypes: true}).valid.should.be.false;
       });
 
       it('should not validate an undefined instance', function () {
@@ -295,27 +334,27 @@ describe('Attributes', function () {
       return this.validator.validate({'the_field':'bar'}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.true;
     });
   });
-  
+
   describe('default', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
-    
+
     it('should preserve value if field is defined', function () {
       var validation = this.validator.validate({'the_field': 'foo'}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}}, {setDefaults: true});
-      validation.valid.should.be.true; 
+      validation.valid.should.be.true;
       validation.instance.the_field.should.equal('foo');
     });
-    
+
     it('should not set default value even field is undefined if options.setDefaults is not true', function () {
       var validation = this.validator.validate({}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}});
-      validation.valid.should.be.true; 
+      validation.valid.should.be.true;
       validation.instance.should.not.have.property('the_field');
     });
-    
+
     it('should set default value if field is undefined and options.setDefaults is true', function () {
       var validation = this.validator.validate({}, {'type': 'object', 'properties':{'the_field':{'type': 'string', 'default': 'bar'}}}, {setDefaults: true})
-      validation.valid.should.be.true; 
+      validation.valid.should.be.true;
       validation.instance.the_field.should.equal('bar');
     });
   });
