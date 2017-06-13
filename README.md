@@ -2,7 +2,7 @@
 
 # jsonschema
 [JSON schema](http://json-schema.org/) validator, which is designed to be fast and simple to use.
-The latest IETF published draft is v4, this library is mostly v4 compatible.
+The latest IETF published draft is v6, this library is mostly v4 compatible.
 
 ## Contributing & bugs
 Please fork the repository, make the changes in your fork and include tests. Once you're done making changes, send in a pull request.
