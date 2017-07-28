@@ -49,6 +49,7 @@ export declare function validate(instance: any, schema: any, options?: Options):
 export interface Schema {
     id?: string
     $schema?: string
+    $ref?: string
     title?: string
     description?: string
     multipleOf?: number
