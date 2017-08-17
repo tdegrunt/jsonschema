@@ -190,7 +190,7 @@ describe('Attributes', function () {
     });
   });
 
-  describe('dividibleBy', function () {
+  describe('divisibleBy', function () {
     beforeEach(function () {
       this.validator = new Validator();
     });
@@ -205,6 +205,32 @@ describe('Attributes', function () {
 
     it('should not validate 1 is even', function () {
       return this.validator.validate(1, {'type': 'number', 'divisibleBy': 2}).valid.should.be.false;
+    });
+
+    it('should validate divisibleBy with decimals', function () {
+      return this.validator.validate(2.4, {'type': 'number', 'divisibleBy': 0.1}).valid.should.be.true;
+    });
+  });
+
+  describe('multipleOf', function () {
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('should validate if 0 is even', function () {
+      return this.validator.validate(2, {'type': 'number', 'multipleOf': 2}).valid.should.be.true;
+    });
+
+    it('should validate if -2 is even', function () {
+      return this.validator.validate(-2, {'type': 'number', 'multipleOf': 2}).valid.should.be.true;
+    });
+
+    it('should not validate 1 is even', function () {
+      return this.validator.validate(1, {'type': 'number', 'multipleOf': 2}).valid.should.be.false;
+    });
+
+    it('should validate mutlipleOf with decimals', function () {
+      return this.validator.validate(2.4, {'type': 'number', 'multipleOf': 0.1}).valid.should.be.true;
     });
   });
 
