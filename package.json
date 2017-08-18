@@ -3,16 +3,19 @@
   "name": "jsonschema",
   "version": "1.1.1",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "contributors": [
-    { "name" : "Austin Wright" }
+    {
+      "name": "Austin Wright",
+      "name": "Gregg Lind"
+    }
   ],
   "main": "./lib",
   "typings": "./lib/index.d.ts",
   "devDependencies": {
+    "chai": "~1.5.0",
     "mocha": "~1.8.2",
-    "chai": "~1.5.0"
+    "webpack": "^1.14.0"
   },
   "optionalDependencies": {},
   "engines": {
@@ -31,6 +34,7 @@
   },
   "description": "A fast and easy to use JSON Schema validator",
   "scripts": {
-    "test": "./node_modules/.bin/mocha -R spec"
+    "test": "./node_modules/.bin/mocha -R spec",
+    "prepublish":  "webpack --output-library-target commonjs lib/index.js lib/jsonschema-commonjs.js"
   }
 }
