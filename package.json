@@ -3,10 +3,11 @@
   "name": "jsonschema",
   "version": "1.2.0",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "contributors": [
-    { "name" : "Austin Wright" }
+    {
+      "name": "Austin Wright"
+    }
   ],
   "main": "./lib",
   "typings": "./lib/index.d.ts",
