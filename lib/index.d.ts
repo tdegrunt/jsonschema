@@ -83,6 +83,7 @@ export interface Schema {
     }
     'enum'?: any[]
     type?: string | string[]
+    format?: string
     allOf?: Schema[]
     anyOf?: Schema[]
     oneOf?: Schema[]
