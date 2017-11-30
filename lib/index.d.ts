@@ -4,7 +4,7 @@ This is for library users. Thus, properties and methods for internal use is omit
  */
 export declare class Validator {
     constructor();
-    customFormats: CustomFormat[];
+    customFormats: {[id:string]: CustomFormat};
     schemas: {[id:string]: Schema};
     unresolvedRefs: string[];
 
