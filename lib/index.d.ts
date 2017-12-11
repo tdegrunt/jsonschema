@@ -4,11 +4,11 @@ This is for library users. Thus, properties and methods for internal use is omit
  */
 export declare class Validator {
     constructor();
-    customFormats: CustomFormat[];
-    schemas: {[id:string]: Schema};
+    customFormats: {[formatName: string]: CustomFormat};
+    schemas: {[id: string]: Schema};
     unresolvedRefs: string[];
 
-    attributes: {[property:string]: CustomProperty};
+    attributes: {[property: string]: CustomProperty};
 
     addSchema(schema?: Schema, uri?: string): Schema|void;
     validate(instance: any, schema: Schema, options?: Options, ctx?: SchemaContext): ValidatorResult;
@@ -23,7 +23,7 @@ export declare class ValidatorResult {
     throwError: boolean;
     disableFormat: boolean;
     valid: boolean;
-    addError(detail:string|ErrorDetail): ValidationError;
+    addError(detail: string|ErrorDetail): ValidationError;
     toString(): string;
 }
 
@@ -83,6 +83,7 @@ export interface Schema {
     }
     'enum'?: any[]
     type?: string | string[]
+    format?: string
     allOf?: Schema[]
     anyOf?: Schema[]
     oneOf?: Schema[]
@@ -107,7 +108,7 @@ export interface SchemaContext {
     options: Options;
     propertyPath: string;
     base: string;
-    schemas: {[base:string]: Schema};
+    schemas: {[base: string]: Schema};
 }
 
 export interface CustomFormat {
