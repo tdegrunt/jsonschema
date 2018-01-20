@@ -134,6 +134,11 @@ describe('Formats', function () {
       this.validator.validate("0", {'type': 'string', 'format': 'style'}).valid.should.be.false;
     });
 
+    it('should validate a valid style if called twice with the same instance', function () {
+      this.validator.validate("color: red;", {'type': 'string', 'format': 'style'}).valid.should.be.true;
+      this.validator.validate("color: red;", {'type': 'string', 'format': 'style'}).valid.should.be.true;
+    });
+
   });
 
   describe('phone', function () {
