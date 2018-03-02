@@ -36,6 +36,7 @@ export declare class ValidationError {
     name: string;
     argument: any;
     toString(): string;
+    stack: string;
 }
 
 export declare class SchemaError extends Error{
