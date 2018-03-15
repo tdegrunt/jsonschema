@@ -12,6 +12,7 @@
   "main": "./lib",
   "typings": "./lib/index.d.ts",
   "devDependencies": {
+    "json-metaschema": "^1.2.0",
     "mocha": "~3",
     "chai": "~1.5.0"
   },

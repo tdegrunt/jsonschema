@@ -6,10 +6,12 @@ var should = require('chai').should();
 
 var Validator = require('./../lib/validator');
 var schemas = [
-  require('../schema/draft-03/schema.json'),
-  require('../schema/draft-03/hyper-schema.json'),
-  require('../schema/draft-04/schema.json'),
-  require('../schema/draft-04/hyper-schema.json'),
+  require('json-metaschema/draft-03-schema.json'),
+  require('json-metaschema/draft-03-hyper-schema.json'),
+  require('json-metaschema/draft-04-schema.json'),
+  require('json-metaschema/draft-04-hyper-schema.json'),
+//  require('json-metaschema/draft-07-schema.json'),
+//  require('json-metaschema/draft-07-hyper-schema.json'),
 ];
 
 var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional', 'test/suite/tests/draft7', 'test/suite/tests/draft7/optional'];
