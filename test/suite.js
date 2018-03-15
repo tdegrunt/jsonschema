@@ -12,8 +12,8 @@ var schemas = [
   require('../schema/draft-04/hyper-schema.json'),
 ];
 
-var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional'];
-var ignoredFiles = ['optional', 'zeroTerminatedFloats.json', 'refRemote.json'];
+var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional', 'test/suite/tests/draft7', 'test/suite/tests/draft7/optional'];
+var ignoredFiles = ['optional', 'format', 'zeroTerminatedFloats.json', 'refRemote.json'];
 
 /**
  * Runs the JSON Schema Test Suite
@@ -31,9 +31,9 @@ describe('JSON Schema Test Suite', function(){
 
             suite.tests.forEach(function(test) {
 
-              it(test.description, function() {
+              it(path + '/' + file + ' ' + test.description, function() {
                 var validator = new Validator();
-		schemas.forEach(function(s){ validator.addSchema(s); });
+                schemas.forEach(function(s){ validator.addSchema(s); });
                 var result = validator.validate(test.data, suite.schema);
                 return should.equal(test.valid, result.valid, util.inspect(result, true, null));
               });
