@@ -15,7 +15,7 @@ var schemas = [
 ];
 
 var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional', 'test/suite/tests/draft7', 'test/suite/tests/draft7/optional'];
-var ignoredFiles = ['optional', 'format', 'zeroTerminatedFloats.json', 'refRemote.json', 'ecmascript-regex.json', 'content.json', 'bignum.json'];
+var ignoredFiles = ['optional', 'format', 'zeroTerminatedFloats.json', 'refRemote.json', 'ecmascript-regex.json', 'content.json', 'bignum.json', 'jsregex.json'];
 
 /**
  * Runs the JSON Schema Test Suite
@@ -29,11 +29,11 @@ describe('JSON Schema Test Suite', function(){
         var suites = JSON.parse(fs.readFileSync(path+"/"+file));
         suites.forEach(function(suite) {
 
-          describe(suite.description, function() {
+          describe(path + '/' + file + ' ' + suite.description, function() {
 
             suite.tests.forEach(function(test) {
 
-              it(path + '/' + file + ' ' + test.description, function() {
+              it(test.description, function() {
                 var validator = new Validator();
                 schemas.forEach(function(s){ validator.addSchema(s); });
                 var result = validator.validate(test.data, suite.schema);
