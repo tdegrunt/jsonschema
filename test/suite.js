@@ -14,7 +14,7 @@ var schemas = [
 //  require('json-metaschema/draft-07-hyper-schema.json'),
 ];
 
-var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional', 'test/suite/tests/draft7', 'test/suite/tests/draft7/optional'];
+var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional'];
 var ignoredFiles = ['optional', 'format', 'zeroTerminatedFloats.json', 'refRemote.json', 'ecmascript-regex.json', 'content.json', 'bignum.json', 'jsregex.json'];
 
 /**
