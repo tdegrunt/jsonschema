@@ -317,6 +317,10 @@ describe('Attributes', function () {
       return this.validator.validate({'the_field':undefined}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.false;
     });
 
+    it('should not validate if a field in required array is undefined', function () {
+      return this.validator.validate({'the_field':undefined}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'] }}, required: ['the_field']}).valid.should.be.false;
+    });
+
     it('should validate if a required field has a value out of enum', function () {
       return this.validator.validate({'the_field':'bar'}, {'type': 'object', 'properties':{'the_field': {'enum': ['foo', 'bar', 'baz'], 'required': true}}}).valid.should.be.true;
     });
