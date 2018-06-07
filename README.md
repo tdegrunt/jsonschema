@@ -16,66 +16,66 @@ Please include a test which shows why the code fails.
 Simple object validation using JSON schemas.
 
 ```javascript
-  var Validator = require('jsonschema').Validator;
-  var v = new Validator();
-  var instance = 4;
-  var schema = {"type": "number"};
-  console.log(v.validate(instance, schema));
+var Validator = require('jsonschema').Validator;
+var v = new Validator();
+var instance = 4;
+var schema = {"type": "number"};
+console.log(v.validate(instance, schema));
 ```
 
 ### Even simpler
 
 ```javascript
-  var validate = require('jsonschema').validate;
-  console.log(validate(4, {"type": "number"}));
+var validate = require('jsonschema').validate;
+console.log(validate(4, {"type": "number"}));
 ```
 
 ### Complex example, with split schemas and references
 
 ```javascript
-  var Validator = require('jsonschema').Validator;
-  var v = new Validator();
+var Validator = require('jsonschema').Validator;
+var v = new Validator();
 
-  // Address, to be embedded on Person
-  var addressSchema = {
-    "id": "/SimpleAddress",
-    "type": "object",
-    "properties": {
-      "lines": {
-        "type": "array",
-        "items": {"type": "string"}
-      },
-      "zip": {"type": "string"},
-      "city": {"type": "string"},
-      "country": {"type": "string"}
+// Address, to be embedded on Person
+var addressSchema = {
+  "id": "/SimpleAddress",
+  "type": "object",
+  "properties": {
+    "lines": {
+      "type": "array",
+      "items": {"type": "string"}
     },
-    "required": ["country"]
-  };
+    "zip": {"type": "string"},
+    "city": {"type": "string"},
+    "country": {"type": "string"}
+  },
+  "required": ["country"]
+};
 
-  // Person
-  var schema = {
-    "id": "/SimplePerson",
-    "type": "object",
-    "properties": {
-      "name": {"type": "string"},
-      "address": {"$ref": "/SimpleAddress"},
-      "votes": {"type": "integer", "minimum": 1}
-    }
-  };
+// Person
+var schema = {
+  "id": "/SimplePerson",
+  "type": "object",
+  "properties": {
+    "name": {"type": "string"},
+    "address": {"$ref": "/SimpleAddress"},
+    "votes": {"type": "integer", "minimum": 1}
+  }
+};
 
-  var p = {
-    "name": "Barack Obama",
-    "address": {
-      "lines": [ "1600 Pennsylvania Avenue Northwest" ],
-      "zip": "DC 20500",
-      "city": "Washington",
-      "country": "USA"
-    },
-    "votes": "lots"
-  };
+var p = {
+  "name": "Barack Obama",
+  "address": {
+    "lines": [ "1600 Pennsylvania Avenue Northwest" ],
+    "zip": "DC 20500",
+    "city": "Washington",
+    "country": "USA"
+  },
+  "votes": "lots"
+};
 
-  v.addSchema(addressSchema, '/SimpleAddress');
-  console.log(v.validate(p, schema));
+v.addSchema(addressSchema, '/SimpleAddress');
+console.log(v.validate(p, schema));
 ```
 
 For a comprehensive, annotated example illustrating all possible validation options, see [examples/all.js](./examples/all.js)
@@ -158,50 +158,50 @@ unknown references are inserted into the `validator.unresolvedRefs` Array. Async
 them:
 
 ```javascript
-  var Validator = require('jsonschema').Validator;
-  var v = new Validator();
-  v.addSchema(initialSchema);
-  function importNextSchema(){
-    var nextSchema = v.unresolvedRefs.shift();
-    if(!nextSchema){ done(); return; }
-    databaseGet(nextSchema, function(schema){
-      v.addSchema(schema);
-      importNextSchema();
-    });
-  }
-  importNextSchema();
+var Validator = require('jsonschema').Validator;
+var v = new Validator();
+v.addSchema(initialSchema);
+function importNextSchema(){
+  var nextSchema = v.unresolvedRefs.shift();
+  if(!nextSchema){ done(); return; }
+  databaseGet(nextSchema, function(schema){
+    v.addSchema(schema);
+    importNextSchema();
+  });
+}
+importNextSchema();
 ```
 
 ### Pre-Property Validation Hook
 If some processing of properties is required prior to validation a function may be passed via the options parameter of the validate function. For example, say you needed to perform type coercion for some properties:
 
 ```const coercionHook = function (instance, property, schema, options, ctx) {
-  var value = instance[property];
+var value = instance[property];
 
-  // Skip nulls and undefineds
-  if (value === null || typeof value == 'undefined') {
-    return;
-  }
+// Skip nulls and undefineds
+if (value === null || typeof value == 'undefined') {
+  return;
+}
 
-  // If the schema declares a type and the property fails type validation.
-  if (schema.type && this.attributes.type.call(this, instance, schema, options, ctx.makeChild(schema, property))) {
-    var types = (schema.type instanceof Array) ? schema.type : [schema.type];
-    var coerced = undefined;
+// If the schema declares a type and the property fails type validation.
+if (schema.type && this.attributes.type.call(this, instance, schema, options, ctx.makeChild(schema, property))) {
+  var types = (schema.type instanceof Array) ? schema.type : [schema.type];
+  var coerced = undefined;
 
-    // Go through the declared types until we find something that we can
-    // coerce the value into.
-    for (var i = 0; typeof coerced == 'undefined' && i < types.length; i++) {
-      // If we support coercion to this type
-      if (lib.coercions[types[i]]) {
-        // ...attempt it.
-        coerced = lib.coercions[types[i]](value);
-      }
-    }
-    // If we got a successful coercion we modify the property of the instance.
-    if (typeof coerced != 'undefined') {
-      instance[property] = coerced;
+  // Go through the declared types until we find something that we can
+  // coerce the value into.
+  for (var i = 0; typeof coerced == 'undefined' && i < types.length; i++) {
+    // If we support coercion to this type
+    if (lib.coercions[types[i]]) {
+      // ...attempt it.
+      coerced = lib.coercions[types[i]](value);
     }
   }
+  // If we got a successful coercion we modify the property of the instance.
+  if (typeof coerced != 'undefined') {
+    instance[property] = coerced;
+  }
+}
 }.bind(validator)
 
 // And now, to actually perform validation with the coercion hook!
