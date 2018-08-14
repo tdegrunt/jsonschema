@@ -250,6 +250,10 @@ describe('Attributes', function () {
     it('should validate if string does not match the string pattern', function () {
       return this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'}).valid.should.be.false;
     });
+
+    it('should return correct error message when parsing regular expression', function () {
+        return this.validator.validate('abac', {'type': 'string', 'pattern': /^a+$/}).errors[0].stack.should.include("/^a+$/");
+    })
   });
 
   describe('minLength', function () {
