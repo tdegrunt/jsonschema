@@ -110,7 +110,7 @@ with different formats in a program.
 
 Here is an example that uses custom formats:
 
-```
+```javascript
 Validator.prototype.customFormats.myFormat = function(input) {
   return input === 'myFormat';
 };
@@ -175,33 +175,34 @@ importNextSchema();
 ### Pre-Property Validation Hook
 If some processing of properties is required prior to validation a function may be passed via the options parameter of the validate function. For example, say you needed to perform type coercion for some properties:
 
-```const coercionHook = function (instance, property, schema, options, ctx) {
-var value = instance[property];
+```javascript
+const coercionHook = function (instance, property, schema, options, ctx) {
+  var value = instance[property];
 
-// Skip nulls and undefineds
-if (value === null || typeof value == 'undefined') {
-  return;
-}
+  // Skip nulls and undefineds
+  if (value === null || typeof value == 'undefined') {
+    return;
+  }
 
-// If the schema declares a type and the property fails type validation.
-if (schema.type && this.attributes.type.call(this, instance, schema, options, ctx.makeChild(schema, property))) {
-  var types = (schema.type instanceof Array) ? schema.type : [schema.type];
-  var coerced = undefined;
+  // If the schema declares a type and the property fails type validation.
+  if (schema.type && this.attributes.type.call(this, instance, schema, options, ctx.makeChild(schema, property))) {
+    var types = (schema.type instanceof Array) ? schema.type : [schema.type];
+    var coerced = undefined;
 
-  // Go through the declared types until we find something that we can
-  // coerce the value into.
-  for (var i = 0; typeof coerced == 'undefined' && i < types.length; i++) {
-    // If we support coercion to this type
-    if (lib.coercions[types[i]]) {
-      // ...attempt it.
-      coerced = lib.coercions[types[i]](value);
+    // Go through the declared types until we find something that we can
+    // coerce the value into.
+    for (var i = 0; typeof coerced == 'undefined' && i < types.length; i++) {
+      // If we support coercion to this type
+      if (lib.coercions[types[i]]) {
+        // ...attempt it.
+        coerced = lib.coercions[types[i]](value);
+      }
+    }
+    // If we got a successful coercion we modify the property of the instance.
+    if (typeof coerced != 'undefined') {
+      instance[property] = coerced;
     }
   }
-  // If we got a successful coercion we modify the property of the instance.
-  if (typeof coerced != 'undefined') {
-    instance[property] = coerced;
-  }
-}
 }.bind(validator)
 
 // And now, to actually perform validation with the coercion hook!
