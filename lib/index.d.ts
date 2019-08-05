@@ -60,7 +60,7 @@ export interface Schema {
     exclusiveMinimum?: boolean
     maxLength?: number
     minLength?: number
-    pattern?: string
+    pattern?: string | RegExp
     additionalItems?: boolean | Schema
     items?: Schema | Schema[]
     maxItems?: number
