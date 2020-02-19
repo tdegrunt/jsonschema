@@ -77,7 +77,19 @@ var p = {
 v.addSchema(addressSchema, '/SimpleAddress');
 console.log(v.validate(p, schema));
 ```
-
+### Example for Array schema
+```json
+var arraySchema = {
+        "type": "array",
+        "items": {
+            "properties": {
+                "name": { "type": "string" },
+                "lastname": { "type": "string" }
+            },
+            "required": ["name", "lastname"]
+        }
+    }
+```
 For a comprehensive, annotated example illustrating all possible validation options, see [examples/all.js](./examples/all.js)
 
 ## Features
