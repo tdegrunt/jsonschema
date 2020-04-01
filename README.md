@@ -198,7 +198,7 @@ const coercionHook = function (instance, property, schema, options, ctx) {
 
   // If the schema declares a type and the property fails type validation.
   if (schema.type && this.attributes.type.call(this, instance, schema, options, ctx.makeChild(schema, property))) {
-    var types = (schema.type instanceof Array) ? schema.type : [schema.type];
+    var types = Array.isArray(schema.type) ? schema.type : [schema.type];
     var coerced = undefined;
 
     // Go through the declared types until we find something that we can
