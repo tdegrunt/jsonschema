@@ -68,7 +68,7 @@ export interface Schema {
     uniqueItems?: boolean
     maxProperties?: number
     minProperties?: number
-    required?: string[]
+    required?: string[] | boolean
     additionalProperties?: boolean | Schema
     definitions?: {
         [name: string]: Schema
