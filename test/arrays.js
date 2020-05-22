@@ -94,5 +94,13 @@ describe('Arrays', function () {
     it('should validate if not an Array', function () {
       return this.validator.validate(null, {'type': 'any', 'uniqueItems': true}).valid.should.be.true;
     });
+
+    it('shouldvalidate if array has no duplicate items and uniqueItems is false', function () {
+      return this.validator.validate([1, 2, 3], {'type': 'array', 'uniqueItems': false}).valid.should.be.true;
+    });
+
+    it('should validate if array has duplicate numbers but uniqueItems is false', function () {
+      return this.validator.validate([1, 2, 4, 1, 3, 5], {'type': 'array', 'uniqueItems': false}).valid.should.be.true;
+    });
   });
 });
