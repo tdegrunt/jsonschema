@@ -16,7 +16,7 @@ describe('API', function () {
     it('"dependencies" constraint', function () {
       var data = {
         "foo": [1,2,3],
-        "bar": 2
+        "bar": 2,
       };
       var schema = {
         "dependencies": {
@@ -24,13 +24,13 @@ describe('API', function () {
             "properties": {
               "foo": {
                 "type": "array",
-                "items": {"type":"integer"}
+                "items": {"type":"integer"},
               },
-              "bar": {"type": "integer"}
+              "bar": {"type": "integer"},
             },
-            "required": ["foo", "bar"]
-          }
-        }
+            "required": ["foo", "bar"],
+          },
+        },
       };
       Object.freeze(data.foo);
       Object.freeze(data);

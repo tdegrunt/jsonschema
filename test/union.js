@@ -23,8 +23,8 @@ describe('Union', function () {
       "description": "MongoDB ObjectID",
       "properties": {
         "id": {"type": "string"},
-        "_bsontype": {"type": "string"}
-      }
+        "_bsontype": {"type": "string"},
+      },
     };
 
     this.validator.addSchema(testSchema, '/Test#Simple');
@@ -108,9 +108,9 @@ describe('Union', function () {
         "properties": {
           "wildcards": {
             "type": "array",
-            "items": {"type": [{"$ref": "MongoDb#ObjectId"}, {"type": "string", "pattern": "^\\*$"}]}
-          }
-        }
+            "items": {"type": [{"$ref": "MongoDb#ObjectId"}, {"type": "string", "pattern": "^\\*$"}]},
+          },
+        },
       };
       this.validator.validate({'wildcards': ['*']}, schema).valid.should.be.true;
     });
@@ -121,9 +121,9 @@ describe('Union', function () {
         "properties": {
           "wildcards": {
             "type": "array",
-            "items": {"type": [{"$ref": "MongoDb#ObjectId"}, {"type": "string", "pattern": "^\\*$"}]}
-          }
-        }
+            "items": {"type": [{"$ref": "MongoDb#ObjectId"}, {"type": "string", "pattern": "^\\*$"}]},
+          },
+        },
       };
       this.validator.validate({'wildcards': []}, schema).valid.should.be.true;
     });
@@ -134,9 +134,9 @@ describe('Union', function () {
         "properties": {
           "wildcards": {
             "type": "array",
-            "items": {"type": [{"$ref": "MongoDb#ObjectId"}, {"type": "string", "pattern": "^\\*$"}]}
-          }
-        }
+            "items": {"type": [{"$ref": "MongoDb#ObjectId"}, {"type": "string", "pattern": "^\\*$"}]},
+          },
+        },
       };
       this.validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).valid.should.be.true;
     });
@@ -147,9 +147,9 @@ describe('Union', function () {
         "properties": {
           "wildcards": {
             "type": "array",
-            "items": {"type": [{"$ref": "MongoDb#ObjectId", "title": "test", "description": "test"}, {"type": "string", "pattern": "^\\*$"}]}
-          }
-        }
+            "items": {"type": [{"$ref": "MongoDb#ObjectId", "title": "test", "description": "test"}, {"type": "string", "pattern": "^\\*$"}]},
+          },
+        },
       };
       this.validator.validate({'wildcards': [{"id": "1234", "_bsontype": "test"}, '*']}, schema).valid.should.be.true;
     });
@@ -169,19 +169,19 @@ describe('Union', function () {
             properties: {
               filename: {type: 'string', required: true},
               lineno: {type: ['integer', 'null']},
-              method: {type: ['string', 'null']}
-            }
-          }
+              method: {type: ['string', 'null']},
+            },
+          },
         },
         exception: {
           type: 'object',
           required: true,
           properties: {
             class: {type: 'string', required: true},
-            message: {type: 'string'}
-          }
-        }
-      }
+            message: {type: 'string'},
+          },
+        },
+      },
     };
     var exc = {class: 'testing...', message: 'this is only a test'};
     it('should validate for nulls', function () {

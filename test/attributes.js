@@ -252,8 +252,8 @@ describe('Attributes', function () {
     });
 
     it('should return correct error message when parsing regular expression', function () {
-        return this.validator.validate('abac', {'type': 'string', 'pattern': /^a+$/}).errors[0].stack.should.include("/^a+$/");
-    })
+      return this.validator.validate('abac', {'type': 'string', 'pattern': /^a+$/}).errors[0].stack.should.include("/^a+$/");
+    });
   });
 
   describe('minLength', function () {

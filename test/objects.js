@@ -36,8 +36,8 @@ describe('Objects', function () {
         {
           'type': 'object',
           'properties': {
-            'name': {'type': 'string'}
-          }
+            'name': {'type': 'string'},
+          },
         }
       ).valid.should.be.true;
     });
@@ -55,8 +55,8 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'address': {'type': 'string'}
-          }
+            'address': {'type': 'string'},
+          },
         }
       ).valid.should.be.true;
     });
@@ -68,8 +68,8 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'address': {'type': 'string'}
-          }
+            'address': {'type': 'string'},
+          },
         }
       ).valid.should.be.true;
     });
@@ -80,8 +80,8 @@ describe('Objects', function () {
         {
           'type': 'object',
           'properties': {
-            'name': {'type': 'string'}
-          }
+            'name': {'type': 'string'},
+          },
         }
       ).valid.should.be.false;
     });
@@ -96,8 +96,8 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'nested': {'type': 'object'}
-          }
+            'nested': {'type': 'object'},
+          },
         }
       ).valid.should.be.false;
     });
@@ -109,8 +109,8 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'nested': {'type': 'string'}
-          }
+            'nested': {'type': 'string'},
+          },
         }
       ).valid.should.be.true;
     });
@@ -129,10 +129,10 @@ describe('Objects', function () {
               'required': true,
               'properties': {
                 'bar': {'type': 'object', 'required': true},
-                'baz': {'type': 'number', 'required': true}
-              }
-            }
-          }
+                'baz': {'type': 'number', 'required': true},
+              },
+            },
+          },
         }
       ).valid.should.be.false;
     });
@@ -146,9 +146,9 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'nested': {'type': 'string'}
+            'nested': {'type': 'string'},
           },
-          'additionalProperties': false
+          'additionalProperties': false,
         }
       ).valid.should.be.true;
     });
@@ -160,9 +160,9 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'nested': {'type': 'string'}
+            'nested': {'type': 'string'},
           },
-          'additionalProperties': false
+          'additionalProperties': false,
         }
       ).valid.should.be.false;
     });
@@ -174,9 +174,9 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'nested': {'type': 'string'}
+            'nested': {'type': 'string'},
           },
-          'additionalProperties': {'type': 'number'}
+          'additionalProperties': {'type': 'number'},
         }
       ).valid.should.be.true;
     });
@@ -188,9 +188,9 @@ describe('Objects', function () {
           'type': 'object',
           'properties': {
             'name': {'type': 'string'},
-            'nested': {'type': 'string'}
+            'nested': {'type': 'string'},
           },
-          'additionalProperties': {'type': 'number'}
+          'additionalProperties': {'type': 'number'},
         }
       ).valid.should.be.false;
     });

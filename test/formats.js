@@ -21,21 +21,21 @@ describe('Formats', function () {
     });
 
     it('should validate a date-time with a timezone offset instead of Z', function () {
-        this.validator.validate("2012-07-08T16:41:41.532+00:00", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
-        this.validator.validate("2012-07-08T16:41:41.532+05:30", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
-        this.validator.validate("2012-07-08T16:41:41.532+04:00", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+      this.validator.validate("2012-07-08T16:41:41.532+00:00", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+      this.validator.validate("2012-07-08T16:41:41.532+05:30", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+      this.validator.validate("2012-07-08T16:41:41.532+04:00", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
     });
 
     it('should validate a date-time with a z instead of a Z', function () {
-        this.validator.validate("2012-07-08T16:41:41.532z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+      this.validator.validate("2012-07-08T16:41:41.532z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
     });
 
     it('should validate a date-time with a space instead of a T', function () {
-        this.validator.validate("2012-07-08 16:41:41.532Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+      this.validator.validate("2012-07-08 16:41:41.532Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
     });
 
     it('should validate a date-time with a t instead of a T', function () {
-        this.validator.validate("2012-07-08t16:41:41.532Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+      this.validator.validate("2012-07-08t16:41:41.532Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
     });
 
     it('should not validate a date-time with the time missing', function () {
@@ -47,8 +47,8 @@ describe('Formats', function () {
     });
 
     it('should not validate a date-time with a timezone offset AND a Z', function () {
-        this.validator.validate("2012-07-08T16:41:41.532+00:00Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.false;
-        this.validator.validate("2012-07-08T16:41:41.532+Z00:00", {'type': 'string', 'format': 'date-time'}).valid.should.be.false;
+      this.validator.validate("2012-07-08T16:41:41.532+00:00Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.false;
+      this.validator.validate("2012-07-08T16:41:41.532+Z00:00", {'type': 'string', 'format': 'date-time'}).valid.should.be.false;
     });
   });
 
@@ -332,7 +332,7 @@ describe('Formats', function () {
   describe('with options.disableFormat === true', function() {
     it('should validate invalid formats', function() {
       this.validator.validate("2012-07-08", {'type': 'string', 'format': 'date-time'},
-          {disableFormat: true}).valid.should.be.true;
+        {disableFormat: true}).valid.should.be.true;
     });
   });
 

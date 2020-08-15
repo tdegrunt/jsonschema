@@ -17,13 +17,13 @@ describe('Combinators', function () {
         'type': 'object',
         'anyOf': [{
           'properties': {
-            'name': {'type': 'string', 'enum': ['test1'] }
-          }
+            'name': {'type': 'string', 'enum': ['test1'] },
+          },
         }, {
           'properties': {
-            'name': {'type': 'string', 'enum': ['test2'] }
-          }
-        }]
+            'name': {'type': 'string', 'enum': ['test2'] },
+          },
+        }],
       };
     });
 
@@ -54,15 +54,15 @@ describe('Combinators', function () {
         'type': 'object',
         'oneOf': [{
           'properties': {
-            'name1': {'type': 'string', 'enum': ['test1'] }
+            'name1': {'type': 'string', 'enum': ['test1'] },
           },
-          'additionalProperties': false
+          'additionalProperties': false,
         }, {
           'properties': {
-            'name2': {'type': 'string', 'enum': ['test2'] }
+            'name2': {'type': 'string', 'enum': ['test2'] },
           },
-          'additionalProperties': false
-        }]
+          'additionalProperties': false,
+        }],
       };
     });
 

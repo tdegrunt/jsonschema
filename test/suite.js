@@ -26,24 +26,24 @@ describe('JSON Schema Test Suite', function(){
     fs.readdirSync(path).forEach(function(file) {
       if (~ignoredFiles.indexOf(file)) return;
 
-        var suites = JSON.parse(fs.readFileSync(path+"/"+file));
-        suites.forEach(function(suite) {
+      var suites = JSON.parse(fs.readFileSync(path+"/"+file));
+      suites.forEach(function(suite) {
 
-          describe(path + '/' + file + ' ' + suite.description, function() {
+        describe(path + '/' + file + ' ' + suite.description, function() {
 
-            suite.tests.forEach(function(test) {
+          suite.tests.forEach(function(test) {
 
-              it(test.description, function() {
-                var validator = new Validator();
-                schemas.forEach(function(s){ validator.addSchema(s); });
-                var result = validator.validate(test.data, suite.schema);
-                return should.equal(test.valid, result.valid, util.inspect(result, true, null));
-              });
-
+            it(test.description, function() {
+              var validator = new Validator();
+              schemas.forEach(function(s){ validator.addSchema(s); });
+              var result = validator.validate(test.data, suite.schema);
+              return should.equal(test.valid, result.valid, util.inspect(result, true, null));
             });
-          });
 
+          });
         });
+
+      });
 
     });
   });

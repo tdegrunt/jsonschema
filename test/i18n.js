@@ -108,12 +108,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate(1, {'type': 'number', 'minimum': 2})
-            .errors[0].name.should.equal('minimum');
+          .errors[0].name.should.equal('minimum');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate(1, {'type': 'number', 'minimum': 2})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
       describe('exclusiveMinimum', function () {
@@ -136,12 +136,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate(3, {'type': 'number', 'maximum': 1})
-            .errors[0].name.should.equal('maximum');
+          .errors[0].name.should.equal('maximum');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate(3, {'type': 'number', 'maximum': 1})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
       describe('exclusiveMaximum', function () {
@@ -164,12 +164,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate(1, {'type': 'number', 'divisibleBy': 2})
-            .errors[0].name.should.equal('divisibleBy');
+          .errors[0].name.should.equal('divisibleBy');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate(1, {'type': 'number', 'divisibleBy': 2})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -178,12 +178,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'})
-            .errors[0].name.should.equal('pattern');
+          .errors[0].name.should.equal('pattern');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -192,12 +192,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate('abcde', {'type': 'string', 'minLength': 6})
-            .errors[0].name.should.equal('minLength');
+          .errors[0].name.should.equal('minLength');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate('abcde', {'type': 'string', 'minLength': 6})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -206,12 +206,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate('abcde', {'type': 'string', 'maxLength': 4})
-            .errors[0].name.should.equal('maxLength');
+          .errors[0].name.should.equal('maxLength');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate('abcde', {'type': 'string', 'maxLength': 4})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -220,12 +220,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate('abcde', {'type': 'string', 'enum': ['abcdf', 'abcdd']})
-            .errors[0].name.should.equal('enum');
+          .errors[0].name.should.equal('enum');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate('abcde', {'type': 'string', 'enum': ['abcdf', 'abcdd']})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -234,12 +234,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate([1], {'type': 'any', 'not':'array'})
-            .errors[0].name.should.equal('not');
+          .errors[0].name.should.equal('not');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate([1], {'type': 'any', 'not':'array'})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
       it('should prohibit specified types', function () {
@@ -253,12 +253,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate([1], {'type': 'any', 'disallow':'array'})
-            .errors[0].name.should.equal('not');
+          .errors[0].name.should.equal('not');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate([1], {'type': 'any', 'disallow':'array'})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
       it('should prohibit specified types', function () {
@@ -270,12 +270,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate({quux: 1, foo: 1}, {'dependencies': {'quux': ['foo', 'bar']}})
-            .errors[0].name.should.equal('dependencies');
+          .errors[0].name.should.equal('dependencies');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate({quux: 1, foo: 1}, {'dependencies': {'quux': ['foo', 'bar']}})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -290,12 +290,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("2012-07-08", {'type': 'string', 'format': 'date-time'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("2012-07-08", {'type': 'string', 'format': 'date-time'})
-            .errors[0].argument.should.equal('date-time');
+          .errors[0].argument.should.equal('date-time');
       });
 
     });
@@ -304,12 +304,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("TEST2012-07-08", {'type': 'string', 'format': 'date'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("TEST2012-07-08", {'type': 'string', 'format': 'date'})
-            .errors[0].argument.should.equal('date');
+          .errors[0].argument.should.equal('date');
       });
 
     });
@@ -318,12 +318,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("16:41:41.532Z", {'type': 'string', 'format': 'time'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("16:41:41.532Z", {'type': 'string', 'format': 'time'})
-            .errors[0].argument.should.equal('time');
+          .errors[0].argument.should.equal('time');
       });
 
     });
@@ -332,12 +332,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("16:41:41.532Z", {'type': 'string', 'format': 'utc-millisec'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("16:41:41.532Z", {'type': 'string', 'format': 'utc-millisec'})
-            .errors[0].argument.should.equal('utc-millisec');
+          .errors[0].argument.should.equal('utc-millisec');
       });
 
     });
@@ -346,12 +346,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("/^(abc]/", {'type': 'string', 'format': 'regex'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("/^(abc]/", {'type': 'string', 'format': 'regex'})
-            .errors[0].argument.should.equal('regex');
+          .errors[0].argument.should.equal('regex');
       });
 
     });
@@ -360,12 +360,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("json", {'type': 'string', 'format': 'color'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("json", {'type': 'string', 'format': 'color'})
-            .errors[0].argument.should.equal('color');
+          .errors[0].argument.should.equal('color');
       });
 
     });
@@ -374,12 +374,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("0", {'type': 'string', 'format': 'style'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("0", {'type': 'string', 'format': 'style'})
-            .errors[0].argument.should.equal('style');
+          .errors[0].argument.should.equal('style');
       });
 
     });
@@ -388,12 +388,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("31 42 123 4567", {'type': 'string', 'format': 'phone'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("31 42 123 4567", {'type': 'string', 'format': 'phone'})
-            .errors[0].argument.should.equal('phone');
+          .errors[0].argument.should.equal('phone');
       });
 
     });
@@ -402,12 +402,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("tdegrunt", {'type': 'string', 'format': 'uri'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("tdegrunt", {'type': 'string', 'format': 'uri'})
-            .errors[0].argument.should.equal('uri');
+          .errors[0].argument.should.equal('uri');
       });
 
     });
@@ -416,12 +416,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("obama@", {'type': 'string', 'format': 'email'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("obama@", {'type': 'string', 'format': 'email'})
-            .errors[0].argument.should.equal('email');
+          .errors[0].argument.should.equal('email');
       });
 
     });
@@ -430,12 +430,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("192.168.0", {'type': 'string', 'format': 'ip-address'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("192.168.0", {'type': 'string', 'format': 'ip-address'})
-            .errors[0].argument.should.equal('ip-address');
+          .errors[0].argument.should.equal('ip-address');
       });
 
     });
@@ -444,12 +444,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("127.0.0.1", {'type': 'string', 'format': 'ipv6'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("127.0.0.1", {'type': 'string', 'format': 'ipv6'})
-            .errors[0].argument.should.equal('ipv6');
+          .errors[0].argument.should.equal('ipv6');
       });
 
     });
@@ -458,12 +458,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("www.-hi-.com", {'type': 'string', 'format': 'host-name'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("www.-hi-.com", {'type': 'string', 'format': 'host-name'})
-            .errors[0].argument.should.equal('host-name');
+          .errors[0].argument.should.equal('host-name');
       });
 
     });
@@ -473,12 +473,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("www.-hi-.com", {'type': 'string', 'format': 'alpha'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("www.-hi-.com", {'type': 'string', 'format': 'alpha'})
-            .errors[0].argument.should.equal('alpha');
+          .errors[0].argument.should.equal('alpha');
       });
 
     });
@@ -487,12 +487,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate("1test!", {'type': 'string', 'format': 'alphanumeric'})
-            .errors[0].name.should.equal('format');
+          .errors[0].name.should.equal('format');
       });
 
       it('should provide an error argument', function () {
         this.validator.validate("1test!", {'type': 'string', 'format': 'alphanumeric'})
-            .errors[0].argument.should.equal('alphanumeric');
+          .errors[0].argument.should.equal('alphanumeric');
       });
 
     });
@@ -507,12 +507,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate(0, {'type': 'array'})
-            .errors[0].name.should.equal('type');
+          .errors[0].name.should.equal('type');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate(0, {'type': 'array'})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
       describe('attribute on array items', function () {
@@ -535,12 +535,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate([1], {'type': 'array', 'items': {'type': 'number'}, 'minItems': 2})
-            .errors[0].name.should.equal('minItems');
+          .errors[0].name.should.equal('minItems');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate([1], {'type': 'array', 'items': {'type': 'number'}, 'minItems': 2})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -549,12 +549,12 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate([1, 2, 3], {'type': 'array', 'items': {'type': 'number'}, 'maxItems': 2})
-            .errors[0].name.should.equal('maxItems');
+          .errors[0].name.should.equal('maxItems');
       });
 
       it('should provide an error argument', function () {
         should.exist(this.validator.validate([1, 2, 3], {'type': 'array', 'items': {'type': 'number'}, 'maxItems': 2})
-            .errors[0].argument);
+          .errors[0].argument);
       });
 
     });
@@ -563,7 +563,7 @@ describe('i18n', function () {
 
       it('should provide an error name', function () {
         this.validator.validate([1, 2, 4, 1, 3, 5], {'type': 'array', 'uniqueItems': true})
-            .errors[0].name.should.equal('uniqueItems');
+          .errors[0].name.should.equal('uniqueItems');
       });
 
     });
@@ -578,9 +578,9 @@ describe('i18n', function () {
           'name': {'type': 'string'},
           'lines': {
             'type': 'array',
-            'items': {'type': 'string', 'format': 'alphanumeric'}
-          }
-        }
+            'items': {'type': 'string', 'format': 'alphanumeric'},
+          },
+        },
       };
     });
 

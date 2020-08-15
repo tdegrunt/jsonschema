@@ -21,9 +21,9 @@ describe('Mixed', function () {
             'name': {'type': 'string'},
             'lines': {
               'type': 'array',
-              'items': {'type': 'string'}
-            }
-          }
+              'items': {'type': 'string'},
+            },
+          },
         }
       ).valid.should.be.true;
     });
@@ -39,9 +39,9 @@ describe('Mixed', function () {
             'name': {'type': 'string'},
             'lines': {
               'type': 'array',
-              'items': {'type': 'string'}
-            }
-          }
+              'items': {'type': 'string'},
+            },
+          },
         }
       );
       result.errors.should.have.length(1);
