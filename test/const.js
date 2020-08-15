@@ -29,7 +29,7 @@ describe('"const" keyword', function () {
   describe('object', function () {
     var schema = { 'const': {"some key": [ null, "1", 2, true ]} };
     it('valid', function () {
-      this.validator.validate({"some key": [ null, "1", 2, true ]}, schema).valid.should.be.trfalseue;
+      this.validator.validate({"some key": [ null, "1", 2, true ]}, schema).valid.should.be.true;
     });
     it('invalid 1', function () {
       this.validator.validate([null], schema).valid.should.be.false;

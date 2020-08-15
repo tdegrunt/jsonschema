@@ -324,7 +324,7 @@ describe('Formats', function () {
       });
 
       it('should be assigned to the instances', function() {
-        ((new Validator()).customFormats.boo).should.be.a.function;
+        ((new Validator()).customFormats.boo).should.be.a('function');
       });
     });
   });

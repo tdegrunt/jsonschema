@@ -12,9 +12,10 @@
   "main": "./lib",
   "typings": "./lib/index.d.ts",
   "devDependencies": {
+    "chai": "~4.2.0",
+    "eslint": "^7.7.0",
     "json-metaschema": "^1.2.0",
-    "mocha": "~3",
-    "chai": "~1.5.0"
+    "mocha": "~8.1.1"
   },
   "optionalDependencies": {},
   "engines": {
