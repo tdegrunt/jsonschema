@@ -99,6 +99,7 @@ export interface Options {
     propertyName?: string;
     base?: string;
     throwError?: boolean;
+    nestedErrors?: boolean;
 }
 
 export interface RewriteFunction {
