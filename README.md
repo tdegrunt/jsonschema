@@ -1,18 +1,22 @@
 [![Build Status](https://secure.travis-ci.org/tdegrunt/jsonschema.svg)](http://travis-ci.org/tdegrunt/jsonschema)
 
 # jsonschema
+
 [JSON schema](http://json-schema.org/) validator, which is designed to be fast and simple to use.
 The latest IETF published draft is v6, this library is mostly v4 compatible.
 
 ## Contributing & bugs
+
 Please fork the repository, make the changes in your fork and include tests. Once you're done making changes, send in a pull request.
 
 ### Bug reports
+
 Please include a test which shows why the code fails.
 
 ## Usage
 
 ### Simple
+
 Simple object validation using JSON schemas.
 
 ```javascript
@@ -78,6 +82,7 @@ v.addSchema(addressSchema, '/SimpleAddress');
 console.log(v.validate(p, schema));
 ```
 ### Example for Array schema
+
 ```json
 var arraySchema = {
         "type": "array",
@@ -95,21 +100,26 @@ For a comprehensive, annotated example illustrating all possible validation opti
 ## Features
 
 ### Definitions
+
 All schema definitions are supported, $schema is ignored.
 
 ### Types
+
 All types are supported
 
 ### Formats
+
 #### Disabling the format keyword.
 
 You may disable format validation by providing `disableFormat: true` to the validator
 options.
 
 #### String Formats
+
 All formats are supported, phone numbers are expected to follow the [E.123](http://en.wikipedia.org/wiki/E.123) standard.
 
 #### Custom Formats
+
 You may add your own custom format functions.  Format functions accept the input
 being validated and return a boolean value.  If the returned value is `true`, then
 validation succeeds.  If the returned value is `false`, then validation fails.
@@ -133,27 +143,29 @@ validator.validate('foo', {type: 'string', format: 'myFormat'}).valid; // false
 ```
 
 ### Results
+
 The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array which also contains the success flag `result.valid`.
 
-When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are not reported, unless `options.nestedErrors` is truthy. This option may be useful when troubleshooting validation errors in complex schemas. 
+When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are not reported, unless `options.nestedErrors` is truthy. This option may be useful when troubleshooting validation errors in complex schemas.
 
 ### Custom properties
+
 Specify your own JSON Schema properties with the validator.attributes property:
 
 ```javascript
 validator.attributes.contains = function validateContains(instance, schema, options, ctx) {
-  if(typeof instance!='string') return;
-  if(typeof schema.contains!='string') throw new jsonschema.SchemaError('"contains" expects a string', schema);
+  if(typeof instance !== 'string') return;
+  if(typeof schema.contains !== 'string') throw new jsonschema.SchemaError('"contains" expects a string', schema);
   if(instance.indexOf(schema.contains)<0){
     return 'does not contain the string ' + JSON.stringify(schema.contains);
   }
 }
-var result = validator.validate("i am an instance", { type:"string", contains: "i am" });
+var result = validator.validate("I am an instance", { type:"string", contains: "I am" });
 // result.valid === true;
 ```
 
 The instance passes validation if the function returns nothing. A single validation error is produced
-if the fuction returns a string. Any number of errors (maybe none at all) may be returned by passing a
+if the function returns a string. Any number of errors (maybe none at all) may be returned by passing a
 `ValidatorResult` object, which may be used like so:
 
 ```javascript
@@ -165,6 +177,7 @@ if the fuction returns a string. Any number of errors (maybe none at all) may be
 ```
 
 ### Dereferencing schemas
+
 Sometimes you may want to download schemas from remote sources, like a database, or over HTTP. When importing a schema,
 unknown references are inserted into the `validator.unresolvedRefs` Array. Asynchronously shift elements off this array and import
 them:
@@ -185,13 +198,14 @@ importNextSchema();
 ```
 
 ### Pre-Property Validation Hook
+
 If some processing of properties is required prior to validation a function may be passed via the options parameter of the validate function. For example, say you needed to perform type coercion for some properties:
 
 ```javascript
 const coercionHook = function (instance, property, schema, options, ctx) {
   var value = instance[property];
 
-  // Skip nulls and undefineds
+  // Skip null and undefined
   if (value === null || typeof value == 'undefined') {
     return;
   }
@@ -222,6 +236,7 @@ v.validate(instance, schema, { preValidateProperty: coercionHook });
 ```
 
 ## Tests
+
 Uses [JSON Schema Test Suite](https://github.com/json-schema/JSON-Schema-Test-Suite) as well as our own tests.
 You'll need to update and init the git submodules:
 
