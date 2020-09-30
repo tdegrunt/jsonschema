@@ -214,6 +214,48 @@ var result = validate(["Name"], {
 }, { base: 'http://example.com/' });
 ```
 
+### Rewrite Hook
+
+The `rewrite` option lets you change the value of an instance after it has successfully been validated. This will mutate the `instance` passed to the validate function. This can be useful for unmarshalling data and parsing it into native instances, such as changing a string to a `Date` instance.
+
+The `rewrite` option accepts a function with the following arguments:
+
+* instance: any
+* schema: object
+* options: object
+* ctx: object
+* return value: any new value for the instance
+
+The value may be removed by returning `undefined`.
+If you don't want to change the value, call `return instance`.
+
+Here is an example that can convert a property expecting a date into a Date instance:
+
+```javascript
+const schema = {
+  properties: {
+    date: {id: 'http://example.com/date', type: 'string'},
+  },
+};
+
+const value = {
+  date: '2020-09-30T23:39:27.060Z',
+};
+
+function unmarshall(instance, schema){
+  if(schema.id === 'http://example.com/date'){
+    return new Date(instance);
+  }
+  return instance;
+}
+
+const v = new Validator();
+const res = v.validate(value, schema, {rewrite: unmarshall});
+
+assert(res.instance.date instanceof Date);
+```
+
+
 ### Pre-Property Validation Hook
 
 If some processing of properties is required prior to validation a function may be passed via the options parameter of the validate function. For example, say you needed to perform type coercion for some properties:
