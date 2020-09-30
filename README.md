@@ -197,6 +197,23 @@ function importNextSchema(){
 importNextSchema();
 ```
 
+### Default base URI
+
+Schemas should typically have an `id` with an absolute, full URI. However if the schema you are using contains only relative URI references, the `base` option will be used to resolve these.
+
+This following example would throw a `SchemaError` if the `base` option were unset:
+
+```javascript
+var result = validate(["Name"], {
+  id: "/schema.json",
+  type: "array",
+  items: { $ref: "http://example.com/schema.json#/definitions/item" },
+  definitions: {
+    item: { type: "string" },
+  },
+}, { base: 'http://example.com/' });
+```
+
 ### Pre-Property Validation Hook
 
 If some processing of properties is required prior to validation a function may be passed via the options parameter of the validate function. For example, say you needed to perform type coercion for some properties:
