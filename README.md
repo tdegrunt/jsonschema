@@ -155,6 +155,14 @@ The first error found will be thrown as an `Error` object if `options.throwError
 
 When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are not reported, unless `options.nestedErrors` is truthy. This option may be useful when troubleshooting validation errors in complex schemas.
 
+To provide localized, human-readable errors, use the `name` string as a translation key. Feel free to open an issue for support relating to localizing error messages. For example:
+
+```
+var localized = result.errors.map(function(err){
+  return localeService.translate(err.name);
+});
+```
+
 ### Custom properties
 
 Specify your own JSON Schema properties with the validator.attributes property:
