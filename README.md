@@ -144,7 +144,14 @@ validator.validate('foo', {type: 'string', format: 'myFormat'}).valid; // false
 
 ### Results
 
-The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array which also contains the success flag `result.valid`.
+The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array. Each item in this array is a `ValidationError` with the following properties:
+
+* property: string. Describes the property path. Starts with `instance` (this is configurable with the `options.propertyName` option), and is delimited with a dot (`.`).
+* message: string. A human-readable message for debugging use. Provided in English and subject to change.
+* schema: object. The schema containing the keyword that failed
+* instance: any. The instance that failed
+* name: string. The keyword within the schema that failed.
+* argument: any. Provides information about the keyword that failed.
 
 When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are not reported, unless `options.nestedErrors` is truthy. This option may be useful when troubleshooting validation errors in complex schemas.
 
