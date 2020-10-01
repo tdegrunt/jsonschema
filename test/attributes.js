@@ -130,6 +130,37 @@ describe('Attributes', function () {
     });
   });
 
+  describe('oneOf', function () {
+    var schema = {
+      oneOf: [
+        {type: 'string'},
+        {enum: [0, 1]},
+        {type: 'object', required: ['type']},
+        {type: 'object', required: ['name']},
+      ],
+    };
+    beforeEach(function () {
+      this.validator = new Validator();
+    });
+
+    it('does not validate zero successes', function () {
+      return this.validator.validate(true, schema).valid.should.be.false;
+    });
+
+    it('validates one success', function () {
+      return this.validator.validate({type: true}, schema).valid.should.be.true;
+    });
+
+    it('does not validate two successes', function () {
+      return this.validator.validate({type:true, name:true}, schema).valid.should.be.false;
+    });
+
+    it('reports inner errors with nestedErrors flag', function () {
+      return this.validator.validate({type:true, name:true}, schema, {nestedErrors:true}).errors.length.should.equal(3);
+    });
+
+  });
+
   describe('minimum', function () {
     beforeEach(function () {
       this.validator = new Validator();
