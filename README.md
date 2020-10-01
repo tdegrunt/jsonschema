@@ -301,6 +301,29 @@ const coercionHook = function (instance, property, schema, options, ctx) {
 v.validate(instance, schema, { preValidateProperty: coercionHook });
 ```
 
+### Skip validation of certain keywords
+
+Use the "skipAttributes" option to skip validation of certain keywords. Provide an array of keywords to ignore.
+
+For skipping the "format" keyword, see the disableFormat option.
+
+### Fail on unknown keywords
+
+By default, JSON Schema is supposed to ignore unknown schema keywords.
+
+You can change this behavior to require that all keywords used in a schema have a defined behavior, by using setting the "allowUnknownAttributes" option to false.
+
+This example will throw a `SchemaError`:
+
+```javascript
+var schema = {
+  type: "string",
+  format: "email",
+  example: "foo",
+};
+var result = validate("Name", schema, { allowUnknownAttributes: false });
+```
+
 ## Tests
 
 Uses [JSON Schema Test Suite](https://github.com/json-schema/JSON-Schema-Test-Suite) as well as our own tests.
