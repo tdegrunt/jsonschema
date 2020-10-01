@@ -3,8 +3,10 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var Validator = require('../lib/validator');
-var should = require('chai').should();
+var lib = require('..');
+var Validator = lib.Validator;
+require('chai').should();
+var assert = require('assert');
 
 describe('Attributes', function () {
   describe('type', function () {
@@ -157,6 +159,19 @@ describe('Attributes', function () {
 
     it('reports inner errors with nestedErrors flag', function () {
       return this.validator.validate({type:true, name:true}, schema, {nestedErrors:true}).errors.length.should.equal(3);
+    });
+
+    it('functions with throwError flag', function () {
+      var validator = this.validator;
+      assert.throws(function(){
+        validator.validate({type:true, name:true}, schema, {throwError:true});
+      }, function(err){
+        err.message.should.contain('exactly one');
+        return true;
+      });
+      assert.doesNotThrow(function(){
+        validator.validate({type:true}, schema, {throwError:true});
+      });
     });
 
   });
