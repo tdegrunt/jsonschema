@@ -153,7 +153,31 @@ The first error found will be thrown as an `Error` object if `options.throwError
 * name: string. The keyword within the schema that failed.
 * argument: any. Provides information about the keyword that failed.
 
-When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are not reported, unless `options.nestedErrors` is truthy. This option may be useful when troubleshooting validation errors in complex schemas.
+#### "nestedErrors" option
+
+When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are normally suppressed, because it is not necessary to fix all of them. And in the case of `oneOf`, it would itself be an error to fix all of the listed errors.
+
+This behavor may be configured with `options.nestedErrors`. If truthy, it will emit all the errors from the subschemas. This option may be useful when troubleshooting validation errors in complex schemas:
+
+```javascript
+var schema = {
+  oneOf: [
+    { type: 'string', minLength: 32, maxLength: 32 },
+    { type: 'string', maxLength: 16 },
+    { type: 'number' },
+  ]
+};
+var validator = new Validator();
+var result = validator.validate('This string is 28 chars long', schema, {nestedErrors: true});
+
+// result.toString() reads out:
+// 0: instance does not meet minimum length of 32
+// 1: instance does not meet maximum length of 16
+// 2: instance is not of a type(s) number
+// 3: instance is not exactly one from [subschema 0],[subschema 1],[subschema 2]
+```
+
+#### Localizing Error Messages
 
 To provide localized, human-readable errors, use the `name` string as a translation key. Feel free to open an issue for support relating to localizing error messages. For example:
 
