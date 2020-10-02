@@ -5,6 +5,7 @@
 
 var Validator = require('../lib/validator');
 var should = require('chai').should();
+var assert = require('assert');
 
 describe('Objects', function () {
   beforeEach(function () {
@@ -44,6 +45,29 @@ describe('Objects', function () {
 
     it('should not validate an invalid object', function () {
       return this.validator.validate(0, {'type': 'object'}).valid.should.be.false;
+    });
+  });
+
+  describe('object with enumerable properties in prototype chain', function () {
+    var schema = {
+      required: ['constructor'],
+      properties: {
+        constructor: { type: 'string' },
+      },
+    };
+    it('should validate a valid property', function () {
+      var res = this.validator.validate(Object.create({constructor: 'string'}), schema);
+      assert.strictEqual(res.valid, true);
+    });
+    it('should not validate an invalid property', function () {
+      var res = this.validator.validate(Object.create({constructor: true}), schema);
+      assert.strictEqual(res.valid, false);
+      res.errors[0].name.should.equal('type');
+    });
+    it('should not validate a missing property', function () {
+      var res = this.validator.validate(Object.create({}), schema);
+      assert.strictEqual(res.valid, false);
+      res.errors[0].name.should.equal('required');
     });
   });
 
