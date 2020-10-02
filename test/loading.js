@@ -34,7 +34,7 @@ describe('Schema management', function testSchemaManagement() {
       this.validator.addSchema(dataSchema, '/data_schema.json');
       this.validator.addSchema(dataCollectionSchema, '/data_collection_schema.json');
       this.validator.addSchema(typesSchema, '/types.json');
-      this.validator.validate(dataCollection, '/data_collection_schema.json').valid.should.be.true;
+      this.validator.validate(dataCollection, { $ref: '/data_collection_schema.json' }).valid.should.be.true;
     });
 
     it('Multiple schemas with the same id should throw an error', function testForCorrectValidation() {
