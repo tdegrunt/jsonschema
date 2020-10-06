@@ -300,6 +300,13 @@ describe('Attributes', function () {
     it('should return correct error message when parsing regular expression', function () {
       return this.validator.validate('abac', {'type': 'string', 'pattern': /^a+$/}).errors[0].stack.should.include("/^a+$/");
     });
+
+    it('supports invalid non-unicode patterns (deprecated)', function () {
+      this.validator.validate('0{012}', {'type': 'string', 'pattern': /0{1.3}/}).valid.should.be.false;
+      this.validator.validate('0{123}', {'type': 'string', 'pattern': /0{1.3}/}).valid.should.be.true;
+      this.validator.validate('0{012}', {'type': 'string', 'pattern': "0{1.3}"}).valid.should.be.false;
+      this.validator.validate('0{123}', {'type': 'string', 'pattern': "0{1.3}"}).valid.should.be.true;
+    });
   });
 
   describe('minLength', function () {
