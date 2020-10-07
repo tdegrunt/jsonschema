@@ -95,7 +95,7 @@ export interface Schema {
 export interface Options {
     skipAttributes?: string[];
     allowUnknownAttributes?: boolean;
-    preValidateProperty?: function;
+    preValidateProperty?: PreValidatePropertyFunction;
     rewrite?: RewriteFunction;
     propertyName?: string;
     base?: string;
@@ -107,7 +107,7 @@ export interface RewriteFunction {
     (instance: any, schema: Schema, options: Options, ctx: SchemaContext): any;
 }
 
-export interface preValidatePropertyFunction {
+export interface PreValidatePropertyFunction {
     (instance: any, key: string, schema: Schema, options: Options, ctx: SchemaContext): any;
 }
 
