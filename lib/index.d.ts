@@ -82,7 +82,7 @@ export interface Schema {
     dependencies?: {
         [name: string]: Schema | string[]
     }
-    const?: any[]
+    const?: any
     'enum'?: any[]
     type?: string | string[]
     format?: string
