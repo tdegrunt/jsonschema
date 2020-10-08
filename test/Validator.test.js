@@ -3,8 +3,8 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var Validator = require('..').Validator;
-var SchemaError = require('..').SchemaError;
+var Validator = require('../lib/index.js').Validator;
+var SchemaError = require('../lib/index.js').SchemaError;
 var assert = require('assert');
 
 describe('Validator', function () {

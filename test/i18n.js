@@ -3,7 +3,8 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var Validator = require('../lib/validator');
+var Validator = require('../lib/index.js').Validator;
+
 var should = require('chai').should();
 
 describe('i18n', function () {

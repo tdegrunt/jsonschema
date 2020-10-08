@@ -1,17 +1,7 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-
-pids
-logs
-results
-
+# Node.js dependencies
 node_modules
 npm-debug.log
 
-.idea
+# stryker output files
+.stryker-tmp
+reports/

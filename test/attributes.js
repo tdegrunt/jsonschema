@@ -3,10 +3,10 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var lib = require('..');
-var Validator = lib.Validator;
-require('chai').should();
+var Validator = require('../lib/index.js').Validator;
 var assert = require('assert');
+
+require('chai').should();
 
 describe('Attributes', function () {
   describe('type', function () {

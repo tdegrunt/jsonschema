@@ -5,7 +5,7 @@
 
 // Adds preliminary tests for the "const" keyword expected to be added to JSON Schema with this behavior
 
-var Validator = require('../lib/validator');
+var Validator = require('../lib/index.js').Validator;
 var should = require('chai').should();
 
 describe('"const" keyword', function () {

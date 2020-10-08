@@ -4,7 +4,7 @@ var util = require('util');
 var fs = require('fs');
 var should = require('chai').should();
 
-var Validator = require('./../lib/validator');
+var Validator = require('../lib/index.js').Validator;
 var schemas = [
   require('json-metaschema/draft-03-schema.json'),
   require('json-metaschema/draft-03-hyper-schema.json'),

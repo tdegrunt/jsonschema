@@ -6,7 +6,7 @@
 var util = require('util');
 var fs = require('fs');
 var assert = require('chai').assert;
-var Validator = require('../lib/validator');
+var Validator = require('../lib/index.js').Validator;
 
 /**
 * sort of functional test for "extends" and "required"

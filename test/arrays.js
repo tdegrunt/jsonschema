@@ -4,7 +4,8 @@
 /*jsl predef:it*/
 
 var Validator = require('../lib/validator');
-var should = require('chai').should();
+
+require('chai').should();
 
 describe('Arrays', function () {
   describe('simple array', function () {

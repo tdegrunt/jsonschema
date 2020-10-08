@@ -3,9 +3,10 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var Validator = require('../lib/validator');
-var should = require('chai').should();
+var Validator = require('../lib/index.js').Validator;
 var assert = require('assert');
+
+require('chai').should();
 
 describe('Objects', function () {
   beforeEach(function () {

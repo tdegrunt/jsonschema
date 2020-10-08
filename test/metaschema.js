@@ -3,10 +3,11 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-require('chai').should();
+var Validator = require('../lib/index.js').Validator;
 
-var Validator = require('..').Validator;
 var metaschema = require('json-metaschema/draft-04-schema.json');
+
+require('chai').should();
 
 describe('Meta-schema', function () {
 

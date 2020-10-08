@@ -3,8 +3,9 @@
 /*jsl predef:define*/
 /*jsl predef:it*/
 
-var Validator = require('../lib/validator');
-var should = require('chai').should();
+var Validator = require('../lib/index.js').Validator;
+
+require('chai').should();
 
 describe('Formats', function () {
   beforeEach(function () {
