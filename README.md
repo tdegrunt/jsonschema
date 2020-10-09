@@ -187,9 +187,9 @@ var localized = result.errors.map(function(err){
 });
 ```
 
-### Custom properties
+### Custom keywords
 
-Specify your own JSON Schema properties with the validator.attributes property:
+Specify your own JSON Schema keywords with the validator.attributes property:
 
 ```javascript
 validator.attributes.contains = function validateContains(instance, schema, options, ctx) {
