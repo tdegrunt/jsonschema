@@ -4,6 +4,7 @@
 /*jsl predef:it*/
 
 var Validator = require('../lib/index.js').Validator;
+var SchemaError = require('../lib/index.js').SchemaError;
 var assert = require('assert');
 
 require('chai').should();
@@ -218,6 +219,93 @@ describe('Objects', function () {
           'additionalProperties': {'type': 'number'},
         }
       ).valid.should.be.false;
+    });
+
+  });
+
+  describe('properties', function () {
+    it('should treat undefined property schema as not existing', function () {
+      var schema = {
+        'type': 'object',
+        'properties': {
+          'name': {'type': 'string'},
+          'nested': undefined,
+        },
+        'additionalProperties': {'type': 'number'},
+      };
+      this.validator.validate(
+        {'name': 'test', 'nested': 2},
+        schema
+      ).valid.should.be.true;
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2'},
+        schema
+      ).valid.should.be.false;
+    });
+
+    it('should not permit null as a schema', function () {
+      var validator = this.validator;
+      var schema = {
+        'type': 'object',
+        'properties': {
+          'name': {'type': 'string'},
+          'nested': null,
+        },
+        'additionalProperties': {'type': 'number'},
+      };
+      assert.throws(function(){
+        validator.validate(
+          {'name': 'test', 'nested': 2},
+          schema
+        );
+      }, function(err){
+        assert(err instanceof SchemaError);
+        assert.strictEqual(err.message, 'Unexpected null, expected schema in "properties"');
+        return true;
+      });
+    });
+  });
+
+  describe('patternProperties', function () {
+    it('should treat undefined property schema as not existing', function () {
+      var schema = {
+        'type': 'object',
+        'patternProperties': {
+          'name': {'type': 'string'},
+          'nested': undefined,
+        },
+        'additionalProperties': {'type': 'number'},
+      };
+      this.validator.validate(
+        {'name': 'test', 'nested': 2},
+        schema
+      ).valid.should.be.true;
+      this.validator.validate(
+        {'name': 'test', 'nested': 'test2'},
+        schema
+      ).valid.should.be.false;
+    });
+
+    it('should not permit null as a schema', function () {
+      var validator = this.validator;
+      var schema = {
+        'type': 'object',
+        'patternProperties': {
+          'name': {'type': 'string'},
+          'nested': null,
+        },
+        'additionalProperties': {'type': 'number'},
+      };
+      assert.throws(function(){
+        validator.validate(
+          {'name': 'test', 'nested': 2},
+          schema
+        );
+      }, function(err){
+        assert(err instanceof SchemaError);
+        assert.strictEqual(err.message, 'Unexpected null, expected schema in "patternProperties"');
+        return true;
+      });
     });
   });
 });
