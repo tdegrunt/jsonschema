@@ -4,6 +4,7 @@
 /*jsl predef:it*/
 
 var Validator = require('../lib/index.js').Validator;
+var SchemaError = require('../lib/index.js').SchemaError;
 var assert = require('assert');
 
 require('chai').should();
@@ -128,6 +129,29 @@ describe('Attributes', function () {
 
       it('should not validate an undefined instance', function () {
         this.validator.validate(undefined, {'type': 'any', 'required': true}).valid.should.be.false;
+      });
+    });
+    describe('invalid values', function () {
+      it('should ignore undefined', function () {
+        var schema = {
+          type: [undefined, "string"],
+        };
+        this.validator.validate(12, schema).valid.should.be.false;
+        this.validator.validate("foo", schema).valid.should.be.true;
+      });
+
+      it('should error on null', function () {
+        var validator = this.validator;
+        var schema = {
+          type: [null, "string"],
+        };
+        assert.throws(function(){
+          validator.validate("foo", schema);
+        }, function(err){
+          assert(err instanceof SchemaError);
+          assert.strictEqual(err.message, 'Unexpected null in "type" keyword');
+          return true;
+        });
       });
     });
   });
