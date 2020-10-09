@@ -300,37 +300,28 @@ assert(res.instance.date instanceof Date);
 If some processing of properties is required prior to validation a function may be passed via the options parameter of the validate function. For example, say you needed to perform type coercion for some properties:
 
 ```javascript
-const coercionHook = function (instance, property, schema, options, ctx) {
-  var value = instance[property];
+// See examples/coercion.js
+function preValidateProperty(object, key, schema, options, ctx) {
+  var value = object[key];
+  if (typeof value === 'undefined') return;
 
-  // Skip null and undefined
-  if (value === null || typeof value == 'undefined') {
-    return;
-  }
-
-  // If the schema declares a type and the property fails type validation.
-  if (schema.type && this.attributes.type.call(this, instance, schema, options, ctx.makeChild(schema, property))) {
-    var types = Array.isArray(schema.type) ? schema.type : [schema.type];
-    var coerced = undefined;
-
-    // Go through the declared types until we find something that we can
-    // coerce the value into.
-    for (var i = 0; typeof coerced == 'undefined' && i < types.length; i++) {
-      // If we support coercion to this type
-      if (lib.coercions[types[i]]) {
-        // ...attempt it.
-        coerced = lib.coercions[types[i]](value);
-      }
+  // Test if the schema declares a type, but the type keyword fails validation
+  if (schema.type && validator.attributes.type.call(validator, value, schema, options, ctx.makeChild(schema, key))) {
+    // If the type is "number" but the instance is not a number, cast it
+    if(schema.type==='number' && typeof value!=='number'){
+      object[key] = parseFloat(value);
+      return;
     }
-    // If we got a successful coercion we modify the property of the instance.
-    if (typeof coerced != 'undefined') {
-      instance[property] = coerced;
+    // If the type is "string" but the instance is not a string, cast it
+    if(schema.type==='string' && typeof value!=='string'){
+      object[key] = String(value).toString();
+      return;
     }
   }
-}.bind(validator)
+};
 
 // And now, to actually perform validation with the coercion hook!
-v.validate(instance, schema, { preValidateProperty: coercionHook });
+v.validate(instance, schema, { preValidateProperty });
 ```
 
 ### Skip validation of certain keywords
