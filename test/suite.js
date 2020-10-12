@@ -14,44 +14,48 @@ var schemas = [
 //  require('json-metaschema/draft-07-hyper-schema.json'),
 ];
 
-var paths = ['test/suite/tests/draft3', 'test/suite/tests/draft3/optional', 'test/suite/tests/draft4', 'test/suite/tests/draft4/optional'];
+var root = __dirname+'/suite/tests/';
+var paths = ['draft3', 'draft3/optional', 'draft4', 'draft4/optional'];
 var ignoredFiles = ['optional', 'format', 'zeroTerminatedFloats.json', 'refRemote.json', 'ecmascript-regex.json', 'content.json', 'bignum.json', 'jsregex.json'];
 var ignoredTests = [
   // TODO fix these tests for the next major release
   'additionalItems should not look in applicators/items defined in extends are not examined',
   'additionalProperties should not look in applicators/properties defined in extends are not examined',
 ];
+var suiteFiles = paths.flatMap(function(path){
+  return fs.readdirSync(root+path).filter(function(file){
+    if (ignoredFiles.indexOf(file) >= 0) return false;
+    return true;
+  }).map(function(file){
+    return path + '/' + file;
+  });
+});
+suiteFiles.push('draft7/optional/format/uri-reference.json');
 
 /**
  * Runs the JSON Schema Test Suite
  */
 describe('JSON Schema Test Suite', function(){
+  suiteFiles.forEach(function(filepath) {
+    var suites = JSON.parse(fs.readFileSync(root+filepath));
+    suites.forEach(function(suite) {
 
-  paths.forEach(function(path) {
-    fs.readdirSync(path).forEach(function(file) {
-      if (~ignoredFiles.indexOf(file)) return;
+      describe(filepath + ' ' + suite.description, function() {
 
-      var suites = JSON.parse(fs.readFileSync(path+"/"+file));
-      suites.forEach(function(suite) {
+        suite.tests.forEach(function(test) {
 
-        describe(path + '/' + file + ' ' + suite.description, function() {
-
-          suite.tests.forEach(function(test) {
-
-            it(test.description, function() {
-              if(ignoredTests.indexOf(suite.description + '/' + test.description) >= 0) return void this.skip();
-              var validator = new Validator();
-              schemas.forEach(function(s){ validator.addSchema(s); });
-              var result = validator.validate(test.data, suite.schema);
-              return should.equal(test.valid, result.valid, util.inspect(result, true, null));
-            });
-
+          it(test.description, function() {
+            if(ignoredTests.indexOf(suite.description + '/' + test.description) >= 0) return void this.skip();
+            var validator = new Validator();
+            schemas.forEach(function(s){ validator.addSchema(s); });
+            var result = validator.validate(test.data, suite.schema);
+            return should.equal(test.valid, result.valid, util.inspect(result, true, null));
           });
-        });
 
+        });
       });
 
     });
-  });
 
+  });
 });
