@@ -22,12 +22,13 @@ var ignoredTests = [
   'additionalItems should not look in applicators/items defined in extends are not examined',
   'additionalProperties should not look in applicators/properties defined in extends are not examined',
 ];
-var suiteFiles = paths.flatMap(function(path){
-  return fs.readdirSync(root+path).filter(function(file){
+var suiteFiles = [];
+paths.forEach(function(path){
+  fs.readdirSync(root+path).filter(function(file){
     if (ignoredFiles.indexOf(file) >= 0) return false;
     return true;
-  }).map(function(file){
-    return path + '/' + file;
+  }).forEach(function(file){
+    suiteFiles.push(path + '/' + file);
   });
 });
 suiteFiles.push('draft7/optional/format/uri-reference.json');
