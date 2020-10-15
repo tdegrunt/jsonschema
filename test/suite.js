@@ -39,6 +39,7 @@ paths.forEach(function(path){
 });
 suiteFiles.push('draft6/propertyNames.json');
 suiteFiles.push('draft7/optional/format/uri-reference.json');
+suiteFiles.push('draft7/if-then-else.json');
 suiteFiles.push('draft7/minimum.json');
 suiteFiles.push('draft7/maximum.json');
 suiteFiles.push('draft7/exclusiveMinimum.json');
