@@ -6,3 +6,4 @@ test/
 node_modules
 .idea
 .travis.yml
+stryker.conf.js
