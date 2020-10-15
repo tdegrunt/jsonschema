@@ -10,12 +10,18 @@ var schemas = [
   require('json-metaschema/draft-03-hyper-schema.json'),
   require('json-metaschema/draft-04-schema.json'),
   require('json-metaschema/draft-04-hyper-schema.json'),
+//  require('json-metaschema/draft-06-schema.json'),
+//  require('json-metaschema/draft-06-hyper-schema.json'),
 //  require('json-metaschema/draft-07-schema.json'),
 //  require('json-metaschema/draft-07-hyper-schema.json'),
 ];
 
 var root = __dirname+'/suite/tests/';
-var paths = ['draft3', 'draft3/optional', 'draft4', 'draft4/optional'];
+var paths = [
+  'draft3', 'draft3/optional',
+  'draft4', 'draft4/optional',
+  // 'draft6', 'draft6/optional',
+];
 var ignoredFiles = ['optional', 'format', 'zeroTerminatedFloats.json', 'refRemote.json', 'ecmascript-regex.json', 'content.json', 'bignum.json', 'jsregex.json'];
 var ignoredTests = [
   // TODO fix these tests for the next major release
@@ -31,6 +37,7 @@ paths.forEach(function(path){
     suiteFiles.push(path + '/' + file);
   });
 });
+suiteFiles.push('draft6/propertyNames.json');
 suiteFiles.push('draft7/optional/format/uri-reference.json');
 suiteFiles.push('draft7/minimum.json');
 suiteFiles.push('draft7/maximum.json');
