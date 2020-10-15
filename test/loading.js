@@ -44,8 +44,8 @@ describe('Schema management', function testSchemaManagement() {
         validator.addSchema({
           properties: {
             a: { id: 'http://example.com/schema.json', type: 'string' },
-            b: { id: 'http://example.com/schema.json', type: 'number' },
-          }
+            b: { $id: 'http://example.com/schema.json', type: 'number' },
+          },
         });
       }, function(err){
         // This may be changed as necessary
