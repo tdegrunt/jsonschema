@@ -48,6 +48,7 @@ export declare class SchemaError extends Error{
 export declare function validate(instance: any, schema: any, options?: Options): ValidatorResult
 
 export interface Schema {
+    $id?: string
     id?: string
     $schema?: string
     $ref?: string
@@ -55,9 +56,9 @@ export interface Schema {
     description?: string
     multipleOf?: number
     maximum?: number
-    exclusiveMaximum?: boolean
+    exclusiveMaximum?: number | boolean
     minimum?: number
-    exclusiveMinimum?: boolean
+    exclusiveMinimum?: number | boolean
     maxLength?: number
     minLength?: number
     pattern?: string | RegExp
@@ -90,6 +91,9 @@ export interface Schema {
     anyOf?: Schema[]
     oneOf?: Schema[]
     not?: Schema
+    if?: Schema
+    then?: Schema
+    else?: Schema
 }
 
 export interface Options {
