@@ -146,7 +146,8 @@ validator.validate('foo', {type: 'string', format: 'myFormat'}).valid; // false
 
 The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array. Each item in this array is a `ValidationError` with the following properties:
 
-* property: string. Describes the property path. Starts with `instance` (this is configurable with the `options.propertyName` option), and is delimited with a dot (`.`).
+* path: string. An array of properties or array offsets, indicating where inside objects or arrays the instance was found.
+* property: string. Describes the property path. Starts with `instance`, and is delimited with a dot (`.`).
 * message: string. A human-readable message for debugging use. Provided in English and subject to change.
 * schema: object. The schema containing the keyword that failed
 * instance: any. The instance that failed

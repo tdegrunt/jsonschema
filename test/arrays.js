@@ -26,7 +26,12 @@ describe('Arrays', function () {
     });
 
     it('should not validate an array not all strings', function () {
-      this.validator.validate(['1', '2', '3', 4], {'type': 'array', 'items': {'type': 'string'}}).valid.should.be.false;
+      var res = this.validator.validate(['1', '2', '3', 4], {'type': 'array', 'items': {'type': 'string'}});
+      res.valid.should.be.false;
+      res.errors.length.should.equal(1);
+      res.errors[0].property.should.equal('instance[3]');
+      res.errors[0].path.length.should.equal(1);
+      res.errors[0].path[0].should.equal(3);
     });
 
     it('should not validate a non-array', function () {
@@ -49,7 +54,11 @@ describe('Arrays', function () {
     });
 
     it('should not validate if array has a length less than minItems', function () {
-      return this.validator.validate([1], {'type': 'array', 'items': {'type': 'number'}, 'minItems': 2}).valid.should.be.false;
+      var res = this.validator.validate([1], {'type': 'array', 'items': {'type': 'number'}, 'minItems': 2});
+      res.valid.should.be.false;
+      res.errors[0].name.should.equal('minItems');
+      res.errors[0].property.should.equal('instance');
+      res.errors[0].path.length.should.equal(0);
     });
   });
 

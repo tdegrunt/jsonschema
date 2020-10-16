@@ -101,7 +101,6 @@ export interface Options {
     allowUnknownAttributes?: boolean;
     preValidateProperty?: PreValidatePropertyFunction;
     rewrite?: RewriteFunction;
-    propertyName?: string;
     base?: string;
     throwError?: boolean;
     nestedErrors?: boolean;
