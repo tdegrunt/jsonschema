@@ -158,7 +158,7 @@ The first error found will be thrown as an `Error` object if `options.throwError
 
 When `oneOf` or `anyOf` validations fail, errors that caused any of the sub-schemas referenced therein to fail are normally suppressed, because it is not necessary to fix all of them. And in the case of `oneOf`, it would itself be an error to fix all of the listed errors.
 
-This behavor may be configured with `options.nestedErrors`. If truthy, it will emit all the errors from the subschemas. This option may be useful when troubleshooting validation errors in complex schemas:
+This behavior may be configured with `options.nestedErrors`. If truthy, it will emit all the errors from the subschemas. This option may be useful when troubleshooting validation errors in complex schemas:
 
 ```javascript
 var schema = {
