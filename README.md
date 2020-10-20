@@ -107,6 +107,22 @@ All schema definitions are supported, $schema is ignored.
 
 All types are supported
 
+### Handling `undefined`
+
+`undefined` is not a value known to JSON, and by default, the validator treats it as if it is not invalid. i.e., it will return valid.
+
+```javascript
+var res = validate(undefined, {type: 'string'});
+res.valid // true
+```
+
+This behavior may be changed with the "required" option:
+
+```javascript
+var res = validate(undefined, {type: 'string'}, {required: true});
+res.valid // false
+```
+
 ### Formats
 
 #### Disabling the format keyword.
