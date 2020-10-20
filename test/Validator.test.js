@@ -160,6 +160,7 @@ describe('Validator', function () {
         validator.validate(true, null);
       }, function(err){
         assert(err instanceof SchemaError);
+        assert(err.message.indexOf('object or boolean') >= 0);
         return true;
       });
     });
@@ -192,20 +193,79 @@ describe('Validator', function () {
       var res = validator.validate(undefined, true, {required: true});
       assert(!res.valid);
       assert(res.errors[0].message.indexOf('required') >= 0);
+      var neg = validator.validate(null, true, {required: true});
+      assert(neg.valid);
     });
     it('options.required with undefined instance', function () {
       var res = validator.validate(undefined, true, {required: true});
       assert(!res.valid);
       assert(res.errors[0].message.indexOf('required') >= 0);
+      var neg = validator.validate(null, true, {required: true});
+      assert(neg.valid);
     });
     it('options.required is false', function () {
       var res = validator.validate(undefined, true, {required: false});
       assert(res.valid);
+      var neg = validator.validate(null, true, {required: true});
+      assert(neg.valid);
     });
     it('options.required defaults false', function () {
       // TODO DEPRECATED: this behavior changes to true in next major version
       var res = validator.validate(undefined, true, {});
       assert(res.valid);
+      var neg = validator.validate(null, true, {required: true});
+      assert(neg.valid);
+    });
+    it('subschema references (named reference)', function () {
+      var schema = {
+        items: {$ref: '#items'},
+        definitions: {
+          items: {
+            $id: '#items',
+            type: 'array',
+          },
+        },
+      };
+      var res = validator.validate([[]], schema);
+      assert(res.valid);
+      var res = validator.validate([null], schema);
+      assert(!res.valid);
+    });
+    it('subschema references (path reference)', function () {
+      var schema = {
+        items: {$ref: '#/definitions/items'},
+        definitions: {
+          items: {
+            type: 'array',
+          },
+        },
+      };
+      var res = validator.validate([[]], schema);
+      assert(res.valid);
+      var res = validator.validate([null], schema);
+      assert(!res.valid);
+    });
+    it('recursive references (fragment reference)', function () {
+      var schema = {
+        $id: 'http://example.com/foo.json',
+        items: {$ref: '#'},
+        type: 'array',
+      };
+      var res = validator.validate([[[[]]]], schema);
+      assert(res.valid);
+      var res = validator.validate([null], schema);
+      assert(!res.valid);
+    });
+    it('recursive references (filename reference)', function () {
+      var schema = {
+        $id: 'http://example.com/foo.json',
+        items: {$ref: 'foo.json'},
+        type: 'array',
+      };
+      var res = validator.validate([[[[]]]], schema);
+      assert(res.valid);
+      var res = validator.validate([null], schema);
+      assert(!res.valid);
     });
   });
 });
