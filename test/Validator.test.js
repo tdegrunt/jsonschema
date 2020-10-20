@@ -5,6 +5,8 @@
 
 var Validator = require('../lib/index.js').Validator;
 var SchemaError = require('../lib/index.js').SchemaError;
+var ValidationError = require('../lib/index.js').ValidationError;
+var ValidatorResultError = require('../lib/index.js').ValidatorResultError;
 var assert = require('assert');
 
 describe('Validator', function () {
@@ -216,6 +218,70 @@ describe('Validator', function () {
       var neg = validator.validate(null, true, {required: true});
       assert(neg.valid);
     });
+    it('options.throwError', function () {
+      var schema = {
+        properties: {
+          "a": {type: 'number'},
+          "b": {type: 'number'},
+        },
+      };
+      var valid = {a:0, b:0};
+      var invalid = {a:null, b:null};
+      var res = validator.validate(valid, schema, {});
+      assert(res.valid);
+      var neg = validator.validate(invalid, schema, {});
+      assert(!neg.valid);
+      assert.throws(function(){
+        validator.validate(invalid, schema, {throwError: true});
+      }, function(err){
+        assert(err instanceof ValidationError);
+        return true;
+      });
+    });
+    it('options.throwFirst', function () {
+      var schema = {
+        properties: {
+          "a": {type: 'number'},
+          "b": {type: 'number'},
+        },
+      };
+      var valid = {a:0, b:0};
+      var invalid = {a:null, b:null};
+      var res = validator.validate(valid, schema, {throwAll: true});
+      assert(res.valid);
+      var neg = validator.validate(invalid, schema, {});
+      assert(!neg.valid);
+      assert.throws(function(){
+        validator.validate(invalid, schema, {throwFirst: true});
+      }, function(err){
+        assert(err instanceof Error);
+        assert(err instanceof ValidatorResultError);
+        assert.strictEqual(err.errors.length, 1);
+        return true;
+      });
+    });
+    it('options.throwAll', function () {
+      var schema = {
+        properties: {
+          "a": {type: 'number'},
+          "b": {type: 'number'},
+        },
+      };
+      var valid = {a:0, b:0};
+      var invalid = {a:null, b:null};
+      var res = validator.validate(valid, schema, {throwAll: true});
+      assert(res.valid);
+      var neg = validator.validate(invalid, schema, {});
+      assert(!neg.valid);
+      assert.throws(function(){
+        validator.validate(invalid, schema, {throwAll: true});
+      }, function(err){
+        assert(err instanceof Error);
+        assert(err instanceof ValidatorResultError);
+        assert.strictEqual(err.errors.length, 2);
+        return true;
+      });
+    });
     it('subschema references (named reference)', function () {
       var schema = {
         items: {$ref: '#items'},
@@ -228,8 +294,8 @@ describe('Validator', function () {
       };
       var res = validator.validate([[]], schema);
       assert(res.valid);
-      var res = validator.validate([null], schema);
-      assert(!res.valid);
+      var neg = validator.validate([null], schema);
+      assert(!neg.valid);
     });
     it('subschema references (path reference)', function () {
       var schema = {
@@ -242,8 +308,8 @@ describe('Validator', function () {
       };
       var res = validator.validate([[]], schema);
       assert(res.valid);
-      var res = validator.validate([null], schema);
-      assert(!res.valid);
+      var neg = validator.validate([null], schema);
+      assert(!neg.valid);
     });
     it('recursive references (fragment reference)', function () {
       var schema = {
@@ -253,8 +319,8 @@ describe('Validator', function () {
       };
       var res = validator.validate([[[[]]]], schema);
       assert(res.valid);
-      var res = validator.validate([null], schema);
-      assert(!res.valid);
+      var neg = validator.validate([null], schema);
+      assert(!neg.valid);
     });
     it('recursive references (filename reference)', function () {
       var schema = {
@@ -264,8 +330,8 @@ describe('Validator', function () {
       };
       var res = validator.validate([[[[]]]], schema);
       assert(res.valid);
-      var res = validator.validate([null], schema);
-      assert(!res.valid);
+      var neg = validator.validate([null], schema);
+      assert(!neg.valid);
     });
   });
 });

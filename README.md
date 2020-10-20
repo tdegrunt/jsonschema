@@ -144,7 +144,14 @@ validator.validate('foo', {type: 'string', format: 'myFormat'}).valid; // false
 
 ### Results
 
-The first error found will be thrown as an `Error` object if `options.throwError` is `true`.  Otherwise all results will be appended to the `result.errors` array. Each item in this array is a `ValidationError` with the following properties:
+By default, results will be returned in a `ValidatorResult` object with the following properties:
+
+* `instance`: any.
+* `schema`: Schema.
+* `errors`: ValidationError[].
+* `valid`: boolean.
+
+Each item in `errors` is a `ValidationError` with the following properties:
 
 * path: array. An array of property keys or array offsets, indicating where inside objects or arrays the instance was found.
 * property: string. Describes the property path. Starts with `instance`, and is delimited with a dot (`.`).
@@ -153,6 +160,16 @@ The first error found will be thrown as an `Error` object if `options.throwError
 * instance: any. The instance that failed
 * name: string. The keyword within the schema that failed.
 * argument: any. Provides information about the keyword that failed.
+
+The validator can be configured to throw in the event of a validation error:
+
+* If the `throwFirst` option is set, the validator will terminate validation at the first encountered error and throw a `ValidatorResultError` object.
+
+* If the `throwAll` option is set, the validator will throw a `ValidatorResultError` object after the entire instance has been validated.
+
+* If the `throwError` option is set, it will throw at the first encountered validation error (like `throwFirst`), but the `ValidationError` object itself will be thrown. Note that, despite the name, this does not inherit from Error like `ValidatorResultError` does.
+
+The `ValidatorResultError` object has the same properties as `ValidatorResult` and additionally inherits from Error.
 
 #### "nestedErrors" option
 
