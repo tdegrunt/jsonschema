@@ -154,5 +154,25 @@ describe('Validator', function () {
     it('options.base must be a string', function () {
       validator.validate(null, true, null);
     });
+    it('options.required with defined instance', function () {
+      var res = validator.validate(undefined, true, {required: true});
+      assert(!res.valid);
+      console.error(res.errors);
+      assert(res.errors[0].message.indexOf('required') >= 0);
+    });
+    it('options.required with undefined instance', function () {
+      var res = validator.validate(undefined, true, {required: true});
+      assert(!res.valid);
+      assert(res.errors[0].message.indexOf('required') >= 0);
+    });
+    it('options.required is false', function () {
+      var res = validator.validate(undefined, true, {required: false});
+      assert(res.valid);
+    });
+    it('options.required defaults false', function () {
+      // TODO DEPRECATED: this behavior changes to true in next major version
+      var res = validator.validate(undefined, true, {});
+      assert(res.valid);
+    });
   });
 });
