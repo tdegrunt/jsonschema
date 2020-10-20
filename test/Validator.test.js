@@ -88,10 +88,9 @@ describe('Validator', function () {
       });
     });
     it('addSchema(schema) with absolute id', function(){
-      validator.addSchema({
-        id: 'http://example.com/base.json',
-      });
+      validator.addSchema({id: 'http://example.com/base.json'});
       assert.deepStrictEqual(validator.unresolvedRefs, []);
+      assert.deepStrictEqual(validator.schemas['http://example.com/base.json'], {id: 'http://example.com/base.json'});
     });
     it('addSchema(schema) with absolute $id', function(){
       validator.addSchema({
@@ -109,12 +108,26 @@ describe('Validator', function () {
       });
     });
     it('addSchema(schema, base) with relative id', function(){
-      validator.addSchema({id: 'base.json'}, 'http://example.com/index.html');
-      assert('http://example.com/base.json' in validator.schemas);
+      validator.addSchema({id: 'main.json'}, 'http://example.com/index.html');
+      // assert(res);
+      assert('http://example.com/main.json' in validator.schemas);
     });
     it('addSchema(schema, base) with relative $id', function(){
-      validator.addSchema({$id: 'base.json'}, 'http://example.com/index.html');
-      assert('http://example.com/base.json' in validator.schemas);
+      validator.addSchema({$id: 'main.json'}, 'http://example.com/index.html');
+      // assert(res);
+      assert('http://example.com/main.json' in validator.schemas);
+    });
+    it('addSchema() populates unresolvedRefs', function(){
+      validator.addSchema({
+        $id: 'main.json',
+        items: {
+          $ref: 'item.json',
+        },
+      }, 'http://example.com/index.json');
+      assert('http://example.com/main.json' in validator.schemas);
+      assert.strictEqual(validator.unresolvedRefs[0], 'http://example.com/item.json');
+      validator.addSchema({$id: 'item.json'}, 'http://example.com/index.json');
+      assert.strictEqual(validator.unresolvedRefs.length, 0);
     });
   });
   describe('Validator#validate', function () {
@@ -166,7 +179,6 @@ describe('Validator', function () {
     it('options.required with defined instance', function () {
       var res = validator.validate(undefined, true, {required: true});
       assert(!res.valid);
-      console.error(res.errors);
       assert(res.errors[0].message.indexOf('required') >= 0);
     });
     it('options.required with undefined instance', function () {
