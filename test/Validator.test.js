@@ -99,6 +99,15 @@ describe('Validator', function () {
       });
       assert.deepStrictEqual(validator.unresolvedRefs, []);
     });
+    // TODO: held for next major version
+    it.skip('base must be a full URI', function(){
+      assert.throws(function(){
+        validator.addSchema({id: 'main.json'}, '/index.json');
+      }, function(err){
+        assert(err instanceof SchemaError);
+        return true;
+      });
+    });
     it('addSchema(schema, base) with relative id', function(){
       validator.addSchema({id: 'base.json'}, 'http://example.com/index.html');
       assert('http://example.com/base.json' in validator.schemas);
