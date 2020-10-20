@@ -107,13 +107,25 @@ describe('Validator', function () {
         return true;
       });
     });
+    it('addSchema(schema, base) with absolute base', function(){
+      var res = validator.addSchema({type: 'string'}, 'http://example.com/main.json');
+      assert(res);
+      assert('http://example.com/main.json' in validator.schemas);
+      assert.deepStrictEqual(validator.schemas['http://example.com/main.json'], res);
+    });
+    it('addSchema(schema, base) with absolute $id', function(){
+      var res = validator.addSchema({type: 'string'}, 'http://example.com/main.json');
+      assert(res);
+      assert('http://example.com/main.json' in validator.schemas);
+      assert.deepStrictEqual(validator.schemas['http://example.com/main.json'], res);
+    });
     it('addSchema(schema, base) with relative id', function(){
-      validator.addSchema({id: 'main.json'}, 'http://example.com/index.html');
+      var res = validator.addSchema({id: 'main.json'}, 'http://example.com/index.html');
       // assert(res);
       assert('http://example.com/main.json' in validator.schemas);
     });
     it('addSchema(schema, base) with relative $id', function(){
-      validator.addSchema({$id: 'main.json'}, 'http://example.com/index.html');
+      var res = validator.addSchema({$id: 'main.json'}, 'http://example.com/index.html');
       // assert(res);
       assert('http://example.com/main.json' in validator.schemas);
     });
