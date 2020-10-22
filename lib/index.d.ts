@@ -104,6 +104,7 @@ export interface Options {
     rewrite?: RewriteFunction;
     base?: string;
     throwError?: boolean;
+    required?: boolean;
     throwFirst?: boolean;
     throwAll?: boolean;
     nestedErrors?: boolean;
