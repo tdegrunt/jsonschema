@@ -12,8 +12,8 @@ var schemas = [
   require('json-metaschema/draft-04-hyper-schema.json'),
   require('json-metaschema/draft-06-schema.json'),
   require('json-metaschema/draft-06-hyper-schema.json'),
-//  require('json-metaschema/draft-07-schema.json'),
-//  require('json-metaschema/draft-07-hyper-schema.json'),
+  require('json-metaschema/draft-07-schema.json'),
+  require('json-metaschema/draft-07-hyper-schema.json'),
 ];
 
 var root = __dirname+'/suite/tests/';
@@ -21,6 +21,7 @@ var paths = [
   'draft3', 'draft3/optional',
   'draft4', 'draft4/optional',
   'draft6', 'draft6/optional',
+  'draft7', 'draft7/optional',
 ];
 var ignoredFiles = ['optional', 'format', 'zeroTerminatedFloats.json', 'refRemote.json', 'ecmascript-regex.json', 'content.json', 'bignum.json', 'jsregex.json'];
 var ignoredTests = [
