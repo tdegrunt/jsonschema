@@ -38,6 +38,7 @@ paths.forEach(function(path){
   });
 });
 suiteFiles.push('draft6/propertyNames.json');
+suiteFiles.push('draft6/contains.json');
 suiteFiles.push('draft7/optional/format/uri-reference.json');
 suiteFiles.push('draft7/if-then-else.json');
 suiteFiles.push('draft7/minimum.json');
