@@ -39,13 +39,6 @@ paths.forEach(function(path){
   });
 });
 suiteFiles.push('draft7/optional/format/uri-reference.json');
-suiteFiles.push('draft7/contains.json');
-suiteFiles.push('draft7/propertyNames.json');
-suiteFiles.push('draft7/if-then-else.json');
-suiteFiles.push('draft7/minimum.json');
-suiteFiles.push('draft7/maximum.json');
-suiteFiles.push('draft7/exclusiveMinimum.json');
-suiteFiles.push('draft7/exclusiveMaximum.json');
 
 /**
  * Runs the JSON Schema Test Suite
