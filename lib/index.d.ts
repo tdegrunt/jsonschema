@@ -27,6 +27,13 @@ export declare class ValidatorResult {
     toString(): string;
 }
 
+export declare class ValidatorResultError extends Error {
+  instance: any;
+  schema: Schema;
+  options: Options;
+  errors: ValidationError;
+}
+
 export declare class ValidationError {
     constructor(message?: string, instance?: any, schema?: Schema, propertyPath?: any, name?: string, argument?: any);
     path: (string|number)[];
