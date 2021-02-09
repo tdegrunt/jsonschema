@@ -55,6 +55,11 @@ export interface Schema {
     $ref?: string
     title?: string
     description?: string
+    default?: any
+    deprecated?: boolean
+    readOnly?: boolean
+    writeOnly?: boolean
+    examples?: any[]
     multipleOf?: number
     maximum?: number
     exclusiveMaximum?: number | boolean
