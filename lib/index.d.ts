@@ -123,6 +123,7 @@ export interface SchemaContext {
     propertyPath: string;
     base: string;
     schemas: {[base: string]: Schema};
+    makeChild: (schema: Schema, key: string) => SchemaContext;
 }
 
 export interface CustomFormat {
