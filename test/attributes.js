@@ -214,7 +214,7 @@ describe('Attributes', function () {
     });
 
     it('should validate if number is above minimum, using exclusiveMinimum', function () {
-      return this.validator.validate(2, {'type': 'number', 'minimum': '1', 'exclusiveMinimum': true}).valid.should.be.true;
+      return this.validator.validate(1, {'type': 'number', 'minimum': '0', 'exclusiveMinimum': true}).valid.should.be.true;
     });
 
     it('should not validate if number is the minimum, using exclusiveMinimum', function () {
