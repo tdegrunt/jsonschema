@@ -28,6 +28,47 @@ describe('Validator', function () {
       assert.deepStrictEqual(validator.unresolvedRefs, ['http://example.com/item.json']);
     });
   });
+  describe('Performance test', function(){
+    function measureTime(iterations, label, arg, fn) {
+      const startTime = new Date().getTime();
+      for (let x = 0; x < iterations; ++x) {
+        fn(arg);
+      }
+      const elapsed = new Date().getTime() - startTime;
+      console.log("Time to do " + iterations + "* " + label + " = " + elapsed+ ", " + elapsed * 1.0 / iterations + " ms/call");
+    }
+    it.only('Perf test', function (){
+      const schema = {
+        type: "object",
+        properties: {
+          field1: { type: "string"},
+          field2: { type: "string"},
+          field3: { type: "string"},
+          field4: { type: "string"},
+          field5: { type: "string"},
+          field6: { type: "string"},
+          field7: { type: "string"},
+          field8: { type: "string"},
+          field9: { type: "string"},
+          field10: { type: "integer"},
+          field11: { type: "integer"},
+          field12: { type: "integer"},
+          field13: { type: "integer"},
+          field14: { type: "integer"},
+          field15: { type: "integer"},
+          field16: { type: "integer"},
+          field17: { type: "integer"},
+          field18: { type: "integer"},
+          field19: { type: "integer"},
+          field20: { type: "integer"}
+        }
+      };
+      var values = {field1:"a", field2:"a", field3:"a", field4:"a", field5:"a",field6:"a", field7:"a", field8:"a", field9:"a",
+        field10: 0,field11: 0,field12: 0,field13: 0,field14: 0,field15: 0,field16: 0,field17: 0,field18: 0, field19: 0, field20: 0};
+
+      measureTime(10000, "validate", null, function() {return validator.validate(values, schema)});
+    });
+  });
   describe('Validator#addSchema', function () {
     it('argument schema must be a schema: object', function(){
       validator.addSchema({}, 'http://example.com/base.json');
