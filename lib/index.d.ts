@@ -95,6 +95,7 @@ export interface Schema {
     if?: Schema
     then?: Schema
     else?: Schema
+    default?: any
 }
 
 export interface Options {
