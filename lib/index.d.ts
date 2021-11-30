@@ -121,6 +121,7 @@ export interface PreValidatePropertyFunction {
 export interface SchemaContext {
     schema: Schema;
     options: Options;
+    path: (number | string)[];
     propertyPath: string;
     base: string;
     schemas: {[base: string]: Schema};
