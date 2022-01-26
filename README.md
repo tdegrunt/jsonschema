@@ -377,7 +377,7 @@ var schema = {
   format: "email",
   example: "foo",
 };
-var result = validate("Name", schema, { allowUnknownAttributes: false });
+var result = v.validate("Name", schema, { allowUnknownAttributes: false });
 ```
 
 ## Tests
