@@ -6,6 +6,7 @@
 var Validator = require('../lib/index.js').Validator;
 var SchemaError = require('../lib/index.js').SchemaError;
 var ValidationError = require('../lib/index.js').ValidationError;
+var ValidatorResult = require('../lib/index.js').ValidatorResult;
 var ValidatorResultError = require('../lib/index.js').ValidatorResultError;
 var assert = require('assert');
 
@@ -281,6 +282,22 @@ describe('Validator', function () {
         assert.strictEqual(err.errors.length, 2);
         return true;
       });
+    });
+    it('million errors', function () {
+      var schema = {
+        type: 'number',
+        oneMillionErrors: true,
+      };
+      validator.attributes.oneMillionErrors = function(instance, schema, options, ctx) {
+        const result = new ValidatorResult(instance, schema, options, ctx);
+        for(var i = 0; i < 1000000; i++) {
+          result.addError('oneMillionErrors error');
+        }
+        return result;
+      }
+      var res = validator.validate(1, schema, {});
+      assert(!res.valid);
+      assert.strictEqual(res.errors.length, 1000000);
     });
     it('subschema references (named reference)', function () {
       var schema = {
