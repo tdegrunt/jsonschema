@@ -184,6 +184,8 @@ The validator can be configured to throw in the event of a validation error:
 
 * If the `throwError` option is set, it will throw at the first encountered validation error (like `throwFirst`), but the `ValidationError` object itself will be thrown. Note that, despite the name, this does not inherit from Error like `ValidatorResultError` does.
 
+* If the `onError` option is set, the validator will call the provided callback with the `ValidationError` object.
+
 The `ValidatorResultError` object has the same properties as `ValidatorResult` and additionally inherits from Error.
 
 #### "nestedErrors" option

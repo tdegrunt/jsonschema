@@ -282,6 +282,19 @@ describe('Validator', function () {
         return true;
       });
     });
+    it('options.onError', function () {
+      var schema = {
+        type: 'array',
+        items: {type: 'number'},
+      }
+      var errors = []
+      validator.validate([0,'1','2',3,4], schema, {
+        onError: function (err) {
+          errors.push(err)
+        }
+      });
+      assert.strictEqual(errors.length, 2);
+    });
     it('subschema references (named reference)', function () {
       var schema = {
         items: {$ref: '#items'},

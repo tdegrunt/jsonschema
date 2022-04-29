@@ -107,6 +107,7 @@ export interface Options {
     required?: boolean;
     throwFirst?: boolean;
     throwAll?: boolean;
+    onError?: (err: ValidationError) => void;
     nestedErrors?: boolean;
 }
 
