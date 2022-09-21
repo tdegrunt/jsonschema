@@ -80,6 +80,8 @@ var p = {
 v.addSchema(addressSchema, '/SimpleAddress');
 console.log(v.validate(p, schema));
 ```
+Returned ValidatorResult object, will show this example is NOT valid since: `"votes": "lots"` is not an integer.
+
 ### Example for Array schema
 
 ```json
