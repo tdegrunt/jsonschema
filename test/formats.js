@@ -39,6 +39,10 @@ describe('Formats', function () {
       this.validator.validate("2012-07-08t16:41:41.532Z", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
     });
 
+    it('should validate a valid date-time without TZ, in local time', function () {
+      this.validator.validate("2012-07-08 16:41:41", {'type': 'string', 'format': 'date-time'}).valid.should.be.true;
+    });
+
     it('should not validate a date-time with the time missing', function () {
       this.validator.validate("2012-07-08", {'type': 'string', 'format': 'date-time'}).valid.should.be.false;
     });
