@@ -268,6 +268,34 @@ function importNextSchema(){
 }
 importNextSchema();
 ```
+### Disallowing unknown attributes
+
+Sometimes you may want to disallow unknown attributes passed in the body of the request, in order to disallow those unknown attributes before the validation of the body, you need to set additionalProperties to false.
+
+```javascript
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Accounting Resource - Add Item",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+      "itemNumber": {
+          "type":"string"
+      },
+      "title": {
+          "type":"string"
+      },
+      "description": {
+          "type":"string"
+      }
+  },
+  "required": [
+      "itemNumber",
+      "title",
+      "description"
+  ]
+}
+```
 
 ### Default base URI
 
