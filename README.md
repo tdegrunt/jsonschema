@@ -12,6 +12,12 @@ Please fork the repository, make the changes in your fork and include tests. Onc
 
 Please include a test which shows why the code fails.
 
+## Install
+### npm
+https://www.npmjs.com/package/jsonschema
+
+`npm install jsonchema`
+
 ## Usage
 
 ### Simple
