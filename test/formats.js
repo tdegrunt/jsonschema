@@ -328,6 +328,16 @@ describe('Formats', function () {
         ((new Validator()).customFormats.boo).should.be.a('function');
       });
     });
+
+    describe('override default format validation', function () {
+      beforeEach(function () {
+        this.validator.customFormats.date = input => false
+      })
+
+      it('should fail any date validation', function () {
+        this.validator.validate('2021-02-01', {type: 'string', format: 'date'}).valid.should.be.false
+      })
+    })
   });
 
   describe('with options.disableFormat === true', function() {
