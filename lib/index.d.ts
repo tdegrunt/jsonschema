@@ -72,7 +72,7 @@ export interface Schema {
     pattern?: string | RegExp
     additionalItems?: boolean | Schema
     items?: Schema | Schema[]
-    contains: Schema
+    contains?: Schema
     maxItems?: number
     minItems?: number
     uniqueItems?: boolean
