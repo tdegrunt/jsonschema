@@ -105,6 +105,7 @@ export interface Schema {
     then?: Schema
     else?: Schema
     default?: any
+    examples?: any[]
 }
 
 export interface Options {
