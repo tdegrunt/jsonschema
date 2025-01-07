@@ -430,7 +430,7 @@ This library would not be possible without the valuable contributions by:
 
     jsonschema is licensed under MIT license.
 
-    Copyright (C) 2012-2019 Tom de Grunt <tom@degrunt.nl>
+    Copyright (C) 2012-2025 Tom de Grunt <tom@degrunt.nl>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of
     this software and associated documentation files (the "Software"), to deal in
