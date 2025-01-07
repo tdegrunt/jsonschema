@@ -84,17 +84,17 @@ Returned ValidatorResult object, will show this example is NOT valid since: `"vo
 
 ### Example for Array schema
 
-```json
+```js
 var arraySchema = {
-        "type": "array",
-        "items": {
-            "properties": {
-                "name": { "type": "string" },
-                "lastname": { "type": "string" }
-            },
-            "required": ["name", "lastname"]
-        }
-    }
+  "type": "array",
+  "items": {
+    "properties": {
+      "name": { "type": "string" },
+      "lastname": { "type": "string" }
+    },
+    "required": ["name", "lastname"]
+  }
+};
 ```
 For a comprehensive, annotated example illustrating all possible validation options, see [examples/all.js](./examples/all.js)
 
