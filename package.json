@@ -17,7 +17,7 @@
     "chai": "~4.2.0",
     "eslint": "^7.7.0",
     "json-metaschema": "^1.2.0",
-    "mocha": "~8.1.1"
+    "mocha": "~8.4.0"
   },
   "optionalDependencies": {},
   "engines": {
