@@ -1,5 +1,3 @@
-[![Build Status](https://secure.travis-ci.org/tdegrunt/jsonschema.svg)](http://travis-ci.org/tdegrunt/jsonschema)
-
 # jsonschema
 
 [JSON schema](http://json-schema.org/) validator, which is designed to be fast and simple to use. JSON Schema versions through draft-07 are fully supported.
@@ -11,6 +9,14 @@ Please fork the repository, make the changes in your fork and include tests. Onc
 ### Bug reports
 
 Please include a test which shows why the code fails.
+
+## Installation
+
+You can install `jsonschema` using a package manager like npm, yarn, or bun:
+
+```sh
+npm install jsonschema
+```
 
 ## Usage
 
