@@ -42,6 +42,12 @@ describe('Combinators', function () {
       }.bind(this)).should.not.throw();
     });
 
+    it('should not throw if valid when throwFirst is set', function () {
+      (function() {
+        this.validator.validate({ 'name': 'test2' }, this.schema, { throwFirst: true });
+      }.bind(this)).should.not.throw();
+    });
+
     it('should throw if invalid when throwError is set', function () {
       (function() {
         this.validator.validate({ 'name': 'test3' }, this.schema, { throwError: true });
@@ -78,6 +84,12 @@ describe('Combinators', function () {
     it('should not throw if valid when throwError is set', function () {
       (function() {
         this.validator.validate({ 'name2': 'test2' }, this.schema, { throwError: true });
+      }.bind(this)).should.not.throw();
+    });
+
+    it('should not throw if valid when throwFirst is set', function () {
+      (function() {
+        this.validator.validate({ 'name2': 'test2' }, this.schema, { throwFirst: true });
       }.bind(this)).should.not.throw();
     });
 
