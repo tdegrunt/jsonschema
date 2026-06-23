@@ -40,6 +40,12 @@ describe('"const" keyword', function () {
     it('invalid 3', function () {
       this.validator.validate(true, schema).valid.should.be.false;
     });
+    it('an empty object does not match an empty-array const', function () {
+      this.validator.validate({}, { 'const': [] }).valid.should.be.false;
+    });
+    it('an empty array does not match an empty-object const', function () {
+      this.validator.validate([], { 'const': {} }).valid.should.be.false;
+    });
   });
 
 });
