@@ -17,7 +17,8 @@
     "chai": "~4.2.0",
     "eslint": "^7.7.0",
     "json-metaschema": "^1.2.0",
-    "mocha": "~11.0.1"
+    "mocha": "~11.0.1",
+    "typescript": "^5.9.3"
   },
   "optionalDependencies": {},
   "engines": {
@@ -37,6 +38,7 @@
   "description": "A fast and easy to use JSON Schema validator",
   "scripts": {
     "stryker": "stryker run",
-    "test": "./node_modules/.bin/mocha -R spec"
+    "test": "npm run test:types && mocha -R spec",
+    "test:types": "tsc -p test/types"
   }
 }
