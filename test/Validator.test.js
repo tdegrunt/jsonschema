@@ -146,6 +146,47 @@ describe('Validator', function () {
     });
   });
   describe('Validator#validate', function () {
+    describe('allowUnknownAttributes: false', function () {
+      ['id', '$id'].forEach(function (keyword) {
+        it('accepts ' + keyword + ' on a root schema', function () {
+          var schema = {type: 'string'};
+          schema[keyword] = 'http://example.com/string.json';
+          var options = {allowUnknownAttributes: false};
+          assert(validator.validate('value', schema, options).valid);
+          assert(!validator.validate(42, schema, options).valid);
+        });
+
+        it('accepts ' + keyword + ' in a referenced schema', function () {
+          var schema = {type: 'string'};
+          schema[keyword] = 'http://example.com/string.json';
+          validator.addSchema(schema);
+          var ref = {$ref: 'http://example.com/string.json'};
+          var options = {allowUnknownAttributes: false};
+          assert(validator.validate('value', ref, options).valid);
+          assert(!validator.validate(42, ref, options).valid);
+        });
+
+        it('accepts ' + keyword + ' on a subschema', function () {
+          var item = {type: 'string'};
+          item[keyword] = '#item';
+          var schema = {type: 'array', items: item};
+          var options = {allowUnknownAttributes: false};
+          assert(validator.validate(['value'], schema, options).valid);
+          assert(!validator.validate([42], schema, options).valid);
+        });
+      });
+
+      it('continues to reject unknown attributes', function () {
+        assert.throws(function () {
+          validator.validate('value', {type: 'string', unknownKeyword: true}, {
+            allowUnknownAttributes: false,
+          });
+        }, function (err) {
+          return err instanceof SchemaError && err.message === 'Unsupported attribute: unknownKeyword';
+        });
+      });
+    });
+
     it('schema may be an object', function () {
       var res = validator.validate(true, {});
       assert(res.valid);
