@@ -11,13 +11,13 @@ export declare class Validator {
     attributes: {[property: string]: CustomProperty};
 
     addSchema(schema?: Schema, uri?: string): Schema|void;
-    validate(instance: any, schema: Schema, options?: Options, ctx?: SchemaContext): ValidatorResult;
+    validate(instance: any, schema: Schema | boolean, options?: Options, ctx?: SchemaContext): ValidatorResult;
 }
 
 export declare class ValidatorResult {
-    constructor(instance: any, schema: Schema, options: Options, ctx: SchemaContext)
+    constructor(instance: any, schema: Schema | boolean, options: Options, ctx: SchemaContext)
     instance: any;
-    schema: Schema;
+    schema: Schema | boolean;
     propertyPath: string;
     errors: ValidationError[];
     throwError: boolean;
@@ -29,7 +29,7 @@ export declare class ValidatorResult {
 
 export declare class ValidatorResultError extends Error {
   instance: any;
-  schema: Schema;
+  schema: Schema | boolean;
   options: Options;
   errors: ValidationError;
 }
@@ -71,8 +71,8 @@ export interface Schema {
     minLength?: number
     pattern?: string | RegExp
     additionalItems?: boolean | Schema
-    items?: Schema | Schema[]
-    contains?: Schema
+    items?: boolean | Schema | (boolean | Schema)[]
+    contains?: boolean | Schema
     maxItems?: number
     minItems?: number
     uniqueItems?: boolean
@@ -82,28 +82,28 @@ export interface Schema {
     propertyNames?: boolean | Schema
     additionalProperties?: boolean | Schema
     definitions?: {
-        [name: string]: Schema
+        [name: string]: boolean | Schema
     }
     properties?: {
-        [name: string]: Schema
+        [name: string]: boolean | Schema
     }
     patternProperties?: {
-        [name: string]: Schema
+        [name: string]: boolean | Schema
     }
     dependencies?: {
-        [name: string]: Schema | string[]
+        [name: string]: boolean | Schema | string[]
     }
     const?: any
     'enum'?: any[]
     type?: string | string[]
     format?: string
-    allOf?: Schema[]
-    anyOf?: Schema[]
-    oneOf?: Schema[]
-    not?: Schema
-    if?: Schema
-    then?: Schema
-    else?: Schema
+    allOf?: (boolean | Schema)[]
+    anyOf?: (boolean | Schema)[]
+    oneOf?: (boolean | Schema)[]
+    not?: boolean | Schema
+    if?: boolean | Schema
+    then?: boolean | Schema
+    else?: boolean | Schema
     default?: any
     examples?: any[]
 }
@@ -130,12 +130,12 @@ export interface PreValidatePropertyFunction {
 }
 
 export interface SchemaContext {
-    schema: Schema;
+    schema: Schema | boolean;
     options: Options;
     propertyPath: string;
     base: string;
     schemas: {[base: string]: Schema};
-    makeChild: (schema: Schema, key: string) => SchemaContext;
+    makeChild: (schema: Schema | boolean, key: string) => SchemaContext;
 }
 
 export interface CustomFormat {
