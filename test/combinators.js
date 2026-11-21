@@ -12,6 +12,36 @@ describe('Combinators', function () {
     this.validator = new Validator();
   });
 
+  ['anyOf', 'allOf', 'oneOf'].forEach(function (keyword) {
+    describe(keyword + ' with an undefined schema value', function () {
+      it('treats the keyword as omitted while checking other constraints', function () {
+        var schema = {type: 'string', minLength: 5};
+        schema[keyword] = undefined;
+        this.validator.validate('hello', schema).valid.should.be.true;
+        this.validator.validate('no', schema).valid.should.be.false;
+      });
+
+      it('also works in a nested property schema', function () {
+        var property = {type: 'string'};
+        property[keyword] = undefined;
+        var schema = {type: 'object', properties: {value: property}};
+        this.validator.validate({value: 'hello'}, schema).valid.should.be.true;
+        this.validator.validate({value: 42}, schema).valid.should.be.false;
+      });
+
+      it('still rejects defined non-array schema values', function () {
+        var validator = this.validator;
+        [null, false, 0, '', {}].forEach(function (value) {
+          var schema = {};
+          schema[keyword] = value;
+          (function () {
+            validator.validate('hello', schema);
+          }).should.throw(keyword + ' must be an array');
+        });
+      });
+    });
+  });
+
   describe('anyOf', function () {
     beforeEach(function () {
       this.schema = {
