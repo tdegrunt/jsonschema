@@ -317,6 +317,46 @@ describe('Attributes', function () {
       return this.validator.validate('abbbc', {'type': 'string', 'pattern': /ab+c/}).valid.should.be.true;
     });
 
+    it('preserves case-insensitive regexp patterns', function () {
+      var pattern = /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
+      this.validator.validate('f9d15cc5-1a53-4733-9ae7-f1675c8428a7', {pattern: pattern}).valid.should.be.true;
+      this.validator.validate('not-a-uuid', {pattern: pattern}).valid.should.be.false;
+    });
+
+    it('preserves multiline and combined regexp flags', function () {
+      this.validator.validate('before\nvalue\nafter', {pattern: /^value$/m}).valid.should.be.true;
+      this.validator.validate('before\nVALUE\nafter', {pattern: /^value$/im}).valid.should.be.true;
+    });
+
+    it('preserves dotAll regexp patterns', function () {
+      this.validator.validate('a\nb', {pattern: new RegExp('a.b', 's')}).valid.should.be.true;
+    });
+
+    it('does not enable Unicode mode on explicit non-Unicode regexps', function () {
+      this.validator.validate('\ud83d\ude00', {pattern: /^.$/}).valid.should.be.false;
+    });
+
+    it('supports explicit Unicode regexps and Unicode string patterns', function () {
+      this.validator.validate('\ud83d\ude00', {pattern: new RegExp('^.$', 'u')}).valid.should.be.true;
+      this.validator.validate('\ud83d\ude00', {pattern: '^.$'}).valid.should.be.true;
+    });
+
+    it('does not mutate or reuse the lastIndex of global regexps', function () {
+      var pattern = /ab/g;
+      pattern.lastIndex = 2;
+      this.validator.validate('ab', {pattern: pattern}).valid.should.be.true;
+      this.validator.validate('ab', {pattern: pattern}).valid.should.be.true;
+      pattern.lastIndex.should.equal(2);
+    });
+
+    it('preserves sticky matching without mutating the supplied regexp', function () {
+      var pattern = new RegExp('ab', 'y');
+      pattern.lastIndex = 2;
+      this.validator.validate('xxab', {pattern: pattern}).valid.should.be.false;
+      this.validator.validate('ab', {pattern: pattern}).valid.should.be.true;
+      pattern.lastIndex.should.equal(2);
+    });
+
     it('should validate if string does not match the string pattern', function () {
       return this.validator.validate('abac', {'type': 'string', 'pattern': 'ab+c'}).valid.should.be.false;
     });
