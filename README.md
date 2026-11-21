@@ -139,7 +139,41 @@ options.
 
 #### String Formats
 
-All formats are supported, phone numbers are expected to follow the [E.123](http://en.wikipedia.org/wiki/E.123) standard.
+The following built-in formats are checked automatically when a string instance
+is validated against a schema with a `format` keyword:
+
+| Category | Format names |
+| --- | --- |
+| Dates and times | `date-time`, `date`, `time`, `duration`, `utc-millisec` |
+| Email and hostnames | `email`, `idn-email`, `hostname`, `host-name` |
+| IP addresses | `ipv4`, `ip-address` (alias for `ipv4`), `ipv6` |
+| Resource identifiers | `uri`, `uri-reference`, `iri`, `iri-reference`, `uri-template`, `uuid` |
+| JSON pointers | `json-pointer`, `relative-json-pointer` |
+| Regular expressions | `regex`, `regexp`, `pattern` (aliases) |
+| Other string formats | `alpha`, `alphanumeric`, `phone`, `color`, `style` |
+
+For example, `date-time` validation does not need to be enabled separately:
+
+```javascript
+var validate = require('jsonschema').validate;
+var schema = { type: 'string', format: 'date-time' };
+
+validate('2012-07-08T16:41:41Z', schema).valid; // true
+validate('not a date', schema).valid; // false
+validate('not a date', schema, { disableFormat: true }).valid; // true
+```
+
+Built-in format checks apply to strings. Include `type: 'string'` when other
+types should be rejected. An unknown format name is ignored unless a custom
+format validator is registered for it.
+
+These checks use the [patterns and functions in `lib/helpers.js`](./lib/helpers.js).
+For example, `date` and `date-time` check the date's structure but do not reject
+nonexistent calendar dates such as February 30. `time` accepts `HH:mm:ss`
+without a timezone or fractional seconds. Phone numbers are expected to follow
+the [E.123](http://en.wikipedia.org/wiki/E.123) standard. The legacy `color` and
+`style` formats were removed from JSON Schema in draft-04 but remain supported
+here.
 
 #### Custom Formats
 
