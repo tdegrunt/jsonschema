@@ -143,7 +143,7 @@ export interface CustomFormat {
 }
 
 export interface CustomProperty {
-    (instance: any, schema: Schema, options: Options, ctx: SchemaContext): string|ValidatorResult;
+    (instance: any, schema: Schema, options: Options, ctx: SchemaContext): string|ValidatorResult|void;
 }
 
 export interface ErrorDetail {
