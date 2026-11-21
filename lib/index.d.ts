@@ -71,14 +71,14 @@ export interface Schema {
     minLength?: number
     pattern?: string | RegExp
     additionalItems?: boolean | Schema
-    items?: Schema | Schema[]
+    items?: Schema | ReadonlyArray<Schema>
     contains?: Schema
     maxItems?: number
     minItems?: number
     uniqueItems?: boolean
     maxProperties?: number
     minProperties?: number
-    required?: string[] | boolean
+    required?: ReadonlyArray<string> | boolean
     propertyNames?: boolean | Schema
     additionalProperties?: boolean | Schema
     definitions?: {
@@ -91,21 +91,21 @@ export interface Schema {
         [name: string]: Schema
     }
     dependencies?: {
-        [name: string]: Schema | string[]
+        [name: string]: Schema | ReadonlyArray<string>
     }
     const?: any
-    'enum'?: any[]
-    type?: string | string[]
+    'enum'?: ReadonlyArray<any>
+    type?: string | ReadonlyArray<string>
     format?: string
-    allOf?: Schema[]
-    anyOf?: Schema[]
-    oneOf?: Schema[]
+    allOf?: ReadonlyArray<Schema>
+    anyOf?: ReadonlyArray<Schema>
+    oneOf?: ReadonlyArray<Schema>
     not?: Schema
     if?: Schema
     then?: Schema
     else?: Schema
     default?: any
-    examples?: any[]
+    examples?: ReadonlyArray<any>
 }
 
 export interface Options {
