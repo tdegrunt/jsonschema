@@ -192,7 +192,43 @@ The validator can be configured to throw in the event of a validation error:
 
 * If the `throwError` option is set, it will throw at the first encountered validation error (like `throwFirst`), but the `ValidationError` object itself will be thrown. Note that, despite the name, this does not inherit from Error like `ValidatorResultError` does.
 
-The `ValidatorResultError` object has the same properties as `ValidatorResult` and additionally inherits from Error.
+The `ValidatorResultError` object inherits from Error and exposes `instance`,
+`schema`, `options`, and `errors`. It is not a `ValidatorResult` and does not
+have its `valid` getter.
+
+#### Catching all validation errors
+
+With `throwAll: true`, invalid data throws before an assignment such as
+`var result = v.validate(...)` completes. Read the collected errors in a
+`catch` block:
+
+```javascript
+var jsonschema = require('jsonschema');
+var v = new jsonschema.Validator();
+var schema = {
+  type: 'object',
+  properties: {name: {type: 'string'}, age: {type: 'integer'}}
+};
+var invalid = {name: 7, age: 'old'};
+var caught;
+try {
+  v.validate(invalid, schema, {throwAll: true});
+} catch (error) {
+  if (!(error instanceof jsonschema.ValidatorResultError)) throw error;
+  caught = error;
+}
+console.assert(caught.errors.length === 2);
+
+var result = v.validate(invalid, schema);
+console.assert(result.valid === false);
+console.assert(result.errors.length === 2);
+console.assert(v.validate({name: 'Ada', age: 36}, schema, {throwAll: true}).valid);
+```
+
+On a returned `ValidatorResult`, access `result.valid` directly. It is a
+non-enumerable prototype getter derived from `errors.length`, so it need not
+appear when logging own properties or serializing the result to JSON. Omit the
+throw options to handle invalid data through a returned result instead.
 
 #### "nestedErrors" option
 
