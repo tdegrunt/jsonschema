@@ -324,7 +324,7 @@ var result = validate(["Name"], {
 
 ### Rewrite Hook
 
-The `rewrite` option lets you change the value of an instance after it has successfully been validated. This will mutate the `instance` passed to the validate function. This can be useful for unmarshalling data and parsing it into native instances, such as changing a string to a `Date` instance.
+The `rewrite` option lets you change the value of an instance after it has successfully been validated. Object properties and array items are updated in place. For a scalar at the root, use the returned `ValidatorResult.instance`: JavaScript cannot change a primitive variable in the caller. Rewrites from the matching `anyOf` or `oneOf` branch are also returned and propagated to containing properties and array items. This can be useful for unmarshalling data and parsing it into native instances, such as changing a string to a `Date` instance.
 
 The `rewrite` option accepts a function with the following arguments:
 
